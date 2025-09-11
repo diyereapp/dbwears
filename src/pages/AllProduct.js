@@ -37,7 +37,7 @@ const AllProduct = () => {
       try {
         // Fetch current category
         const { data: category } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/category/${id}`
+          `${process.env.REACT_APP_API_URL}/api/db/category/${id}`
         );
 
         setName(category.name);
@@ -46,7 +46,7 @@ const AllProduct = () => {
         // Fetch parent if exists
         if (category.parent) {
           const { data: parentCat } = await axios.get(
-            `${process.env.REACT_APP_API_URL}/api/category/${category.parent}`
+            `${process.env.REACT_APP_API_URL}/api/db/category/${category.parent}`
           );
           setSelectedParent(parentCat._id);
           setSelectedGrandParent(parentCat.parent || parentCat._id);
@@ -56,7 +56,7 @@ const AllProduct = () => {
 
         // Fetch all categories for dropdowns
         const { data: allCats } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/categories`
+          `${process.env.REACT_APP_API_URL}/api/db/categories`
         );
         setGrandParents(allCats.filter((cat) => !cat.parent));
         setParents(
@@ -78,7 +78,7 @@ useEffect(() => {
   const fetchProducts = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/products/category/${id}`
+        `${process.env.REACT_APP_API_URL}/api/db/products/category/${id}`
       );
       setProducts(data);
     } catch (err) {

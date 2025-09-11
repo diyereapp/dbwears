@@ -30,7 +30,7 @@ const Header = () => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/categories`
+          `${process.env.REACT_APP_API_URL}/api/db/categories`
         );
         setCategories(res.data);
       } catch (err) {

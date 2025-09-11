@@ -42,7 +42,7 @@ useEffect(() => {
     try {
       // 🔹 Fetch current category
       const { data: category } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/category/${id}`
+        `${process.env.REACT_APP_API_URL}/api/db/category/${id}`
       );
       console.log("📌 Current category:", category);
 
@@ -51,7 +51,7 @@ useEffect(() => {
 
       // 🔹 Fetch all categories (with nested children)
       const { data: allCats } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/categories`
+        `${process.env.REACT_APP_API_URL}/api/db/categories`
       );
       console.log("📌 All categories:", allCats);
 
@@ -67,7 +67,7 @@ useEffect(() => {
       } else {
         // Walk up one level
         const { data: parentCat } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/category/${category.parent}`
+          `${process.env.REACT_APP_API_URL}/api/db/category/${category.parent}`
         );
         console.log("📌 Parent category:", parentCat);
 
@@ -76,7 +76,7 @@ useEffect(() => {
           console.log("✅ Parent is GRANDPARENT:", grandParentId);
         } else {
           const { data: grandCat } = await axios.get(
-            `${process.env.REACT_APP_API_URL}/api/category/${parentCat.parent}`
+            `${process.env.REACT_APP_API_URL}/api/db/category/${parentCat.parent}`
           );
           console.log("📌 Resolved grandparent category:", grandCat);
           grandParentId = grandCat._id;
@@ -122,7 +122,7 @@ useEffect(() => {
   const fetchProducts = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/products/category/${id}`
+        `${process.env.REACT_APP_API_URL}/api/db/products/category/${id}`
       );
       setProducts(data);
     } catch (err) {
@@ -140,7 +140,7 @@ useEffect(() => {
     const fetchBrands = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/brands`
+          `${process.env.REACT_APP_API_URL}/api/db/brands`
         );
         setBrands(res.data); // ✅ API should return [{ _id, name, image }]
       } catch (error) {

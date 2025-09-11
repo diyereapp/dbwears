@@ -41,7 +41,7 @@ useEffect(() => {
     const fetchProduct = async () => {
       try {
         const { data: product } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/product/${id}`
+          `${process.env.REACT_APP_API_URL}/api/db/product/${id}`
         );
 
         setProduct(product);
@@ -84,7 +84,7 @@ useEffect(() => {
 
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/products?category=${product.category._id}`
+        `${process.env.REACT_APP_API_URL}/api/db/products?category=${product.category._id}`
       );
 
       // filter out the current product

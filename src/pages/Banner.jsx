@@ -28,7 +28,7 @@ const Banner = () => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/categories`
+          `${process.env.REACT_APP_API_URL}/api/db/categories`
         );
         setCategories(res.data);
       } catch (err) {
@@ -118,7 +118,7 @@ return (
 };
  const fetchBrands = async () => {
     try {
-      const res = await axios.get( `${process.env.REACT_APP_API_URL}/api/brands`);
+      const res = await axios.get( `${process.env.REACT_APP_API_URL}/api/db/brands`);
       setBrands(res.data); // assuming API returns [{ _id, name, image }]
     } catch (error) {
       console.error("Failed to fetch brands:", error);
