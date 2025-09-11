@@ -148,7 +148,7 @@ return (
     backgroundImage: `url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 120'></svg>")`,
   }}
  />*/}
-<h1 class="text-center font-extrabold  md:text-left" style={{fontSize: "30px"}}>DIYERE</h1>
+<h1 class="text-center font-extrabold  md:text-left" style={{fontSize: "30px"}}>DBWEARS</h1>
  
  </a>
  
