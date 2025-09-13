@@ -21,10 +21,8 @@ const bgImage = `url("data:image/svg+xml;utf8,
     <image href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRUlEQVR4nLVTPWtVQRBNTCCKBhSTJiKJip8oVoqK+CoxTYyFMYUhj3ff3TMzuzu79yYxJKg8TSM2goqFIGKdxkIQrGwVwUZQK0Xx619E9uELL0UiERw4zNwtDuecO9PRsXZ1/kH73P62rupsNBobEpaWlpbn9rd1kZVluQlAn3Nue5ZlvdVq3ApM9dVq2p+6tXbL4uJi11rEy3bGxsa6nHMDIlohCmdhw2nmeA5SjEDiBXZFNXWReDARrxZBy063qvaIyE6yOko2GrLBMxfXwWGOJC6ILZ6zLV6yjbdhp89k2ZXeFaTJXpa5gTz3u4jCXua434gcg/hxSGBDOmOM3jCk8+B4BxJek8Sf1pXvrS/vEZXHq9XqxiZpUpXsGePOA45zCnUgTORwCvZzOXQqwRg/a4zOG+gjw+ENcfjEUny3rnxLtiiToGaeiZCo3EGkF5MCI8UM4AMQGs1v8mRMQvCAnwPpE1B8Zzh8A8cvZONX4uIx4I60bHemYPPc7TNGTuWko8aEMoe/1lRH3uTk60TBJuugcBccXoHDj0QI1l+Q+IxZTyRxzQzTMDysPWk9auSPgjVPdkG6YEivQgLA6gz5WZDeAocXkPCRJHyAhM9ki6dAPJm2Y8XapGBrIruN0QqgIzn5yaSuDj+ek14i0stEvg4ON3PWBxC9TxIeGtF5wB9YVtiqSqXSneyLyLaaan8KmoiG0t/PrB20mR0kikMpnhrpoYSM+fAksGdiYnrzX6+ldWbJSvvZ/estryBv66vh/9RvTxMh3UHKN/wAAAAASUVORK5CYII='/>
   </svg>")`;
 const Header = () => {
-
-  const [open, setOpen] = useState(false);
+ const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [openCategory, setOpenCategory] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -39,85 +37,6 @@ const Header = () => {
     };
     fetchCategories();
   }, []);
-
-  // Render submenu
-// Only keep children that are categories (ignore products)
-const isCategory = (item) => {
-  // A category has a 'children' property (array) and no 'price' property
-  return item.children && Array.isArray(item.children) && !item.price;
-};
-
-
-const renderSubmenu = (category) => {
-  if (!category.children || category.children.length === 0) return null;
-
-  const categoryChildren = category.children.filter(isCategory);
-
-  const isGrandparent = categoryChildren.some(
-    (child) => child.children && child.children.filter(isCategory).length > 0
-  );
-
- if (!isGrandparent) {
-  // Simple vertical dropdown
-  return (
-    <div
-      className={`absolute top-full mt-2 z-50 rounded-md bg-white text-gray-800 shadow-lg
-      ${categoryChildren.length > 8 ? "right-0" : "left-0"}`}
-    >
-      <ul className="px-4 py-2 bg-white min-w-[220px]">
-        {categoryChildren.map((child) => (
-          <li key={child._id}>
-            <a
-              href={`/category/${child._id}`}
-              className="block px-4 py-2 whitespace-nowrap text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded bg-white"
-            >
-              {child.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-
-  // Flex layout for grandparent categories
-return (
-  <div
-    className="absolute left-1/2 top-full -translate-x-1/2 mt-2 z-50 rounded-md bg-white text-gray-800 shadow-lg"
-  >
-    <ul className="flex justify-between gap-12 px-8 py-6 bg-white">
-      {categoryChildren.map((parent) => (
-        <li key={parent._id} className="min-w-[150px] bg-white">
-          <a
-            href={`/category/${parent._id}`}
-            className="block font-semibold mb-3 text-gray-900 hover:text-blue-600 bg-white"
-          >
-            {parent.name}
-          </a>
-          {parent.children && parent.children.filter(isCategory).length > 0 && (
-            <ul className="flex flex-col gap-1 border-t pt-2 bg-white">
-              {parent.children
-                .filter(isCategory)
-                .map((child) => (
-                  <li key={child._id}>
-                    <a
-                      href={`/category/${child._id}`}
-                      className="flex items-center gap-2 whitespace-nowrap rounded-md px-2 py-1 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 bg-white"
-                    >
-                      {child.name}
-                    </a>
-                  </li>
-                ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-};
 
 
   return (
@@ -231,50 +150,24 @@ return (
     ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
 >
   <div className="p-4 border-t">
-    <ul className="flex flex-col divide-y">
-      {categories.map((cat) => {
-        const hasChildren = cat.children && cat.children.length > 0;
-        const hasGrandchild =
-          hasChildren &&
-          cat.children.some(
-            (child) => child.children && child.children.length > 0
-          );
-
-        // Case 1: Show grandparent
-        if (hasGrandchild) {
-          return (
-            <li key={cat._id}>
-              <a
-                href={`/shop-category/${cat._id}`}
-                className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100"
-                onClick={() => setOpen(false)}
-              >
-                {cat.name}
-              </a>
-            </li>
-          );
-        }
-
-        // Case 2: Show parent (has children but no grandchildren)
-        if (hasChildren && !hasGrandchild) {
-          return (
-            <li key={cat._id}>
-              <a
-                href={`/category/${cat._id}`}
-            
-                  className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100"
-                onClick={() => setOpen(false)}
-              >
-                {cat.name}
-              </a>
-            </li>
-          );
-        }
-
-        return null;
-      })}
-     <li> <a     className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100">Brands</a></li>
-    </ul>
+ <ul className="flex flex-col divide-y">
+                  {categories.map((cat) => (
+                    <li key={cat._id}>
+                      <a
+                        href={`/category/${cat._id}`}
+                        className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100"
+                        onClick={() => setOpen(false)}
+                      >
+                        {cat.name}
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <a className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100">
+                      Brands
+                    </a>
+                  </li>
+                </ul>
 
     {/* Example "Design Now" button */}
     <div className="mt-4 flex justify-center">
@@ -294,45 +187,27 @@ return (
                      <div className="hidden items-center gap-4 lg:flex"><nav aria-label="Main Navigation" data-orientation="horizontal" dir="ltr" className="relative z-10 flex max-w-max flex-1 items-center justify-center">
                       
                <div style={{ position: "relative" }} >
-<nav className="group flex flex-1 list-none items-center justify-center space-x-1"  >
-  {categories.map((cat) => {
-    const isOpen = openCategory === cat._id;
-    return (
- <div
-  key={cat._id}
-  className="relative"
-  onMouseEnter={() => setOpenCategory(cat._id)}
-  // onMouseLeave={() => setOpenCategory(null)}
->
-  {/* Button */}
-  <button className="inline-flex items-center font-medium hover:text-blue-400">
-    {cat.name}
-    {cat.children && cat.children.length > 0 && (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-          openCategory === cat._id ? "rotate-180" : ""
-        }`}
+<nav className="group flex flex-1 list-none items-center justify-center space-x-1">
+  {categories.map((cat) => (
+    <div key={cat._id} className="relative">
+      <a
+        href={`/category/${cat._id}`}
+        className="inline-flex items-center font-medium hover:text-blue-400"
       >
-        <path d="m6 9 6 6 6-6"></path>
-      </svg>
-    )}
-  </button>
+        {cat.name}
+      </a>
+    </div>
+  ))}
 
-  {/* Submenu must be inside the same wrapper */}
-  {openCategory === cat._id && renderSubmenu(cat)}
-</div>
-
-    );
-  })}
+  {/* Static Brands link */}
+  <div className="relative">
+    <a
+      href="/brands"
+      className="inline-flex items-center font-medium hover:text-blue-400"
+    >
+      Brands
+    </a>
+  </div>
 </nav>
 
 

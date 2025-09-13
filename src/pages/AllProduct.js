@@ -20,7 +20,22 @@ const AllProduct = () => {
 
     const { id } = useParams();
   const navigate = useNavigate();
-
+ const [brands, setBrands] = useState([]);
+ const [selectedBrand, setSelectedBrand] = useState([]);
+ const [selectedColor, setSelectedColor] = useState("");
+  const [open, setOpen] = useState(false);
+const availableColors = [
+  { name: "Black", hex: "#000000" },
+  { name: "White", hex: "#FFFFFF" },
+  { name: "Red", hex: "#FF0000" },
+  { name: "Blue", hex: "#0000FF" },
+  { name: "Green", hex: "#008000" },
+  { name: "Yellow", hex: "#FFFF00" },
+  { name: "Purple", hex: "#800080" },
+  { name: "Gray", hex: "#808080" },
+  { name: "Navy", hex: "#001F54" },
+  { name: "Orange", hex: "#FFA500" },
+];
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState("");
@@ -71,8 +86,15 @@ const AllProduct = () => {
     fetchCategory();
   }, [id]);
 
+  const productColors = Array.from(
+    new Set(products.flatMap((p) => p.color || []))
+  );
 
 
+  // Map available colors with hex values
+  const filteredColors = availableColors.filter((c) =>
+    productColors.includes(c.name)
+  );
 
 useEffect(() => {
   const fetchProducts = async () => {
@@ -88,18 +110,22 @@ useEffect(() => {
 
   fetchProducts();
 }, [id]);
-const availableColors = [
-  { name: "Black", hex: "#000000" },
-  { name: "White", hex: "#FFFFFF" },
-  { name: "Red", hex: "#FF0000" },
-  { name: "Blue", hex: "#0000FF" },
-  { name: "Green", hex: "#008000" },
-  { name: "Yellow", hex: "#FFFF00" },
-  { name: "Purple", hex: "#800080" },
-  { name: "Gray", hex: "#808080" },
-  { name: "Navy", hex: "#001F54" },
-  { name: "Orange", hex: "#FFA500" },
-];
+
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/db/brands`
+        );
+        setBrands(res.data); // ✅ API should return [{ _id, name, image }]
+      } catch (error) {
+        console.error("Failed to fetch brands:", error);
+      }
+    };
+
+    fetchBrands();
+  }, []);
 
   return (
     <>
@@ -123,7 +149,7 @@ const availableColors = [
     {/* Always show All Products */}
     <li className="flex items-center">
       <Link
-        className="whitespace-nowrap text-rush-blue-500 hover:text-rush-blue-600 hover:underline"
+        className="whitespace-nowrap text-rush-green-500 hover:text-rush-green-600 hover:underline"
         to="/catalog"
       >
         All Products
@@ -135,25 +161,7 @@ const availableColors = [
       />
     </li>
 
-    {/* Show grandparent if exists */}
-    {selectedGrandParent && (
-      <li className="flex items-center">
-        <Link
-          to={`/category/${selectedGrandParent}`}
-          className="whitespace-nowrap text-rush-blue-500 hover:text-rush-blue-600 hover:underline"
-        >
-          {
-            grandParents.find((g) => g._id === selectedGrandParent)
-              ?.name /* show grandparent name */
-          }
-        </Link>
-        <div
-          data-orientation="vertical"
-          role="none"
-          className="shrink-0 w-[1px] mx-2 h-3 rotate-12 bg-slate-500"
-        />
-      </li>
-    )}
+ 
 
     {/* Show parent if exists */}
     {selectedParent && (
@@ -188,26 +196,50 @@ const availableColors = [
           <div class="mt-8 flex w-full flex-col md:flex-row md:items-center md:justify-between"><h1 class="text-2xl font-semibold">{name}</h1>
     
     
-        <p class="text-slate-500">Design your own hoodies with fast, free shipping</p></div>
+     </div>
         
-        <ul class="no-scrollbar flex w-full gap-6 overflow-scroll">
-          <li><a href="index.html" class="group mt-4 flex flex-col items-center justify-center gap-2 text-center text-sm font-bold"><div class="flex size-24
-           items-center justify-center overflow-hidden rounded-full border bg-white group-hover:border-slate-400 border-slate-400"><img alt="" loading="lazy"
-            width="1024" height="1024" decoding="async" data-nimg="1" class="object-contain p-2" style={{color:"transparent"}} sizes="(max-width: 640px) 100vw,
-             (max-width: 1024px) 50vw, 33vw" 
-   src={image}/>
-        </div><p class="max-w-[6rem]">{name}</p></a></li>
+
         
-        
-        
+        <div class="mt-4 flex w-full justify-between gap-4">
+          
+          
+          <div class="flex gap-2">
+            
+    <div  class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
+  <select
+    value={selectedBrand}
+    onChange={(e) => setSelectedBrand(e.target.value)}
+
     
-    
-    
-        </ul>
-        
-        <div class="mt-4 flex w-full justify-between gap-4"><div class="flex gap-2"><button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R5bhj6m:" data-state="closed" class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">Brand<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></button><button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R9bhj6m:" data-state="closed" class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">Color<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"></path>
-        </svg></button>
-        
+  >
+    <option value="">Brand</option>
+    {brands.map((brand) => (
+      <option key={brand._id} value={brand._id}>
+        {brand.name}
+      </option>
+    ))}
+  </select>
+
+  {/* Chevron icon */}
+
+</div>
+
+ <div className="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
+      <select
+        value={selectedColor}
+        onChange={(e) => setSelectedColor(e.target.value)}
+        className="bg-white outline-none"
+      >
+        <option value="">Color</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>
+            {color.name}
+          </option>
+        ))}
+      </select>
+
+   
+    </div>
         <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rdbhj6m:" data-state="closed" class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium 
         hover:bg-slate-50 lg:flex">Price<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide 
@@ -215,7 +247,7 @@ const availableColors = [
           
           </li><li>
           
-          </li></ul><button class="flex flex-grow items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 md:flex-grow-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R3bhj6m:" data-state="closed">All Filters<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal ml-2 h-5 w-5"><line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4">
+          </li></ul><button class="flex flex-grow items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 md:flex-grow-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R3bhj6m:" data-state="closed" href="/">All Filters<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal ml-2 h-5 w-5"><line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4">
         </line><line x1="21" x2="12" y1="12" y2="12"></line><line x1="8" x2="3" y1="12" y2="12"></line><line x1="21" x2="16" y1="20" y2="20"></line><line x1="12" x2="3" y1="20" y2="20"></line><line x1="14" x2="14" y1="2" y2="6"></line><line x1="8" x2="8" y1="10" y2="14"></line><line x1="16" x2="16" y1="18" y2="22"></line></svg></button></div><div class="flex justify-end gap-4"><button type="button" role="combobox" aria-controls="radix-:Rjhj6m:" aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" class="flex h-10 w-full border-input ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 text-base font-medium hover:bg-slate-50"><span style={{pointerEvents:"none"}}></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><select aria-hidden="true" tabindex="-1" style={{
       position: "absolute",
       border: 0,

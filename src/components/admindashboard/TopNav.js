@@ -4,7 +4,7 @@ import "./TopNav.css";
 import { BsLightbulb } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { FiXCircle } from "react-icons/fi";
-import lg from "../admindashboard/ourcolor.png";
+import lg from "./ourcolor.png";
 import { FaEllipsisV } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import logo from "./oga4.png";

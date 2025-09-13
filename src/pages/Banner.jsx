@@ -219,34 +219,7 @@ return (
                                                           <div class="mx-auto max-w-[1440px] px-6">
                                                             
                                                             
-                                                 <section className="flex flex-col items-center justify-center gap-8">
-      <div className="flex flex-col justify-center gap-1 text-center">
-        <h2 className="text-4xl font-semibold">Brands You Love</h2>
-        <p>Choose from popular brands and much more</p>
-      </div>
-
-      <ul className="grid grid-cols-2 gap-4 md:grid-cols-5">
-        {brands.map((brand) => (
-          <li
-            key={brand._id}
-            className="flex w-full items-center justify-center rounded-2xl border bg-white transition-opacity duration-200 hover:shadow-md"
-          >
-            <a className="w-full p-6" href={`/brands/${brand.slug}`}>
-              <img
-                alt={brand.name}
-                loading="lazy"
-                width="500"
-                height="250"
-                decoding="async"
-                src={brand.image} // adjust based on your API response field
-                className="w-full object-contain"
-              />
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-         
+                      
          
          </div></div>
          
@@ -338,10 +311,9 @@ return (
            </div>
            
            
-           <section>
-            <div class="text-slate-900 landing-yotpo-gallery bg-white"><div class="mx-auto max-w-[1440px] px-6"><div class="mb-8 mt-8 box-border text-center">
-              <div class="flex flex-wrap"><div class="mt-4 flex w-full max-w-full flex-col items-center justify-center"><h2 class="text-3xl font-bold 
-              text-slate-800 lg:text-4xl">Over 1,000,000+ Satisfied Customers</h2><p class="mb-6 text-lg font-light">Get inspired from some of our happy customers showing off their custom apparel</p></div></div><div class="flex flex-wrap"><div class="w-full max-w-full"><div class="yotpo yotpo-pictures-widget" data-gallery-id="5f19ccbaf80e213b31bc4323"></div></div></div></div></div></div></section><div class="bg-slate-100 text-slate-900 py-6"><div class="mx-auto max-w-[1440px] px-6"><section class="flex flex-col gap-4 items-center" aria-labelledby="reviews-E-Nf6nLY_FgKC56Z-7pGP"><h2 id="reviews-E-Nf6nLY_FgKC56Z-7pGP" class="text-3xl font-bold">Customers Love Us</h2><div class="relative w-full" role="region" aria-roledescription="carousel"><div class="overflow-hidden"><div class="flex -ml-4"><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3">
+          
+              
+              <div class="bg-slate-100 text-slate-900 py-6"><div class="mx-auto max-w-[1440px] px-6"><section class="flex flex-col gap-4 items-center" aria-labelledby="reviews-E-Nf6nLY_FgKC56Z-7pGP"><h2 id="reviews-E-Nf6nLY_FgKC56Z-7pGP" class="text-3xl font-bold">Customers Love Us</h2><div class="relative w-full" role="region" aria-roledescription="carousel"><div class="overflow-hidden"><div class="flex -ml-4"><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3">
                     
                     
                     <article class="flex h-full flex-col justify-between rounded-2xl bg-white p-6"><div class="flex flex-col gap-2 items-center"><div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars"><div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" style={{width:"100%"}} aria-hidden="true">★★★★★</div>★★★★★</div><div class="flex flex-col gap-4"><h3 class="text-lg font-bold text-center">Great Shirts &amp; Great Company!</h3><blockquote><p class="text-center">We had a great experience working with the Rush Order Tees team. We needed ~20 shirts for a group bicycle cruise celebrating a wedding. They did a great job &amp; our final design looked nice &amp; clean on the shirts. This is a great brand doing great work and we will definitely order from them again. Thank you Rush Order Tees!</p></blockquote></div></div>

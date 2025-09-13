@@ -364,7 +364,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     dispatch({ type: "LOGOUT" });
     setTimeout(() => {
-      navigate("/login");
+      navigate("/");
     }, 100);
   };
 
