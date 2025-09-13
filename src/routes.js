@@ -13,6 +13,7 @@ import ShopCategory from "./pages/ShopCategory";
 import MyAccount from "./pages/MyAccount";
 import MyDesign from "./pages/MyDesign";
 import MyOrder from "./pages/MyOrder";
+import Collection from "./pages/Collection";
 
 const routes = [
   { path: "/oauth-callback", element: <GoogleAuthHandler /> },
@@ -36,6 +37,10 @@ const routes = [
     {
       path: "/shop-category/:id",
     element: <ShopCategory />,
+  },
+      {
+      path: "/collections",
+    element: <Collection />,
   },
       {
     path: "/my-account",

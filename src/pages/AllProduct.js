@@ -23,6 +23,8 @@ const AllProduct = () => {
  const [brands, setBrands] = useState([]);
  const [selectedBrand, setSelectedBrand] = useState([]);
  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
+
   const [open, setOpen] = useState(false);
 const availableColors = [
   { name: "Black", hex: "#000000" },
@@ -126,6 +128,46 @@ useEffect(() => {
 
     fetchBrands();
   }, []);
+  // Extract unique discountPrice values
+
+  // Define price ranges
+const ranges = [
+  { label: "Under $50", min: 0, max: 50 },
+  { label: "$50 - $100", min: 50, max: 100 },
+  { label: "$100 - $200", min: 100, max: 200 },
+  { label: "Over $200", min: 200, max: Infinity },
+];
+
+// State for selected range
+const [selectedRange, setSelectedRange] = useState("");
+
+// Handle filter change
+const handleRangeChange = (e) => {
+  setSelectedRange(e.target.value);
+  const range = ranges.find((r) => r.label === e.target.value);
+  if (range) {
+    // You can filter products here or pass min/max to API
+    console.log("Selected range:", range.min, "-", range.max);
+  }
+};
+const filteredProducts = products.filter((p) => {
+  let isBrandMatch = !selectedBrand || p.brand === selectedBrand;
+  let isColorMatch = !selectedColor || (p.color || []).includes(selectedColor);
+
+  let isPriceMatch = true;
+  if (selectedRange) {
+    const range = ranges.find((r) => r.label === selectedRange);
+    if (range) {
+      isPriceMatch = p.discountPrice >= range.min && p.discountPrice < range.max;
+    }
+  }
+
+  return isBrandMatch && isColorMatch && isPriceMatch;
+});
+
+  const priceOptions = Array.from(
+    new Set(products.map((p) => p.discountPrice).filter(Boolean))
+  ).sort((a, b) => a - b); // sort low → high
 
   return (
     <>
@@ -240,15 +282,74 @@ useEffect(() => {
 
    
     </div>
-        <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rdbhj6m:" data-state="closed" class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium 
-        hover:bg-slate-50 lg:flex">Price<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide 
-        lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="hidden gap-2 md:flex"><li>
+<div className="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
+  <select
+    value={selectedRange}
+    onChange={(e) => setSelectedRange(e.target.value)}
+    className="bg-white outline-none"
+  >
+    <option value="">Price</option>
+    {ranges.map((range, idx) => (
+      <option key={idx} value={range.label}>
+        {range.label}
+      </option>
+    ))}
+  </select>
+</div>
+    <div  class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
+  <select
+    value={selectedBrand}
+    onChange={(e) => setSelectedBrand(e.target.value)}
+
+    
+  >
+    <option value="">Tags</option>
+    {brands.map((brand) => (
+      <option key={brand._id} value={brand._id}>
+        {brand.name}
+      </option>
+    ))}
+  </select>
+
+  {/* Chevron icon */}
+
+</div>
+  <div  class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
+  <select
+    value={selectedBrand}
+    onChange={(e) => setSelectedBrand(e.target.value)}
+
+    
+  >
+    <option value="">Size</option>
+    {brands.map((brand) => (
+      <option key={brand._id} value={brand._id}>
+        {brand.name}
+      </option>
+    ))}
+  </select>
+
+  {/* Chevron icon */}
+
+</div>
+        <ul class="hidden gap-2 md:flex"><li>
           
           </li><li>
           
-          </li></ul><button class="flex flex-grow items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 md:flex-grow-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R3bhj6m:" data-state="closed" href="/">All Filters<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal ml-2 h-5 w-5"><line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4">
-        </line><line x1="21" x2="12" y1="12" y2="12"></line><line x1="8" x2="3" y1="12" y2="12"></line><line x1="21" x2="16" y1="20" y2="20"></line><line x1="12" x2="3" y1="20" y2="20"></line><line x1="14" x2="14" y1="2" y2="6"></line><line x1="8" x2="8" y1="10" y2="14"></line><line x1="16" x2="16" y1="18" y2="22"></line></svg></button></div><div class="flex justify-end gap-4"><button type="button" role="combobox" aria-controls="radix-:Rjhj6m:" aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" class="flex h-10 w-full border-input ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 text-base font-medium hover:bg-slate-50"><span style={{pointerEvents:"none"}}></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><select aria-hidden="true" tabindex="-1" style={{
+          </li></ul>
+          
+          <button class="flex flex-grow items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium 
+          hover:bg-slate-50 md:flex-grow-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R3bhj6m:" 
+          data-state="closed" href="/">All Filters<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal ml-2 h-5 w-5">
+            <line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4">
+        </line><line x1="21" x2="12" y1="12" y2="12"></line><line x1="8" x2="3" y1="12" y2="12"></line><line x1="21" x2="16" y1="20" y2="20">
+          </line><line x1="12" x2="3" y1="20" y2="20"></line><line x1="14" x2="14" y1="2" y2="6"></line><line x1="8" x2="8" y1="10" y2="14">
+            </line><line x1="16" x2="16" y1="18" y2="22"></line></svg></button>
+            
+            </div><div class="flex justify-end gap-4">
+              
+              <button type="button" role="combobox" aria-controls="radix-:Rjhj6m:" aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" class="flex h-10 w-full border-input ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 text-base font-medium hover:bg-slate-50"><span style={{pointerEvents:"none"}}></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><select aria-hidden="true" tabindex="-1" style={{
       position: "absolute",
       border: 0,
       width: "1px",

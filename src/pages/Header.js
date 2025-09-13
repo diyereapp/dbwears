@@ -163,8 +163,8 @@ const Header = () => {
                     </li>
                   ))}
                   <li>
-                    <a className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100">
-                      Brands
+                    <a className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100" href="/collections">
+                      Shop
                     </a>
                   </li>
                 </ul>
@@ -184,39 +184,43 @@ const Header = () => {
 
     </div>
                      
-                     <div className="hidden items-center gap-4 lg:flex"><nav aria-label="Main Navigation" data-orientation="horizontal" dir="ltr" className="relative z-10 flex max-w-max flex-1 items-center justify-center">
+                     <div className="hidden items-center gap-4 lg:flex">
                       
-               <div style={{ position: "relative" }} >
-<nav className="group flex flex-1 list-none items-center justify-center space-x-1">
-  {categories.map((cat) => (
-    <div key={cat._id} className="relative">
-      <a
-        href={`/category/${cat._id}`}
-        className="inline-flex items-center font-medium hover:text-blue-400"
-      >
-        {cat.name}
-      </a>
-    </div>
-  ))}
+            <nav
+  aria-label="Main Navigation"
+  data-orientation="horizontal"
+  dir="ltr"
+  className="relative z-10 w-full"
+>
+  <div className="mx-auto max-w-6xl px-6">
+    <ul className="flex items-center justify-center space-x-8">
+      {categories.map((cat) => (
+        <li key={cat._id} className="relative">
+          <a
+            href={`/category/${cat._id}`}
+            className="inline-flex items-center px-3 py-2 font-medium hover:text-blue-400"
+          >
+            {cat.name}
+          </a>
+        </li>
+      ))}
 
-  {/* Static Brands link */}
-  <div className="relative">
-    <a
-      href="/brands"
-      className="inline-flex items-center font-medium hover:text-blue-400"
-    >
-      Brands
-    </a>
+      {/* Static Brands / Shop link */}
+      <li className="relative">
+        <a
+          href="/collections"
+          className="inline-flex items-center px-3 py-2 font-medium hover:text-blue-400"
+        >
+          Shop
+        </a>
+      </li>
+    </ul>
   </div>
+
+  {/* keep this if your dropdowns rely on it */}
+  <div className="absolute left-0 top-full flex w-full justify-center"></div>
 </nav>
 
-
-
-    </div>
-                                            
-                                            <div className="absolute left-0 top-full flex w-full justify-center"></div>
-                                            
-                                            </nav>
                                             
                                             <a className="inline-flex
                                              items-center justify-center whitespace-nowrap text-sm font-bold ring-offset-background transition-colors

@@ -306,24 +306,7 @@ const availableColors = [
 
                                                                   
                                                                   
-{product?.decorationMethods && product.decorationMethods.length > 0 && (
-  <div className="flex flex-col gap-2">
-    <h3 className="font-bold">Decoration Method:</h3>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {product.decorationMethods.map((method, index) => (
-        <button
-          key={index}
-          className="flex flex-col items-start justify-center 
-            border-2 border-slate-200 bg-white text-base font-normal 
-            hover:border-primary rounded-2xl px-4 py-2 h-16 w-full"
-        >
-          <p className="font-bold">{method.name}</p>
-          <p className="text-sm font-normal">{method.note}</p>
-        </button>
-      ))}
-    </div>
-  </div>
-)}
+
 
                                                                      
                                                                      
@@ -331,7 +314,7 @@ const availableColors = [
                                                                       justify-center whitespace-nowrap font-bold ring-offset-background transition-colors focus-visible:outline-none
                                                                        focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
                                                                         bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl px-12 py-4 text-xl hidden md:block md:h-fit md:w-fit">
-                                                                        Start Designing</a></div><div class="flex flex-col gap-4"><div class="flex w-full gap-4"><div class="flex basis-1/2
+                                                                        Add to Cart</a></div><div class="flex flex-col gap-4"><div class="flex w-full gap-4"><div class="flex basis-1/2
                                                                          flex-row gap-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
                                                                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck
                                                                           size-10 shrink-0 rounded-full bg-slate-100 p-2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2">
