@@ -36,6 +36,7 @@ const Single = () => {
   const [selectedParent, setSelectedParent] = useState("");
   const [selectedChild, setSelectedChild] = useState("");
  
+const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
 useEffect(() => {
     const fetchProduct = async () => {

@@ -146,7 +146,7 @@ const Header = () => {
   
  {/* Mobile menu panel */}
 <div
-  className={`absolute top-full left-0 right-0 w-full bg-white shadow-lg z-50 transition-all duration-300 ease-in-out
+  className={`absolute left-0 right-0 w-full bg-white shadow-lg z-50 transition-all duration-300 ease-in-out
     ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
 >
   <div className="p-4 border-t">
@@ -226,7 +226,7 @@ const Header = () => {
                                              items-center justify-center whitespace-nowrap text-sm font-bold ring-offset-background transition-colors
                                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
                                               disabled:pointer-events-none disabled:opacity-50 border-2 border-primary text-primary hover:bg-primary
-                                               hover:text-white h-11 rounded-2xl px-4 py-2" href="design-t-shirts/index.html">Design Now</a>
+                                               hover:text-white h-11 rounded-2xl px-4 py-2" href="/collections">Shop Now</a>
                                                <div className="relative ml-4 flex min-w-[200px] items-center gap-4">
                                                 
                                                 {/* Chat Button */}

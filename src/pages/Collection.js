@@ -181,28 +181,16 @@ useEffect(() => {
       </aside>
       
       
-      <main class="col-span-full flex flex-col gap-8 md:col-span-3"><section class="flex flex-col overflow-hidden rounded-2xl bg-gradient-to-r text-white md:flex-row" style={{backgroundColor: "green"}}><div class="flex flex-col gap-4 px-4 py-6 md:max-w-1/2 md:justify-center md:px-12"><h1 class="text-4xl font-extrabold md:text-5xl">{name}</h1><p class="text-lg font-semibold text-slate-200">Design customized {name} in minutes. Pick your style, upload your logo, and we&#x27;ll handle the rest.</p><ul class="flex flex-col gap-2 text-lg"><li><a class="inline-flex items-center whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-12 rounded-2xl px-8 text-lg w-full justify-center border-rush-green-900 bg-rush-green-900 py-3 font-bold transition-opacity duration-200 hover:bg-rush-green-900 hover:opacity-75" href="all/index.html">Shop All {name}</a>
-      </li></ul><div class="relative flex w-full flex-col gap-4 lg:flex-row"><div class="flex w-full flex-row gap-4 lg:basis-1/2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck size-10 shrink-0 rounded-full bg-slate-200/25 p-2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg><div><p class="font-bold text-white">Free Delivery</p>
-      <p class="text-sm text-slate-200 md:text-nowrap">As soon as <span class="text-nowrap">...</span></p></div></div></div></div><div class="flex justify-center md:w-full md:max-w-1/2"><img alt="" 
-      width="900" height="733" decoding="async" data-nimg="1" class="object-none object-top sm:w-full sm:object-cover"
-      
-  style={{
-    color: "transparent",
-    backgroundSize: "cover",
-    backgroundPosition: "50% 50%",
-    backgroundRepeat: "no-repeat",
-    backgroundImage: "url(_data_image/svg%2bxml%3bcharset%3dutf-8%2c_svg%20xmlns%3d%27http_/www.w3.org/2000/svg%27%20viewBox%3d%270%200%201080%20720%27__filter%20id%3d%27b%27%20colo/__feColorMatrix%20values%3d%271%200%200%200%200%200%201/filter__image%20width%3d%2710);')"
-  }}sizes="(max-width: 640px) 100vw,
-       (max-width: 1024px) 50vw, 33vw" srcSet="https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=256&amp;q=75&amp;fit=min&amp;auto=format 256w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=384&amp;q=75&amp;fit=min&amp;auto=format 384w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=640&amp;q=75&amp;fit=min&amp;auto=format 640w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=750&amp;q=75&amp;fit=min&amp;auto=format 750w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=828&amp;q=75&amp;fit=min&amp;auto=format 828w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=1080&amp;q=75&amp;fit=min&amp;auto=format 1080w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=1200&amp;q=75&amp;fit=min&amp;auto=format 1200w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=1920&amp;q=75&amp;fit=min&amp;auto=format 1920w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=2048&amp;q=75&amp;fit=min&amp;auto=format 2048w, https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=3840&amp;q=75&amp;fit=min&amp;auto=format 3840w" src="https://cdn.sanity.io/images/2ahps9jc/production/4f8e23b096b788908340549d5bb9cf1865cfda2d-1004x733.png?w=3840&amp;q=75&amp;fit=min&amp;auto=format"/></div>
-       
-       </section>
+      <main class="col-span-full flex flex-col gap-8 md:col-span-3">
+        
+
        
        
        
        <section class="flex flex-col gap-4"><div class="flex flex-col gap-1">
         
         
-        <h2 class="text-3xl font-bold">Shop By Style</h2><p>Find the perfect {name} to customize</p></div>
+        <h3 class="text-3xl font-bold">Shop By Category</h3><p>Find the perfect cloths and mugs</p></div>
         
         
      <section className="py-8">

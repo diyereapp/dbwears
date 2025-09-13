@@ -24,7 +24,11 @@ const AllProduct = () => {
  const [selectedBrand, setSelectedBrand] = useState([]);
  const [selectedColor, setSelectedColor] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  const [selectedTag, setSelectedTag] = useState("");
+  const [selectedPrinting, setSelectedPrinting] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
   const [open, setOpen] = useState(false);
 const availableColors = [
   { name: "Black", hex: "#000000" },
@@ -314,6 +318,24 @@ const filteredProducts = products.filter((p) => {
   {/* Chevron icon */}
 
 </div>
+    <div  class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
+  <select
+    value={selectedBrand}
+    onChange={(e) => setSelectedBrand(e.target.value)}
+
+    
+  >
+    <option value="">Printing Method</option>
+    {brands.map((brand) => (
+      <option key={brand._id} value={brand._id}>
+        {brand.name}
+      </option>
+    ))}
+  </select>
+
+  {/* Chevron icon */}
+
+</div>
   <div  class="hidden items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 lg:flex">
   <select
     value={selectedBrand}
@@ -337,16 +359,42 @@ const filteredProducts = products.filter((p) => {
           </li><li>
           
           </li></ul>
-          
-          <button class="flex flex-grow items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium 
-          hover:bg-slate-50 md:flex-grow-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R3bhj6m:" 
-          data-state="closed" href="/">All Filters<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal ml-2 h-5 w-5">
-            <line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4">
-        </line><line x1="21" x2="12" y1="12" y2="12"></line><line x1="8" x2="3" y1="12" y2="12"></line><line x1="21" x2="16" y1="20" y2="20">
-          </line><line x1="12" x2="3" y1="20" y2="20"></line><line x1="14" x2="14" y1="2" y2="6"></line><line x1="8" x2="8" y1="10" y2="14">
-            </line><line x1="16" x2="16" y1="18" y2="22"></line></svg></button>
-            
+  <button
+  className="flex items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 w-full "
+  type="button"
+  onClick={(e) => {
+    e.preventDefault(); // just in case
+    setIsSidebarOpen(true);
+  }}
+>
+  All Filters
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="ml-2 h-5 w-5"
+  >
+    <line x1="21" x2="14" y1="4" y2="4" />
+    <line x1="10" x2="3" y1="4" y2="4" />
+    <line x1="21" x2="12" y1="12" y2="12" />
+    <line x1="8" x2="3" y1="12" y2="12" />
+    <line x1="21" x2="16" y1="20" y2="20" />
+    <line x1="12" x2="3" y1="20" y2="20" />
+    <line x1="14" x2="14" y1="2" y2="6" />
+    <line x1="8" x2="8" y1="10" y2="14" />
+    <line x1="16" x2="16" y1="18" y2="22" />
+  </svg>
+</button>
+
+
+
+
             </div><div class="flex justify-end gap-4">
               
               <button type="button" role="combobox" aria-controls="radix-:Rjhj6m:" aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" class="flex h-10 w-full border-input ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 text-base font-medium hover:bg-slate-50"><span style={{pointerEvents:"none"}}></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><select aria-hidden="true" tabindex="-1" style={{
@@ -490,7 +538,114 @@ const filteredProducts = products.filter((p) => {
     ))}
               
     </ul>
-          
+           {isSidebarOpen && (
+  <aside
+    className="fixed top-0 left-0 z-50 h-full bg-white shadow-xl p-6 overflow-y-auto"
+    style={{ width: "260px", maxWidth: "100vw" }} // double the original 24rem → 48rem = 768px, so 960px is even bigger
+  >
+    <button
+      className="mb-4 text-gray-500 hover:text-black"
+      onClick={() => setIsSidebarOpen(false)}
+    >
+       ✕
+    </button>
+
+    {/* Brand Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Brand</h2>
+      <select
+        value={selectedBrand}
+        onChange={(e) => setSelectedBrand(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Brands</option>
+        {brands.map((b) => (
+          <option key={b._id} value={b._id}>{b.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Color Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Color</h2>
+      <select
+        value={selectedColor}
+        onChange={(e) => setSelectedColor(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Colors</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Price Range Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Price</h2>
+      <select
+        value={selectedRange}
+        onChange={(e) => setSelectedRange(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Prices</option>
+        {ranges.map((r, idx) => (
+          <option key={idx} value={r.label}>{r.label}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Tags Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Tags</h2>
+      <select
+        value={selectedTag}
+        onChange={(e) => setSelectedTag(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Tags</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Printing Method Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Printing Method</h2>
+      <select
+        value={selectedPrinting}
+        onChange={(e) => setSelectedPrinting(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Methods</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Size Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Size</h2>
+      <select
+        value={selectedSize}
+        onChange={(e) => setSelectedSize(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Sizes</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Apply Filters Button */}
+    <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-4">
+      Apply Filters
+    </button>
+  </aside>
+)}
              <nav aria-label="Pagination" class="mt-6 flex justify-between px-4 py-4 text-sm font-medium text-slate-700 sm:px-6 lg:px-8">
           
 
@@ -507,17 +662,6 @@ const filteredProducts = products.filter((p) => {
              
              
 
-                      <div class="prose max-w-3xl py-6 prose-a:text-primary prose-a:no-underline hover:prose-a:underline"><h2>Design {name} With Your Logo
-             Or Image</h2><p>Whether you’re working or relaxing, custom hoodies are the perfect addition to your wardrobe. You can choose from a wide
-                 collection of styles and fits from leading brands like <a class="" href="../brands/gildan/hoodies/index.html">Gildan</a>, <a class="" 
-                 href="../brands/carhartt/hoodies/index.html">Carhartt</a>, <a class="" href="../brands/bella-canvas/hoodies/index.html">Bella &amp; Canvas
-                 </a>, <a class="" href="../brands/nike/hoodies/index.html">Nike</a>, <a class="" href="../brands/champion/hoodies/index.html">Champion</a>
-                  and more.</p><p>Our custom hoodies and sweatshirts are suitable for branded events, team uniforms or even as personalized gifts. 
-                    From smart quarter zips to comfortable embroidered hoodies, we have options for every budget and style.</p><p>You can quickly and 
-                        easily upload your own design using our intuitive Design Studio, adding your brand’s logo, team names or a unique image that
-                         you’ve created. You can even develop your own design directly within our platform if you don’t already have one.</p><p>Choose 
-                            between printing (no minimums) and embroidery (minimum of six), upload your design and checkout. Creating custom hoodies 
-                            has never been easier - make your own hoodie today. </p></div>
                             
 </div>
 </div>
@@ -529,3 +673,4 @@ const filteredProducts = products.filter((p) => {
 };
 
 export default AllProduct;
+
