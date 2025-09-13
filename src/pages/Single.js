@@ -191,8 +191,7 @@ const availableColors = [
                             </div></div>
                             
                             
-                            
-                         <div className="md:col-start-1 md:row-start-1 md:row-span-3">
+       <div className="md:col-start-1 md:row-start-1 md:row-span-3">
   <div className="carousel relative w-full">
     <div className="flex flex-row gap-2 overflow-hidden">
       {/* Thumbnails */}
@@ -202,12 +201,13 @@ const availableColors = [
             key={idx}
             aria-label={`slide dot ${idx}`}
             type="button"
-            className="carousel__dot"
+            className={`carousel__dot border ${idx === currentImageIndex ? 'border-black' : 'border-slate-200'}`}
+            onClick={() => setCurrentImageIndex(idx)}  // <-- update the index
           >
             <img
               src={img}
               alt={product?.name || `Image ${idx + 1}`}
-              className="h-12 w-12 object-contain border border-slate-200 hover:border-black/30"
+              className="h-12 w-12 object-contain hover:border-black/30"
             />
           </button>
         ))}
@@ -217,7 +217,7 @@ const availableColors = [
       <div className="relative flex flex-1 justify-center">
         {product?.images?.length > 0 ? (
           <img
-            src={product.images[0]}
+            src={product.images[currentImageIndex]} // <-- use currentImageIndex
             alt={product?.name}
             className="w-full max-h-[500px] object-contain"
           />
