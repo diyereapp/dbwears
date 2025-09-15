@@ -14,6 +14,7 @@ import braImg from "./bus2.png";
 import BestSellers from "./BestSellers";
 import Trending from "./Trending";
 import Featured from "./Featured";
+import { Link } from "react-router-dom";
 
 const bgImage = `url("data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'>
@@ -191,7 +192,7 @@ return (
       <ul className="my-8 w-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
         {categories.map((cat) => (
           <li key={cat._id} className="w-full">
-            <a
+            <Link
               href={`/category/${cat._id}`}
               className="block w-full overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-md"
             >
@@ -202,15 +203,16 @@ return (
               >
                 <img
                   alt={cat.name}
+                      
                   src={cat.image || "/default-image.jpg"}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              <h3 className="px-3 py-2 text-center text-sm font-medium">
+              <h3 className="px-3 py-2 text-center text-sm font-medium"  >
                 {cat.name}
               </h3>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
