@@ -26,13 +26,40 @@ const MyAccount = () => {
  <Header />
     
     <main style={{backgroundColor: "white"}}>
-    <div class="text-slate-900 bg-inherit py-20 lg:py-12"><div class="mx-auto max-w-[1440px] px-6"><div class="ml-[-32px] mt-[-32px] box-border flex flex-row flex-wrap items-center justify-center"><div class="xl:max-w-1/3 lg:max-w-5/12 md:max-w-10/12 
-    grow-0 pl-[32px] pt-[32px] md:basis-10/12 lg:basis-5/12 xl:basis-1/3"><div class="flex flex-col items-center rounded border border-slate-200 p-6 text-center [&amp;]:box-border [&amp;]:max-w-full"><form method="post"><img alt="Dark Logo" width="1000" height="1000" decoding="async" data-nimg="1" class="mx-auto mb-10 mt-6 h-auto w-full max-w-[120px]"
+    <div class="text-slate-900 bg-inherit py-20 lg:py-12"><div class="mx-auto max-w-[1440px] px-6">
+      
+      <div class="ml-[-32px] mt-[-32px] box-border flex flex-row flex-wrap items-center justify-center">
+        
+        <div class="xl:max-w-1/3 lg:max-w-5/12 md:max-w-10/12 
+    grow-0 pl-[32px] pt-[32px] md:basis-10/12 lg:basis-5/12 xl:basis-1/3">
+      <div class="flex flex-col items-center rounded border border-slate-200 p-6 text-center [&amp;]:box-border [&amp;]:max-w-full">
+        <form method="post">
+          
+          {/*<img alt="Dark Logo" width="1000" height="1000" decoding="async" data-nimg="1" class="mx-auto mb-10 mt-6 h-auto w-full max-w-[120px]"
      style={{color:"transparent"}} srcSet="/_next/image/?url=%2Fround-dark-logo.png&amp;w=1080&amp;q=75 1x,
-     /_next/image/?url=%2Fround-dark-logo.png&amp;w=2048&amp;q=75 2x" src="../_next/image/index659d.html?url=%2Fround-dark-logo.png&amp;w=2048&amp;q=75"/><h1 class="text-xl font-semibold md:text-3xl">Login to Your Account</h1><p class="pt-3 font-medium text-slate-800 md:block">Enter your email address to access your saved designs, track your orders, and place a reorder!</p><input type="email" class="my-5 w-full rounded-md border border-slate-400 py-2.5 pl-3 pr-3 text-base leading-5 text-slate-900 focus-visible:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary [&amp;::-webkit-search-cancel-button]:cursor-pointer [&amp;::-webkit-search-cancel-button]:pr-3" 
-     placeholder="Please enter your email address..." required="" autofocus="" name="email_address"/><button class="inline-flex items-center justify-center whitespace-nowrap text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-2xl px-4 py-2 w-full font-medium disabled:bg-slate-900" type="submit">Sign in</button><p class="mb-6 ml-1 mt-2 text-center text-xs font-normal">
+     /_next/image/?url=%2Fround-dark-logo.png&amp;w=2048&amp;q=75 2x" src="../_next/image/index659d.html?url=%2Fround-dark-logo.png&amp;w=2048&amp;q=75"/>*/}
+     
+     
+     <h1 class="text-xl font-semibold md:text-3xl">Login to Your Account</h1><p class="pt-3 font-medium text-slate-800 md:block">
+      Enter your email address and password to checkour your order, track your orders, and place a reorder!</p>
+      <input type="email" class="my-5 w-full rounded-md border border-slate-400 py-2.5 pl-3 pr-3 text-base leading-5 
+      text-slate-900 focus-visible:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+       [&amp;::-webkit-search-cancel-button]:cursor-pointer [&amp;::-webkit-search-cancel-button]:pr-3" 
+     placeholder="Please enter your email address..." required="" autofocus="" name="email_address"/>
+      <input type="password" class="my-5 w-full rounded-md border border-slate-400 py-2.5 pl-3 pr-3 text-base leading-5 
+      text-slate-900 focus-visible:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+       [&amp;::-webkit-search-cancel-button]:cursor-pointer [&amp;::-webkit-search-cancel-button]:pr-3" 
+     placeholder="Please enter your password" required="" autofocus="" name="password"/>
+     <button class="inline-flex items-center justify-center whitespace-nowrap text-sm ring-offset-background transition-colors 
+     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+     disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-2xl px-4
+      py-2 w-full font-medium disabled:bg-slate-900" type="submit">Sign in</button><p class="mb-6 ml-1 mt-2 text-center text-xs font-normal">
      Your email is safe and secure. Read our
-     <a class="text-primary" href="../help/privacy-policy/index.html">Privacy Policy</a></p></form></div></div><div class="xl:max-w-1/3 lg:max-w-5/12 md:max-w-10/12 hidden grow-0 pl-[32px] pt-[32px] md:block md:basis-10/12 lg:basis-5/12 xl:basis-1/3"><h2 class="mb-1 text-xl font-semibold text-slate-950 md:block">Did you know?</h2><p class="text-lg">Inside your account you can:</p><div class="py-2"><div class="flex items-center justify-start px-6 py-4"><svg xmlns="http://www.w3.org/2000/svg" class="mr-3 fill-current" width="48px" height="48px" viewBox="0 0 48 48"><path d="M34.804 6.852h-21.44c-.43 0-.781.35-.781.781v15.134c0 .017.002.031.005.041.004.084.02.166.049.244a.771.771 0 0 0 .371.401.764.764 0 0 0 .355.094h21.44c.43 0 .781-.35.781-.781V7.633a.78.78 0 0 0-.78-.781zm-5.596 5.274-6.385 6.385-2.601-2.601a.782.782 0 0 0-1.104 0l-4.973 4.973V8.413h19.879v7.425l-3.712-3.712a.782.782 0 0 0-1.104 0zm-5.117 
+     <a class="text-primary" href="../help/privacy-policy/index.html">Privacy Policy</a></p></form>
+     
+     
+     
+     </div></div><div class="xl:max-w-1/3 lg:max-w-5/12 md:max-w-10/12 hidden grow-0 pl-[32px] pt-[32px] md:block md:basis-10/12 lg:basis-5/12 xl:basis-1/3"><h2 class="mb-1 text-xl font-semibold text-slate-950 md:block">Did you know?</h2><p class="text-lg">Inside your account you can:</p><div class="py-2"><div class="flex items-center justify-start px-6 py-4"><svg xmlns="http://www.w3.org/2000/svg" class="mr-3 fill-current" width="48px" height="48px" viewBox="0 0 48 48"><path d="M34.804 6.852h-21.44c-.43 0-.781.35-.781.781v15.134c0 .017.002.031.005.041.004.084.02.166.049.244a.771.771 0 0 0 .371.401.764.764 0 0 0 .355.094h21.44c.43 0 .781-.35.781-.781V7.633a.78.78 0 0 0-.78-.781zm-5.596 5.274-6.385 6.385-2.601-2.601a.782.782 0 0 0-1.104 0l-4.973 4.973V8.413h19.879v7.425l-3.712-3.712a.782.782 0 0 0-1.104 0zm-5.117 
      9.86h-8.843l4.421-4.421 4.422 4.421zm9.933-3.94v3.941H26.3l-2.372-2.372 5.833-5.833 4.263 4.264z"></path><path d="M22.823 9.375a2.044 2.044 0 0 0-2.042 2.042c0 1.126.916 2.042 2.042 2.042a2.044 2.044 0 0 0 2.042-2.042 2.044 2.044 0 0 0-2.042-2.042zm.481 2.042a.482.482 0 1 1-.964-.002.482.482 0 0 1 .964.002z"></path><path d="M44.8 12.8c-.27.004-.539.043-.8.114V2.4A2.4 2.4 0 0 0 41.6 0H6.4A2.4 2.4 0 0 0 4 2.4v10.514a3.186 3.186 0 0 0-.8-.114A3.2 3.2 0 0 0 0 16v19.2c0 .182.062.358.175.5L3.2 39.481V40h-.8a.8.8 0 0 0-.8.8v6.4a.8.8 0 0 0 .8.8h12.8a.8.8 0 0 0 .8-.8v-6.4a.8.8 0 0 0-.8-.8h-.8v-5.56a.803.803 0 0 0-.106-.4l-2.102-3.64H35.81l-2.102 3.641a.793.793 0 0 0-.106.4V40h-.8a.8.8 0 0 0-.8.8v6.4a.8.8 0 0 0 .8.8h12.8a.8.8 0 0 0 .8-.8v-6.4a.8.8 0 0 0-.8-.8h-.8v-.519l3.025-3.781a.813.813 0 0 0 .173-.5V16a3.2 3.2 0 0 0-3.2-3.2zM6.4
       1.6h35.2a.8.8 0 0 1 .8.8v20.51a2.673 2.673 0 0 0-.4-.03 3.168 3.168 0 0 0-1.2.24V4.8a1.6 1.6 0 0 0-1.6-1.6H8.8a1.6 1.6 0 0 0-1.6 1.6v18.32a3.15 3.15 0 0 0-1.2-.24c-.134 0-.268.01-.4.03V2.4a.8.8 0 0 1 .8-.8zm3.02 24-.62-1.073V4.8h30.401v19.727l-.62 1.073H9.42zm4.98 20.8H3.2v-4.8h11.2v4.8zM12.8 40h-8v-.8a.803.803 0 0 0-.175-.5L1.6 34.919V16a1.6 1.6 0 0 1 1.6-1.6c.281.001.558.076.8.219V23.6a3.2 3.2 0 0 0-.773 4.08l4.576 7.92 1.386-.8-4.576-7.92a1.604 1.604 0 0 1 .579-2.182c.16-.094.337-.157.521-.185.095-.017.191-.028.287-.033.284 0
        .563.077.806.224.211.12.39.288.522.491.015.022.042.064.059.086l5.412 9.373V40zm7.291-11.2h-8.824l-.924-1.6h27.311l-.924 1.6H20.091zM44.8 46.4H33.6v-4.8h11.2v4.8zm1.6-11.481L43.375 38.7a.803.803 0 0 0-.175.5v.8h-8v-5.346l5.423-9.392a.795.795 0 0 0 .048-.066A1.626 1.626 0 0 1 42 24.481c.096.005.192.016.287.033.18.027.354.088.511.179a1.606 1.606 0 0 1 .589 2.188l-4.576 7.92 1.386.8 4.576-7.92a3.2 3.2 0 0 0-.773-4.08V14.62c.242-.143.519-.219.8-.219a1.6 1.6 0 0 1 1.6 1.6v18.918z"></path></svg><h3 class="text-lg font-semibold text-slate-950 md:block">View Saved Designs</h3></div><div class="flex items-center justify-start px-6 py-4"><svg xmlns="http://www.w3.org/2000/svg" class="mr-3 fill-current" width="48px" height="48px" viewBox="0 0 48 48"><path d="M1.6 37.6V12.8h12.8V16c0
