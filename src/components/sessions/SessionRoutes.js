@@ -1,9 +1,10 @@
 import JwtRegister from "./JwtRegister";
 import JwtLogin from "./JwtLogin";
+import MyAccount from "../../pages/MyAccount";
 
 const sessionRoutes = [
   // { path: "/signup", element: <JwtRegister /> },
-  { path: "/login", element: <JwtLogin /> },
+  { path: "/my-account", element: <MyAccount /> },
 
   { path: "/register", element: <JwtRegister /> },
 

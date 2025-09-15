@@ -52,10 +52,10 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
   <div id="__next"><div className="__variable_0fe379 __variable_70c4e6 font-sans">
       
       <header className="relative z-10 bg-white shadow-lg">
-        <div className="bg-slate-100 text-slate-900"><div className="mx-auto max-w-[1440px] px-6">
+        <div className="bg-green-200 text-slate-900"><div className="mx-auto max-w-[1440px] px-6">
           
           <div className="flex items-center justify-end py-2 text-sm md:justify-between">
-            <div className="hidden md:block">100,000+ Customers Nationwide w/ 99.5% Satisfaction</div><nav aria-label="account and cart"
+            <div className="hidden md:block">What are you looking for?</div><nav aria-label="account and cart"
              data-orientation="horizontal" dir="ltr" className="relative z-10 flex max-w-max flex-1 items-center 
              justify-center"><div style={{position: "relative"}}><ul data-orientation="horizontal" className="group flex flex-1 list-none items-center 
              justify-center space-x-1 gap-4 lg:gap-0" dir="ltr">
