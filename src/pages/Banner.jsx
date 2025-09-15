@@ -14,6 +14,7 @@ import braImg from "./bus2.png";
 import BestSellers from "./BestSellers";
 import Trending from "./Trending";
 import Featured from "./Featured";
+import "./mycss.css"
 import { Link } from "react-router-dom";
 
 const bgImage = `url("data:image/svg+xml;utf8,
@@ -149,7 +150,7 @@ return (
       <p className="mt-2 text-center text-lg font-light">
          Shirts & Mugs that speak your faith.
       </p>
-<ul className="my-8 w-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
+<ul className="my-8 w-full grid grid-cols-3 gap-4 md:grid-cols-3 lg:grid-cols-3">
   {categories.map((cat) => (
     <li key={cat._id} className="w-full">
       <Link
@@ -157,7 +158,7 @@ return (
         className="block w-full overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-md"
       >
         {/* FORCE reduced image height (180px) */}
-        <div className="w-full overflow-hidden" style={{ height: "180px" }}>
+        <div className="w-full overflow-hidden high" style={{ height: "180px" }} >
           <img
             alt={cat.name}
             src={cat.image || "/default-image.jpg"}
