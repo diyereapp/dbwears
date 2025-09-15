@@ -23,6 +23,9 @@ const bgImage = `url("data:image/svg+xml;utf8,
   </svg>")`;
 const Header = () => {
  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // for mobile menu
+const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
+
   const [categories, setCategories] = useState([]);
   const { cartItems } = useCart();
   // const { cartItems } = useCart();
@@ -86,7 +89,7 @@ const Header = () => {
     <div className="relative">
   {/* Cart Button */}
   <button
-    onClick={() => setOpen((prev) => !prev)}
+  onClick={() => setCartOpen((prev) => !prev)}
     className="relative flex items-center gap-2 p-2 hover:text-blue-600"
   >
     <svg
@@ -107,7 +110,7 @@ const Header = () => {
   </button>
 
   {/* Dropdown */}
-  {open && (
+{cartOpen && (
       <div
       className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 z-50"
       style={{ width: "18rem" }} // triple the width (~1152px)
@@ -243,9 +246,9 @@ const Header = () => {
       <button
         type="button"
         className="group flex flex-col items-center text-xs font-bold uppercase"
-        onClick={() => setOpen(!open)}
+   onClick={() => setMenuOpen(!menuOpen)}
       >
-        {open ? (
+    {menuOpen ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -312,11 +315,11 @@ const Header = () => {
     {/* Example "Design Now" button */}
     <div className="mt-4 flex justify-center">
       <a
-        href="/design-now"
+        href="/collection"
         className="px-6 py-2 border-2 border-blue-500 text-blue-500 font-bold rounded-xl hover:bg-blue-500 hover:text-white transition"
         onClick={() => setOpen(false)}
       >
-        Design Now
+        Shop Now
       </a>
     </div>
   </div>
