@@ -202,7 +202,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
                   )}
                   <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
                   {item.price && (
-                    <p className="text-sm font-semibold mt-1">${item.price}</p>
+                    <p className="text-sm font-semibold mt-1">${item.discountPrice}</p>
                   )}
                 </div>
                 <button
