@@ -290,7 +290,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
  {/* Mobile menu panel */}
 <div
   className={`absolute top-full left-0 right-0 w-full bg-white shadow-lg z-40  transition-all duration-300 ease-in-out
-    ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
+    ${menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
 >
   <div className="p-4 border-t">
  <ul className="flex flex-col divide-y">
