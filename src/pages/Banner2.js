@@ -20,7 +20,7 @@ const bgImage = `url("data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'>
     <image href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRUlEQVR4nLVTPWtVQRBNTCCKBhSTJiKJip8oVoqK+CoxTYyFMYUhj3ff3TMzuzu79yYxJKg8TSM2goqFIGKdxkIQrGwVwUZQK0Xx619E9uELL0UiERw4zNwtDuecO9PRsXZ1/kH73P62rupsNBobEpaWlpbn9rd1kZVluQlAn3Nue5ZlvdVq3ApM9dVq2p+6tXbL4uJi11rEy3bGxsa6nHMDIlohCmdhw2nmeA5SjEDiBXZFNXWReDARrxZBy063qvaIyE6yOko2GrLBMxfXwWGOJC6ILZ6zLV6yjbdhp89k2ZXeFaTJXpa5gTz3u4jCXua434gcg/hxSGBDOmOM3jCk8+B4BxJek8Sf1pXvrS/vEZXHq9XqxiZpUpXsGePOA45zCnUgTORwCvZzOXQqwRg/a4zOG+gjw+ENcfjEUny3rnxLtiiToGaeiZCo3EGkF5MCI8UM4AMQGs1v8mRMQvCAnwPpE1B8Zzh8A8cvZONX4uIx4I60bHemYPPc7TNGTuWko8aEMoe/1lRH3uTk60TBJuugcBccXoHDj0QI1l+Q+IxZTyRxzQzTMDysPWk9auSPgjVPdkG6YEivQgLA6gz5WZDeAocXkPCRJHyAhM9ki6dAPJm2Y8XapGBrIruN0QqgIzn5yaSuDj+ek14i0stEvg4ON3PWBxC9TxIeGtF5wB9YVtiqSqXSneyLyLaaan8KmoiG0t/PrB20mR0kikMpnhrpoYSM+fAksGdiYnrzX6+ldWbJSvvZ/estryBv66vh/9RvTxMh3UHKN/wAAAAASUVORK5CYII='/>
   </svg>")`;
-const Banner = () => {
+const Banner2 = () => {
 
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -139,7 +139,46 @@ return (
                                             <main><div class="bg-slate-100"></div><div class="flex flex-col">
                                               
                                               
-          
+                                              {/*<section>
+                                              <div class="text-slate-900 bg-white"><div class="mx-auto max-w-[1440px] px-6">
+                                                <div id="hero-wrapper" class="mx-auto flex flex-col md:flex-row">
+                                                  
+                                                  <img alt="" width="1250" height="900" decoding="async" data-nimg="1" class="object-cover md:hidden"
+  style={{
+    color: "transparent",
+    backgroundSize: "cover",
+    backgroundPosition: "50% 50%",
+    backgroundRepeat: "no-repeat",
+    backgroundImage:
+      "url(_data_image/svg%2bxml%3bcharset%3dutf-8%2c_svg%20xmlns%3d%27http_/www.w3.org/2000/svg%27%20viewBox%3d%270%200%201250%20900%27__filter%20id%3d%27b%27%20colo/__feColorMatrix%20values%3d%271%200%200%200%200%200%201%200%200%200%200/filter__image%20width%3d%2710);&#x27; href=&#x27;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAC4jAAAuIwF4pT92AAAEeUlEQVR4nAFuBJH7AA8vfxAWOJMtFjySUBpDll8fR5pZIk2bO3N/oizQvqxHwauhT2k9hkZGA3pTPhBzTRc+TkEAVDNeAE0tdgBJKVcvXks2fYWFQYaGhkppaWk1ABQ2jj0UPJKIGUCVvyFImc0lS5zHIUqcoVNpnne+saSKvaOdk3E2iZJQCYO1OR9tuhFHRq4CVTTCAlEw0gRQL7wVWT6OVXNncXZ7eGFjY2NFABw5g2EYP4+6JEqY8zdZn/00V6H3I0ma0T9Yk5iemJOOp42Pkm4vh6hXE4TeOCln6g9IP+QDUzPzBVMz/AZVNe8QVzu+P2VWhWx0b2BjZ2NAADVIcmkjQ4WyLU+W7UNio/08YKPvJEeQwTBEbopkZF9rd15jZGEleYBXGHuyPiZguxRCOsMEUC/qA1Iy/QRUM+McWkCqZnZuoYB+fqNsbGx1AFlfV3hFVWe3NlGB6zJSk/wtTpbrJUCAvTU/VZhlWjt5i2w2Y4FTU2h4R1qIakhIm0JPNLccUC3pB1Au/QFPL9kpXEWafYB+tYOBgtNmZGalAJuJJ4CPhTPHaG5R8jhMdvozNnfsQC5cwUc+R5x8ajWLqIIth6F3O56dcUHElms413pdLeVGUCX0Ekwo9wFKKtMpVD+UeXp6sYB+gNNiYGKpAMSoFZC6ox3XlIkw7VlTVeBeKE3jcxwxvl8uM31uYDhsk3M0eZlxPaubbjvVlWYy2oJXJdtbShzZNEcf2jJKHsldUyybjXRhqIh7dLNxamp8ALmjIoynlirQmH4t3YtROcSRLTjXmiMry40nLY10OTlrfGZUZJiHcJOagWSqkXVTn41nQ6qQWyu3nVsdxqpgHdO+ZiLJxm0wv7xvPJmwbUJUAJ2STHiRe0e8mVs536pCOOGwREjurkNJ76szO9aiKDCpmlVWgZ2TkZ+amZatnJiVrqyQfsjEeEXW13An4dZ3NfDTeTrz23Ms5t9rHLLYZRhqAHl7d4J7XlvIlD0+5K83POu6Uln5ultg/rM9RvSmKTHTiTY+rG9eYaR+gIOpoKGhzLChmum/hl/i0HIy5MZ0Pfe+dUP8zHAx6c1mIKavVx9gAFFdcYBjRVTCiy450qssNda4Q0ryuUlQ/K82PumLKzXSWS44y0E5QqxwdHeepKWn1ayrq+WykHvCym8vzMloJvHCZyf8xGUh4KFZJ5xbSD5qAERLbGxtPVamlis6t6wmLciwKjPwsCoz+6YmL+FyKTHNOi453zA1QL9rb3STpKeoyKmrrtOxkn2bzmkhuNhkFfDXZBX7yV8X4otRKLBGQT+QAGBEZlKPPVmAoixAf6oiKparICnDqh8nzaEeKLJkIyudLSoyuiUrNaNZW2NnoqSlj6iqraO1j3Zy0WYYkdpkE8TZYxPNyF4Vu4ZKIpQ6MzF7AH80UiKlM0w8qCY+NZ0aJUScGiJgnhkhZJYYIVVVHiVLJCQqYSEkLVVRUVYvm5ufSKGhpFexhXA7xV0UTMpdEmLKWxJiwVYTW4FEHEcxLCg57R7xDJgCrSoAAAAASUVORK5CYII=&#x27;/%3E%3C/svg%3E&quot;)"
+  }}
+  
+ src={braImg}/><div class="flex flex-col py-4 md:w-3/5 md:py-24 lg:w-1/2"><div class="flex flex-col gap-6">
+    
+    <h1 class="text-center text-[2.75rem] font-extrabold leading-[3rem] md:text-left md:text-[3.5rem] md:leading-[3.6rem]">Custom Faith Based T-Shirts &amp; Mugs</h1><h2 class="text-center text-xl md:text-left">Personalize t-shirts, apparel,
+       or mugs for your group or business</h2><div class="flex flex-col gap-4 md:items-start lg:flex-row">
+                                              <a class="inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background
+                                               transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+                                               focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary
+                                                text-primary-foreground hover:bg-primary/90 rounded-2xl px-12 py-4 text-xl"
+                                                 href="/collections">Shop Collection</a></div></div>
+                                              
+                                              
+                                              <div class="mt-10"><div class="flex w-full"><div class="flex flex-1 flex-col items-center justify-center lg:items-start xl:flex-none"><h3 class="mb-2 whitespace-nowrap text-xl font-medium text-slate-950">Free Delivery</h3><p class="text-center leading-4 text-slate-600 lg:text-left">As soon as <span class="whitespace-nowrap blur-sm">Loading...</span></p></div><div data-orientation="vertical" role="none" class="shrink-0 w-[1px] mx-4 h-auto bg-primary"></div><div class="flex flex-1 flex-col items-center justify-center lg:items-start xl:flex-none"><h3 class="mb-2 whitespace-nowrap text-xl text-slate-950">Rush Delivery</h3><p class="text-center leading-4 text-slate-600 lg:text-left">Guaranteed by <span class="whitespace-nowrap blur-sm">Loading...</span></p></div><div data-orientation="vertical" role="none" class="shrink-0 w-[1px] mx-4 hidden h-auto bg-primary lg:block"></div><div class="hidden flex-1 flex-col items-center justify-center lg:flex lg:flex-col lg:items-start xl:flex-none"><h3 class="mb-2 text-xl text-slate-950">Need it Sooner?</h3><p class="leading-4 text-slate-600">Call<a href="tel:8006201233" class="whitespace-nowrap pl-1">1-800-620-1233</a><a href="#" class="pl-1">or Live Chat</a></p></div></div><div class="flex items-center justify-center gap-4 px-6 pb-6 pt-10 lg:hidden"><h3 class="text-slate-950">Need it Sooner?</h3><p class="leading-4 text-slate-600"><a href="tel:8006201233">Call Now</a> or <a href="#">Live Chat</a></p></div></div></div><div class="relative hidden overflow-y-clip md:flex md:w-2/5 lg:w-1/2"><img alt="" width="1250" height="900" decoding="async" data-nimg="1" class="overflow-visible object-cover object-left 2xl:object-none"
+                                              
+                          style={{
+    color: "transparent",
+    backgroundSize: "cover",
+    backgroundPosition: "50% 50%",
+    backgroundRepeat: "no-repeat",
+    backgroundImage:
+      "url(_data_image/svg%2bxml%3bcharset%3dutf-8%2c_svg%20xmlns%3d%27http_/www.w3.org/2000/svg%27%20viewBox%3d%270%200%20800%20900%27__filter%20id%3d%27b%27%20color/__feColorMatrix%20values%3d%271%200%200%200%200%200%201%200%200%200%200/filter__image%20width%3d%2710);' href='data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAXABQDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAUGBwMI/8QAIxAAAQMEAgIDAQAAAAAAAAAAAQIDBAAFBhESEyExFEFRYf/EABUBAQEAAAAAAAAAAAAAAAAAAAED/8QAGxEAAwEAAwEAAAAAAAAAAAAAAAECEQNBYRL/2gAMAwEAAhEDEQA/APR0u+9GRxrWlgqDqSpTu/CP5UZec6tdruy4chaw40QlYCd+T6qLvJQjNlOBZLyAkpR6BrPc7jyHsmFxCkdcl1JDSVbJ4kVTklR8+onx073xm8QbnEmsB5h0KRvX5o/lKruN26V8J1xxrq7XVOJSr3ogUqZQ43/GJcq+OXOK+2Dw0EKH2KrcTCLtcJ8GTKXGjtxneRbT55DezSlN07a3oJlRudmrpHFIA+qUpQJ//9k='/%3E%3C/svg%3E\")"
+  }}
+  
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" 
+  
+ src={braImg}/></div>
+   </div></div></div></section>*/}
    
    
 <section className="bg-slate-100 text-slate-900">
@@ -149,30 +188,32 @@ return (
       <p className="mt-2 text-center text-lg font-light">
         Christian shirts & mugs that speak your faith.
       </p>
-<ul className="my-8 w-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
-  {categories.map((cat) => (
-    <li key={cat._id} className="w-full">
-      <Link
-        to={`/category/${cat._id}`}
-        className="block w-full overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-md"
-      >
-        {/* FORCE reduced image height (180px) */}
-        <div className="w-full overflow-hidden" style={{ height: "180px" }}>
-          <img
-            alt={cat.name}
-            src={cat.image || "/default-image.jpg"}
-            className="w-full h-full object-cover"
-          />
-        </div>
 
-        <h3 className="px-3 py-2 text-center text-sm font-medium">
-          {cat.name}
-        </h3>
-      </Link>
-    </li>
-  ))}
-</ul>
+      <ul className="my-8 w-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
+        {categories.map((cat) => (
+          <li key={cat._id} className="w-full">
+        <li key={cat._id} className="w-full">
+  <Link to={`/category/${cat._id}`} passHref>
+    <a className="block w-full overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-md">
+      {/* FORCE reduced image height (180px) */}
+      <div className="w-full overflow-hidden" style={{ height: "180px" }}>
+        <img
+          alt={cat.name}
+          src={cat.image || "/default-image.jpg"}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
+      <h3 className="px-3 py-2 text-center text-sm font-medium">
+        {cat.name}
+      </h3>
+    </a>
+  </Link>
+</li>
+
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
@@ -263,4 +304,4 @@ return (
   );
 };
 
-export default Banner;
+export default Banner2;
