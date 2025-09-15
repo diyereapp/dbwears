@@ -187,47 +187,44 @@ useEffect(() => {
        
        
        
-       <section class="flex flex-col gap-4"><div class="flex flex-col gap-1">
-        
-        
-        <h3 class="text-3xl font-bold">Shop By Category</h3><p>Find the perfect cloths and mugs</p></div>
-        
-        
-     <section className="py-8">
+   <section className="flex flex-col gap-4">
+  <div className="flex flex-col gap-1">
+    <h3 className="text-3xl font-bold">Shop By Category</h3>
+    <p>Find the perfect cloths and mugs</p>
+  </div>
 
-
-  <ul className="mt-4 grid grid-cols-2 gap-4 overflow-hidden rounded-2xl">
- {categories.map((cat) => (
-      <li
-key={cat._id}
-        // style={{
-        //   background: cat.bgColor || ["#e4f4f1", "#b8dcfc", "#9dadbc", "#ffeccc"][index % 4], // fallback colors
-        // }}
-      >
-        <a
-        href={`/category/${cat._id}`}
-          className="relative flex justify-center transition-opacity duration-200 hover:opacity-75"
-        >
-          <img
-            alt={cat.name}
-            loading="lazy"
-            decoding="async"
-            className="object-contain p-2 lg:max-w-72"
-            src={cat.image || "https://via.placeholder.com/600x600?text=No+Image"}
-          />
-          <h3 className="absolute bottom-0 left-0 mb-4 rounded-r-lg bg-white px-2 py-1 text-lg font-bold md:px-4 md:py-2 md:text-xl">
-            {cat.name}
-          </h3>
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
+  <section className="py-8">
+    <ul className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      {categories.map((cat) => (
+        <li key={cat._id} className="h-64"> {/* fixed height for all cards */}
+          <a
+            href={`/category/${cat._id}`}
+            className="relative flex h-full flex-col items-center justify-center rounded-xl border bg-white shadow-sm transition-transform duration-200 hover:scale-105"
+          >
+            <img
+              alt={cat.name}
+              loading="lazy"
+              decoding="async"
+              className="h-40 w-full object-contain p-2"
+              src={
+                cat.image ||
+                "https://via.placeholder.com/600x600?text=No+Image"
+              }
+            />
+            <h3 className="absolute bottom-0 left-0 mb-4 rounded-r-lg bg-white/90 px-3 py-1 text-lg font-bold shadow-md">
+              {cat.name}
+            </h3>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
 </section>
 
 
 
-<section className="flex flex-col gap-4">
+
+<section className="flex flex-col gap-4" style={{marginBottom: "20px"}}>
       {/* Heading */}
       <div className="flex flex-col gap-1">
         <div className="flex items-center justify-between">

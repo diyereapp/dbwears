@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import white from "./home.png";
 import young from "./a1.jpeg";
 import old from "./a3.jpg";
@@ -8,9 +8,23 @@ import oil from "./safe.png";
 import hiab from "./ran.png";
 import "./home.css";
 import "./style.css";
-
+import axios from "axios";
 
 const Footer = () => {
+    const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/db/categories`
+        );
+        setCategories(res.data);
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <>
@@ -41,11 +55,38 @@ const Footer = () => {
 
       </div><div class="text-slate-900 bg-inherit">
       
-      <div class="mx-auto max-w-[1440px] px-6"><nav class="lg:my-12"><ul class="flex flex-col items-center divide-y lg:grid lg:auto-rows-fr lg:grid-cols-5 lg:gap-8 lg:divide-y-0"><li class="h-full w-full"><div class="flex flex-col items-center py-8 lg:flex-grow lg:items-stretch lg:py-0" data-state="closed"><div class="flex items-center gap-2"><button type="button" aria-controls="radix-:R1dmm:" aria-expanded="false" data-state="closed" 
-      class="group flex items-center gap-2 hover:text-primary"><h4 class="text-lg font-semibold uppercase tracking-wider text-slate-100 hover:text-primary">Apparel</h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-6 w-6 text-slate-400 group-data-[state=open]:hidden lg:hidden"><path d="m6 9 6 6 6-6"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="lucide lucide-chevron-up h-6 w-6 text-slate-400 group-data-[state=closed]:hidden lg:hidden"><path d="m18 15-6-6-6 6"></path></svg></button></div><div data-state="closed" id="radix-:R1dmm:"><ul class="mt-2 flex flex-col items-center gap-2 text-slate-400 lg:items-start"><li class="flex flex-col items-center"><a class="flex flex-col items-center
-        whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="t-shirts/index.html">T-Shirts</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="hoodies/index.html">Hoodies</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="sweatshirts/index.html">Sweatshirts</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="hats/index.html">Hats</a>
-        </li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="polo-shirts/index.html">Polos</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="jackets/index.html">Jackets</a></li></ul></div></div></li><li class="h-full w-full"><div class="flex flex-col items-center py-8 lg:flex-grow lg:items-stretch lg:py-0" data-state="closed"><div class="flex items-center gap-2"><button type="button" aria-controls="radix-:R2dmm:" aria-expanded="false" data-state="closed" class="group flex items-center gap-2 hover:text-primary"><h4 class="text-lg font-semibold uppercase tracking-wider text-slate-100 hover:text-primary">Promo Products</h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-6 w-6 text-slate-400 group-data-[state=open]:hidden lg:hidden"><path d="m6 9 6 6 6-6"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up h-6 w-6 text-slate-400 group-data-[state=closed]:hidden lg:hidden"><path d="m18 15-6-6-6 6"></path></svg></button></div><div data-state="closed" id="radix-:R2dmm:"><ul class="mt-2 flex flex-col items-center gap-2 text-slate-400 lg:items-start"><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="promotional-products/no-minimum/index.html">No Minimums</a>
+      <div class="mx-auto max-w-[1440px] px-6"><nav class="lg:my-12"><ul class="flex flex-col items-center divide-y lg:grid lg:auto-rows-fr 
+      lg:grid-cols-5 lg:gap-8 lg:divide-y-0"><li class="h-full w-full"><div class="flex flex-col items-center py-8 lg:flex-grow lg:items-stretch
+       lg:py-0" data-state="closed"><div class="flex items-center gap-2"><button type="button" aria-controls="radix-:R1dmm:" aria-expanded="false"
+        data-state="closed" 
+      class="group flex items-center gap-2 hover:text-primary"><h4 class="text-lg font-semibold uppercase tracking-wider text-slate-100
+       hover:text-primary">Apparel</h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-6 w-6
+         text-slate-400 group-data-[state=open]:hidden lg:hidden"><path d="m6 9 6 6 6-6"></path></svg><svg xmlns="http://www.w3.org/2000/svg" 
+         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="lucide lucide-chevron-up h-6 w-6 text-slate-400 group-data-[state=closed]:hidden lg:hidden"><path d="m18 15-6-6-6 6"></path></svg></button>
+       </div><div data-state="closed" id="radix-:R1dmm:"><ul class="mt-2 flex flex-col items-center gap-2 text-slate-400 lg:items-start"><li class="flex
+        flex-col items-center"><a class="flex flex-col items-center
+        whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="t-shirts/index.html">T-Shirts</a></li><li class="flex flex-col
+         items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2"
+          href="hoodies/index.html">Hoodies</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line 
+          hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="sweatshirts/index.html">Sweatshirts</a></li><li class="flex flex-col
+           items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2"
+            href="hats/index.html">Hats</a>
+        </li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row 
+        lg:items-center lg:gap-2" href="polo-shirts/index.html">Polos</a></li><li class="flex flex-col items-center"><a class="flex flex-col 
+        items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="jackets/index.html">Jackets</a></li></ul></div>
+        </div></li><li class="h-full w-full"><div class="flex flex-col items-center py-8 lg:flex-grow lg:items-stretch lg:py-0" data-state="closed">
+          <div class="flex items-center gap-2"><button type="button" aria-controls="radix-:R2dmm:" aria-expanded="false" data-state="closed" class="group 
+          flex items-center gap-2 hover:text-primary"><h4 class="text-lg font-semibold uppercase tracking-wider text-slate-100 hover:text-primary">
+             Products</h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-6 w-6 text-slate-400 
+              group-data-[state=open]:hidden lg:hidden"><path d="m6 9 6 6 6-6"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" 
+              height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+              class="lucide lucide-chevron-up h-6 w-6 text-slate-400 group-data-[state=closed]:hidden lg:hidden"><path d="m18 15-6-6-6 6">
+                </path></svg></button></div><div data-state="closed" id="radix-:R2dmm:"><ul class="mt-2 flex flex-col items-center gap-2 
+                text-slate-400 lg:items-start"><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line 
+                hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="promotional-products/no-minimum/index.html">No Minimums</a>
         </li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="bags/index.html">Bags</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="drinkware/index.html">Drinkware</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="trade-shows/index.html">Trade Shows</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="office/index.html">Office Supplies</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="technology/index.html">Technology</a></li></ul></div></div></li><li class="h-full w-full"><div class="flex flex-col items-center py-8 lg:flex-grow lg:items-stretch lg:py-0" data-state="closed"><div class="flex items-center gap-2"><button type="button" aria-controls="radix-:R3dmm:" aria-expanded="false" data-state="closed" class="group flex items-center gap-2 hover:text-primary"><h4 class="text-lg font-semibold uppercase tracking-wider text-slate-100 hover:text-primary">About</h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-6 w-6 text-slate-400 group-data-[state=open]:hidden lg:hidden"><path d="m6 9 6 6 6-6"></path></svg>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up h-6 w-6 text-slate-400 group-data-[state=closed]:hidden lg:hidden"><path d="m18 15-6-6-6 6"></path></svg></button></div><div data-state="closed" id="radix-:R3dmm:"><ul class="mt-2 flex flex-col items-center gap-2 text-slate-400 lg:items-start"><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="about/reviews/index.html">Reviews</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="about/our-story/index.html">Our Story</a></li><li class="flex flex-col items-center"><a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="blog/index.html">Blog</a></li><li class="flex flex-col items-center">
         <a class="flex flex-col items-center whitespace-pre-line hover:text-primary lg:flex-row lg:items-center lg:gap-2" href="about/careers/index.html">Careers</a>
@@ -119,7 +160,7 @@ Email Us</a></li></ul></div></div></li></ul></nav><div class="flex flex-col item
     backgroundRepeat: "no-repeat",
     backgroundImage:
       "url(\"_data_image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><filter id='b' color/><feColorMatrix values='1 0 0 0 0 0 1 0 0 0 0'/></filter><image width='10'/></svg>\")"
-  }} src="https://cdn.sanity.io/images/2ahps9jc/production/49126a1fda1a17a759096eaf646c3dcb060f9c7d-128x128.png?w=3840&amp;q=75&amp;fit=min&amp;auto=format"/></a></nav></div><div class="flex flex-col items-center border-t pt-6 text-sm text-slate-500 lg:flex-row lg:justify-end lg:gap-1"><p>© Copyright  Diyere.</p><p>All rights reserved.</p></div></div></div>
+  }} src="https://cdn.sanity.io/images/2ahps9jc/production/49126a1fda1a17a759096eaf646c3dcb060f9c7d-128x128.png?w=3840&amp;q=75&amp;fit=min&amp;auto=format"/></a></nav></div><div class="flex flex-col items-center border-t pt-6 text-sm text-slate-500 lg:flex-row lg:justify-end lg:gap-1"><p>© Copyright  DbWears.</p><p>All rights reserved.</p></div></div></div>
 
 
 
