@@ -355,6 +355,7 @@ const availableColors = [
       className="items-center justify-center whitespace-nowrap font-bold 
                  rounded-2xl px-12 py-4 text-xl bg-primary text-primary-foreground 
                  hover:bg-primary/90 disabled:opacity-50"
+                 style={{padding: "12px"}}
     >
       Add to Cart
     </button>
