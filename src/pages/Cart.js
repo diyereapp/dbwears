@@ -283,7 +283,8 @@ const Cart = () => {
 
                 <button
                   onClick={() => navigate("/checkout")}
-                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                  className="w-full text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                  style={{backgroundColor: "green"}}
                 >
                   Proceed to Checkout
                 </button>
