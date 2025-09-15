@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiHelpCircle } from "react-icons/fi"; // Feather icon (react-icons)
 import { MessageCircle, Phone } from "lucide-react";
+import { useCart } from "../context/CartContext";
 
 const bgImage = `url("data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'>
@@ -23,7 +24,11 @@ const bgImage = `url("data:image/svg+xml;utf8,
 const Header = () => {
  const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const { cartItems } = useCart();
+  // const { cartItems } = useCart();
+  // const [open, setOpen] = useState(false);
 
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -47,16 +52,151 @@ const Header = () => {
         <div className="bg-slate-100 text-slate-900"><div className="mx-auto max-w-[1440px] px-6">
           
           <div className="flex items-center justify-end py-2 text-sm md:justify-between">
-            <div className="hidden md:block">100,000+ Customers Nationwide w/ 99.5% Satisfaction</div><nav aria-label="account and cart" data-orientation="horizontal" dir="ltr" className="relative z-10 flex max-w-max flex-1 items-center justify-center"><div style={{position: "relative"}}><ul data-orientation="horizontal" className="group flex flex-1 list-none items-center justify-center space-x-1 gap-4 lg:gap-0" dir="ltr">
-              <div><div className="relative hidden lg:flex" aria-labelledby="search-trigger-label" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rbkmm:" data-state="closed"><div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search size-5 text-slate-400">
-                <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div><label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sr-only" id="search-trigger-label" for="site-search-input">Search for products</label><input id="site-search-input" placeholder="Search for products" className="w-full rounded-xl border border-slate-400 py-2 pl-10 pr-9 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" value=""/></div></div><li><a className="flex items-center gap-1 font-medium lg:hidden" href="/my-account" data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-user-round w-5"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4"></circle><circle cx="12" cy="12" r="10"></circle></svg>My Account</a><button id="radix-:Rkmm:-trigger-radix-:Rjkmm:" data-state="closed" aria-expanded="false" aria-controls="radix-:Rkmm:-content-radix-:Rjkmm:" className="group h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group hidden bg-transparent lg:inline-flex" data-radix-collection-item=""><a className="flex items-center gap-1 font-medium" href="my-account" data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-user-round w-5"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4">
+            <div className="hidden md:block">100,000+ Customers Nationwide w/ 99.5% Satisfaction</div><nav aria-label="account and cart"
+             data-orientation="horizontal" dir="ltr" className="relative z-10 flex max-w-max flex-1 items-center 
+             justify-center"><div style={{position: "relative"}}><ul data-orientation="horizontal" className="group flex flex-1 list-none items-center 
+             justify-center space-x-1 gap-4 lg:gap-0" dir="ltr">
+              <div><div className="relative hidden lg:flex" aria-labelledby="search-trigger-label" type="button" aria-haspopup="dialog" aria-expanded="false" 
+              aria-controls="radix-:Rbkmm:" data-state="closed"><div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search size-5 text-slate-400">
+                <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div><label className="text-sm font-medium leading-none 
+                peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sr-only" id="search-trigger-label" for="site-search-input">Search for products
+                </label><input id="site-search-input" placeholder="Search for products" className="w-full rounded-xl border border-slate-400 py-2 pl-10 pr-9 
+                text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" value=""/></div></div>
+                
+                
+                
+                <li><a className="flex items-center 
+                gap-1 font-medium lg:hidden" href="/my-account" data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide
+                  lucide-circle-user-round w-5"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4"></circle><circle cx="12" cy="12" 
+                  r="10"></circle></svg>My Account</a><button id="radix-:Rkmm:-trigger-radix-:Rjkmm:" data-state="closed" aria-expanded="false"
+                   aria-controls="radix-:Rkmm:-content-radix-:Rjkmm:" className="group h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm 
+                   font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none
+                    disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group hidden bg-transparent 
+                    lg:inline-flex" data-radix-collection-item=""><a className="flex items-center gap-1 font-medium" href="my-account"
+                     data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-user-round 
+                      w-5"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4">
 
-                </circle><circle cx="12" cy="12" r="10"></circle></svg>My Account</a> </button></li><li><a className="flex items-center gap-2 font-medium lg:hidden" href="https://www.rushordertees.com/cart/" data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shopping-cart w-5"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2
-                  0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>Cart<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-loader-circle size-6 animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg></a><button id="radix-:Rkmm:-trigger-radix-:Rrkmm:" data-state="closed" aria-expanded="false" aria-controls="radix-:Rkmm:-content-radix-:Rrkmm:" className="group h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group hidden bg-transparent pr-0 lg:inline-flex" data-radix-collection-item=""><a className="flex items-center gap-2 font-medium" href="https://www.rushordertees.com/cart/" data-radix-collection-item="">
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shopping-cart w-5"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>Cart<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-loader-circle size-6 animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
-                    </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-chevron-down relative top-[1px] ml-1 h-3 w-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></li></ul></div><div className="absolute left-0 top-full flex w-full justify-center"></div></nav></div></div></div><div className="text-slate-900 bg-white py-3"><div className="mx-auto max-w-[1440px] px-6"><div className="flex justify-between"><a className="flex items-center" href="/">
+                </circle><circle cx="12" cy="12" r="10"></circle></svg>My Account</a> </button></li>
+                
+                
+    <div className="relative">
+  {/* Cart Button */}
+  <button
+    onClick={() => setOpen((prev) => !prev)}
+    className="relative flex items-center gap-2 p-2 hover:text-blue-600"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <circle cx="8" cy="21" r="1"></circle>
+      <circle cx="19" cy="21" r="1"></circle>
+      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+    </svg>
+    Cart
+    <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+      {totalItems}
+    </span>
+  </button>
+
+  {/* Dropdown */}
+  {open && (
+      <div
+      className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 z-50"
+      style={{ width: "18rem" }} // triple the width (~1152px)
+    >
+      {cartItems.length === 0 ? (
+        <div className="p-4 text-center text-gray-500 text-sm">
+          You have no items in your shopping cart.
+        </div>
+      ) : (
+        <div className="flex flex-col">
+          {/* Cart Items */}
+          <div className="p-4 max-h-80 overflow-y-auto divide-y divide-gray-200">
+            {cartItems.map((item, idx) => (
+              <div key={idx} className="flex gap-3 py-3 items-center">
+                <figure className="w-16 h-16 flex-shrink-0">
+                  <img
+                    src={item.images?.[0] || "https://via.placeholder.com/60"}
+                    alt={item.name}
+                    className="w-full h-full object-cover rounded"
+                  />
+                </figure>
+                <div className="flex-1">
+                  <h5 className="font-medium text-sm">{item.name}</h5>
+                  {item.color && (
+                    <p className="text-xs text-gray-500">Color: {item.color}</p>
+                  )}
+                  <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                  {item.price && (
+                    <p className="text-sm font-semibold mt-1">${item.price}</p>
+                  )}
+                </div>
+                <button
+                  // onClick={() => removeFromCart(item._id, item.color)}
+                  className="text-red-500 text-lg font-bold"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <div className="p-4 border-t border-gray-200 flex flex-col gap-3">
+            <div className="flex justify-between font-semibold">
+              <span>Subtotal:</span>
+              <span>
+                ${cartItems.reduce((sum, i) => sum + (i.price || 0) * i.quantity, 0).toFixed(2)}
+              </span>
+            </div>
+            <div className="flex gap-2">
+          <a
+  href="/cart"
+  className="flex-1 text-center py-2 rounded-md transition"
+  style={{
+    backgroundColor: "green", // green-600
+    color: "white",           // red-600
+  }}
+>
+  View Cart
+</a>
+
+              <a
+                href="/checkout"
+          className="flex-1 text-center py-2 rounded-md transition"
+  style={{
+    backgroundColor: "white", // green-600
+    color: "black",
+    border: "1px solid green"           // red-600
+  }}
+              >
+                Checkout
+              </a>
+            </div>
+            <button
+              // onClick={() => setCartItems([])}
+              className="text-red-500 text-sm mt-1 hover:underline"
+            >
+              Clear Cart
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+</div>
+
+                     
+                     
+                     </ul></div><div className="absolute left-0 top-full flex w-full justify-center"></div></nav></div></div></div><div className="text-slate-900 bg-white py-3"><div className="mx-auto max-w-[1440px] px-6"><div className="flex justify-between"><a className="flex items-center" href="/">
                   {/*<img alt="Rush Order Tees Logo" loading="eager" 
                   width="300" height="120" decoding="async" data-nimg="1" className="w-28"
                  style={{
@@ -146,7 +286,7 @@ const Header = () => {
   
  {/* Mobile menu panel */}
 <div
-  className={`absolute top-full left-0 right-0 w-full bg-white shadow-lg z-50 transition-all duration-300 ease-in-out
+  className={`absolute top-full left-0 right-0 w-full bg-white shadow-lg z-40  transition-all duration-300 ease-in-out
     ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
 >
   <div className="p-4 border-t">

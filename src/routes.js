@@ -14,6 +14,7 @@ import MyAccount from "./pages/MyAccount";
 import MyDesign from "./pages/MyDesign";
 import MyOrder from "./pages/MyOrder";
 import Collection from "./pages/Collection";
+import Cart from "./pages/Cart";
 
 const routes = [
   { path: "/oauth-callback", element: <GoogleAuthHandler /> },
@@ -53,6 +54,10 @@ const routes = [
           {
     path: "/account-order",
     element: <MyOrder />,
+  },
+     {
+    path: "/cart",
+    element: <Cart />,
   },
   // { path: "/", element: <Navigate to="vision" /> },
   {

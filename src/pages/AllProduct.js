@@ -359,41 +359,142 @@ const filteredProducts = products.filter((p) => {
           </li><li>
           
           </li></ul>
-  <button
-  className="flex items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 w-full "
-  type="button"
-  onClick={(e) => {
-    e.preventDefault(); // just in case
-    setIsSidebarOpen(true);
-  }}
->
-  All Filters
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="ml-2 h-5 w-5"
-  >
-    <line x1="21" x2="14" y1="4" y2="4" />
-    <line x1="10" x2="3" y1="4" y2="4" />
-    <line x1="21" x2="12" y1="12" y2="12" />
-    <line x1="8" x2="3" y1="12" y2="12" />
-    <line x1="21" x2="16" y1="20" y2="20" />
-    <line x1="12" x2="3" y1="20" y2="20" />
-    <line x1="14" x2="14" y1="2" y2="6" />
-    <line x1="8" x2="8" y1="10" y2="14" />
-    <line x1="16" x2="16" y1="18" y2="22" />
-  </svg>
-</button>
+     <button
+        className="flex flex-grow items-center justify-between whitespace-nowrap rounded-xl border bg-white px-4 py-2 font-medium hover:bg-slate-50 md:flex-grow-0"
+        type="button"
+        onClick={() => setIsSidebarOpen(true)}
+      >
+        All Filters
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="ml-2 h-5 w-5"
+        >
+          <line x1="21" x2="14" y1="4" y2="4"></line>
+          <line x1="10" x2="3" y1="4" y2="4"></line>
+          <line x1="21" x2="12" y1="12" y2="12"></line>
+          <line x1="8" x2="3" y1="12" y2="12"></line>
+          <line x1="21" x2="16" y1="20" y2="20"></line>
+          <line x1="12" x2="3" y1="20" y2="20"></line>
+          <line x1="14" x2="14" y1="2" y2="6"></line>
+          <line x1="8" x2="8" y1="10" y2="14"></line>
+          <line x1="16" x2="16" y1="18" y2="22"></line>
+        </svg>
+      </button>
+ {isSidebarOpen && (
+  <aside className="fixed top-0 left-0 z-50 h-full w-[48rem] bg-white shadow-xl p-6 overflow-y-auto" style={
+  {width: "300px"}
+  }>
+    <button
+      className="mb-4 text-gray-500 hover:text-black"
+      onClick={() => setIsSidebarOpen(false)}
+    >
+       ✕
+    </button>
 
+    {/* Brand Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Brand</h2>
+      <select
+        value={selectedBrand}
+        onChange={(e) => setSelectedBrand(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Brands</option>
+        {brands.map((b) => (
+          <option key={b._id} value={b._id}>{b.name}</option>
+        ))}
+      </select>
+    </section>
 
+    {/* Color Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Color</h2>
+      <select
+        value={selectedColor}
+        onChange={(e) => setSelectedColor(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Colors</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
 
+    {/* Price Range Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Price</h2>
+      <select
+        value={selectedRange}
+        onChange={(e) => setSelectedRange(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Prices</option>
+        {ranges.map((r, idx) => (
+          <option key={idx} value={r.label}>{r.label}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Tags Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Tags</h2>
+      <select
+        value={selectedTag}
+        onChange={(e) => setSelectedTag(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Tags</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Printing Method Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Printing Method</h2>
+      <select
+        value={selectedPrinting}
+        onChange={(e) => setSelectedPrinting(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Methods</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Size Filter */}
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-2">Size</h2>
+      <select
+        value={selectedSize}
+        onChange={(e) => setSelectedSize(e.target.value)}
+        className="w-full border px-3 py-2 rounded-md"
+      >
+        <option value="">All Sizes</option>
+        {filteredColors.map((color) => (
+          <option key={color.name} value={color.name}>{color.name}</option>
+        ))}
+      </select>
+    </section>
+
+    {/* Apply Filters Button */}
+    <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-4">
+      Apply Filters
+    </button>
+  </aside>
+)}
 
             </div><div class="flex justify-end gap-4">
               
@@ -538,114 +639,7 @@ const filteredProducts = products.filter((p) => {
     ))}
               
     </ul>
-           {isSidebarOpen && (
-  <aside
-    className="fixed top-0 left-0 z-50 h-full bg-white shadow-xl p-6 overflow-y-auto"
-    style={{ width: "260px", maxWidth: "100vw" }} // double the original 24rem → 48rem = 768px, so 960px is even bigger
-  >
-    <button
-      className="mb-4 text-gray-500 hover:text-black"
-      onClick={() => setIsSidebarOpen(false)}
-    >
-       ✕
-    </button>
-
-    {/* Brand Filter */}
-    <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-2">Brand</h2>
-      <select
-        value={selectedBrand}
-        onChange={(e) => setSelectedBrand(e.target.value)}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">All Brands</option>
-        {brands.map((b) => (
-          <option key={b._id} value={b._id}>{b.name}</option>
-        ))}
-      </select>
-    </section>
-
-    {/* Color Filter */}
-    <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-2">Color</h2>
-      <select
-        value={selectedColor}
-        onChange={(e) => setSelectedColor(e.target.value)}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">All Colors</option>
-        {filteredColors.map((color) => (
-          <option key={color.name} value={color.name}>{color.name}</option>
-        ))}
-      </select>
-    </section>
-
-    {/* Price Range Filter */}
-    <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-2">Price</h2>
-      <select
-        value={selectedRange}
-        onChange={(e) => setSelectedRange(e.target.value)}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">All Prices</option>
-        {ranges.map((r, idx) => (
-          <option key={idx} value={r.label}>{r.label}</option>
-        ))}
-      </select>
-    </section>
-
-    {/* Tags Filter */}
-    <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-2">Tags</h2>
-      <select
-        value={selectedTag}
-        onChange={(e) => setSelectedTag(e.target.value)}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">All Tags</option>
-        {filteredColors.map((color) => (
-          <option key={color.name} value={color.name}>{color.name}</option>
-        ))}
-      </select>
-    </section>
-
-    {/* Printing Method Filter */}
-    <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-2">Printing Method</h2>
-      <select
-        value={selectedPrinting}
-        onChange={(e) => setSelectedPrinting(e.target.value)}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">All Methods</option>
-        {filteredColors.map((color) => (
-          <option key={color.name} value={color.name}>{color.name}</option>
-        ))}
-      </select>
-    </section>
-
-    {/* Size Filter */}
-    <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-2">Size</h2>
-      <select
-        value={selectedSize}
-        onChange={(e) => setSelectedSize(e.target.value)}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">All Sizes</option>
-        {filteredColors.map((color) => (
-          <option key={color.name} value={color.name}>{color.name}</option>
-        ))}
-      </select>
-    </section>
-
-    {/* Apply Filters Button */}
-    <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-4">
-      Apply Filters
-    </button>
-  </aside>
-)}
+          
              <nav aria-label="Pagination" class="mt-6 flex justify-between px-4 py-4 text-sm font-medium text-slate-700 sm:px-6 lg:px-8">
           
 
@@ -673,4 +667,3 @@ const filteredProducts = products.filter((p) => {
 };
 
 export default AllProduct;
-

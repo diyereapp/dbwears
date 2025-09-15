@@ -12,6 +12,8 @@ import Footer from "./Footer";
 import axios from "axios";
 import braImg from "./bus2.png";
 import BestSellers from "./BestSellers";
+import Trending from "./Trending";
+import Featured from "./Featured";
 
 const bgImage = `url("data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'>
@@ -133,7 +135,10 @@ return (
     <>
 
   
-                                            <main><div class="bg-slate-100"></div><div class="flex flex-col"><section>
+                                            <main><div class="bg-slate-100"></div><div class="flex flex-col">
+                                              
+                                              
+                                              {/*<section>
                                               <div class="text-slate-900 bg-white"><div class="mx-auto max-w-[1440px] px-6">
                                                 <div id="hero-wrapper" class="mx-auto flex flex-col md:flex-row">
                                                   
@@ -172,52 +177,48 @@ return (
   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" 
   
  src={braImg}/></div>
-   </div></div></div></section><div class="bg-slate-100 text-slate-900">
-    
-    
-    <div class="mx-auto max-w-[1440px] px-6">
+   </div></div></div></section>*/}
+   
+   
+<section className="bg-slate-100 text-slate-900">
+  <div className="mx-auto max-w-[1440px] px-6">
+    <div className="flex flex-col items-center">
+      <h2 className="mt-8 text-2xl font-semibold">Shop Categories</h2>
+      <p className="mt-2 text-center text-lg font-light">
+        Christian shirts & mugs that speak your faith.
+      </p>
 
-
-<div className="flex flex-col items-center justify-center">
-  <h2 className="mt-8 text-4xl font-semibold">Shop Top Categories</h2>
-  <p className="mt-2 text-center text-xl font-light">
-    Best selling apparel great for any occasion
-  </p>
-
-  <ul className="my-8 grid grid-cols-2 gap-4 md:gap-4 lg:gap-8 md:grid-cols-2 lg:grid-cols-4">
-    {categories.flatMap((grandparent) =>
-      // Only pick children (parents) of the grandparent
-      (grandparent.children || [])
-        .filter(
-          (child) => child.children && Array.isArray(child.children) // ensure it's a parent category
-        )
-        .map((parent) => (
-          <li key={parent._id} className="flex">
+      <ul className="my-8 w-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
+        {categories.map((cat) => (
+          <li key={cat._id} className="w-full">
             <a
-              href={`/category/${parent._id}`}
-              className="flex flex-col items-center justify-center overflow-hidden rounded-2xl border bg-white transition-opacity duration-200 hover:shadow-md"
+              href={`/category/${cat._id}`}
+              className="block w-full overflow-hidden rounded-2xl border bg-white transition-shadow hover:shadow-md"
             >
-              <img
-                alt={parent.name}
-                src={parent.img || "/default-image.jpg"} // fallback if no image
-                className="object-cover"
-                width="800"
-                height="900"
-              />
-              <h3 className="p-4 text-center text-lg font-bold">{parent.name}</h3>
+              {/* FORCE reduced image height (180px) */}
+              <div
+                className="w-full overflow-hidden"
+                style={{ height: "180px" }}
+              >
+                <img
+                  alt={cat.name}
+                  src={cat.image || "/default-image.jpg"}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <h3 className="px-3 py-2 text-center text-sm font-medium">
+                {cat.name}
+              </h3>
             </a>
           </li>
-        ))
-    )}
-  </ul>
-</div>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
 
 
-                                                         
-                                                         </div>
-                                                        
-                                                        </div>
-                                                        
                                                         
                                                         
                                                         
@@ -267,6 +268,8 @@ return (
                                                                                   </section>*/}
                                                                                   
                                                                                   <BestSellers />
+                                                                                  <Trending />
+                                                                                  <Featured />
                                                                                   
                                                                                   </div></div><div class="bg-slate-100 text-slate-900"><div class="mx-auto max-w-[1440px] px-6">
                                                                                     
@@ -274,43 +277,7 @@ return (
 
 
 
-                                                                                <div className="flex flex-col items-center justify-center">
-  <h2 className="mt-8 text-4xl font-semibold">Shop Popular Promo Products</h2>
-  <p className="mt-2 text-center text-xl font-light">
-    Best selling promo products for any business, event, school, or reunion
-  </p>
-
-  <ul className="my-8 grid grid-cols-2 gap-4 md:gap-4 lg:gap-8 md:grid-cols-2 lg:grid-cols-4">
-    {categories
-      .filter((grandparent) => grandparent.name === "Promo Products") // only Promo Products
-      .flatMap((grandparent) =>
-        (grandparent.children || [])
-          .filter(
-            (child) => child.children && Array.isArray(child.children) // ensure it's a parent category
-          )
-          .map((parent) => (
-            <li key={parent._id} className="flex">
-              <a
-                href={`/category/${parent._id}`}
-                className="flex flex-col items-center justify-center overflow-hidden rounded-2xl border bg-white transition-opacity duration-200 hover:shadow-md"
-              >
-                <img
-                  alt={parent.name}
-                  src={parent.img || "/default-image.jpg"} // fallback if no image
-                  className="object-cover"
-                  width="800"
-                  height="900"
-                />
-                <h3 className="p-4 text-center text-lg font-bold">
-                  {parent.name}
-                </h3>
-              </a>
-            </li>
-          ))
-      )}
-  </ul>
-</div>
-
+                  
            
            
            
@@ -321,75 +288,14 @@ return (
            
           
               
-              <div class="bg-slate-100 text-slate-900 py-6"><div class="mx-auto max-w-[1440px] px-6"><section class="flex flex-col gap-4 items-center" aria-labelledby="reviews-E-Nf6nLY_FgKC56Z-7pGP"><h2 id="reviews-E-Nf6nLY_FgKC56Z-7pGP" class="text-3xl font-bold">Customers Love Us</h2><div class="relative w-full" role="region" aria-roledescription="carousel"><div class="overflow-hidden"><div class="flex -ml-4"><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3">
-                    
-                    
-                    <article class="flex h-full flex-col justify-between rounded-2xl bg-white p-6"><div class="flex flex-col gap-2 items-center"><div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars"><div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" style={{width:"100%"}} aria-hidden="true">★★★★★</div>★★★★★</div><div class="flex flex-col gap-4"><h3 class="text-lg font-bold text-center">Great Shirts &amp; Great Company!</h3><blockquote><p class="text-center">We had a great experience working with the Rush Order Tees team. We needed ~20 shirts for a group bicycle cruise celebrating a wedding. They did a great job &amp; our final design looked nice &amp; clean on the shirts. This is a great brand doing great work and we will definitely order from them again. Thank you Rush Order Tees!</p></blockquote></div></div>
-                    
-                    
-                    
-                  
-                
-                </article></div><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3"><article class="flex h-full flex-col justify-between rounded-2xl bg-white p-6"><div class="flex flex-col gap-2 items-center"><div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars"><div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" style={{width:"100%"}} aria-hidden="true">★★★★★</div>★★★★★</div><div class="flex flex-col gap-4"><h3 class="text-lg font-bold text-center">Another Happy Customer</h3><blockquote><p class="text-center">We ordered shirts to promote our new LLC which turned out amazing! The print was fantastic, exactly as I put it on the website; the shirts fit perfectly! From the final products to their phenomenal customer service, this place is the place to order custom gear from!</p></blockquote></div></div>
-                    
-                    
-                   </article></div><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3"><article class="flex h-full flex-col justify-between rounded-2xl bg-white p-6"><div class="flex flex-col gap-2 items-center"><div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars"><div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" style={{width:"100%"}}  aria-hidden="true">★★★★★</div>★★★★★</div><div class="flex flex-col gap-4"><h3 class="text-lg font-bold text-center">Amazing Service, will def use again!</h3><blockquote><p class="text-center">I had an order I needed a really quick turnaround. Rush Order Tees made it so easy to get some designs started with their online system and their email, chat and phone services were really wonderful throughout the whole process. My shirts came in time and everyone loved them! Will definitely use again. </p></blockquote></div></div>
-                    
-                    
-               </article></div><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3"><article class="flex h-full flex-col justify-between rounded-2xl bg-white p-6"><div class="flex flex-col gap-2 items-center"><div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars"><div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" style={{width:"100%"}}  aria-hidden="true">★★★★★</div>★★★★★</div><div class="flex flex-col gap-4"><h3 class="text-lg font-bold text-center">Love the sweatshirts!</h3><blockquote><p class="text-center">The team from RushOrderTees really delivered! The zippered hoodies are warm and well-made, the logo work is excellent, and my staff loves them. RushOrderTees did a great job communicating all the intricacies of the order and they got the product delivered on time. Would definitely use them again!</p></blockquote></div></div>
-                    
-                    
-                  </article></div><div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3"><article class="flex h-full flex-col justify-between rounded-2xl bg-white p-6"><div class="flex flex-col gap-2 items-center"><div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars"><div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" style={{width:"100%"}}  aria-hidden="true">★★★★★</div>★★★★★</div><div class="flex flex-col gap-4"><h3 class="text-lg font-bold text-center">Excellent Quality, exactly as ordered</h3><blockquote><p class="text-center">We had team t-shirts made and I had reservations. I had ordered shirts from a competitor and was very unhappy with the quality. So glad I took a chance on Rush Order Tees! We were thrilled with the quality of the shirts and how true our logos were. Will definitely order from them again. </p></blockquote></div></div>
-                    
-                    
-                    
-                </article>
+              <div class="bg-slate-100 text-slate-900 py-6"><div class="mx-auto max-w-[1440px] px-6">
                 
                 
-                
-                </div></div></div><button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-white text-slate-300 shadow hover:border-primary/90 hover:text-primary rounded-xl absolute h-12 w-12 -left-8 top-1/2 -translate-y-1/2" disabled=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left h-4 w-4"><path d="m15 18-6-6 6-6"></path></svg><span class="sr-only">Previous slide</span></button><button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-white text-slate-300 shadow hover:border-primary/90 hover:text-primary rounded-xl absolute h-12 w-12 -right-8 top-1/2 -translate-y-1/2" disabled=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right h-4 w-4"><path d="m9 18 6-6-6-6"></path></svg><span class="sr-only">Next slide</span></button></div></section></div></div><section><div class="landing-html">
-
-
-<div class="legacy-trustbuilding">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                
-                    <div class="legacy-trustbuilding--body">
-                    
-                        <div class="legacy-trustbuilding--body-item">
-                            <img class="homepage-legacy-img" alt="Philadelphia 76ers Logo" src="data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' id='Layer_1' data-name='Layer 1' viewBox='0 0 180 140'%3E%3Cdefs%3E%3Cstyle%3E .cls-1%7Bfill:%23006bb5;%7D.cls-2%7Bfill:%23ec174c;%7D %3C/style%3E%3C/defs%3E%3Cpath d='M146.79 58.15a57 57 0 0 0-25-36.63 58 58 0 1 0-63.48 97 57.6 57.6 0 0 0 43.6 8.24 57 57 0 0 0 36.65-25 59.07 59.07 0 0 0 8.23-43.61zm-4.4-2.71c-2.14-2.86-4.88-5.59-7.84-6.2a9.76 9.76 0 0 0-7.63 1.94 69.5 69.5 0 0 0-7.71-9c4.63-3.89 8.36-6.86 11-8.78a53.78 53.78 0 0 1 12.18 22.04zm-22.61-30.88a55.25 55.25 0 0 1 8.65 7c-2.74 2-6.49 5-11.06 8.83q-4.41-4.16-8.7-7.49c2.64-2.58 3.85-5.37 3.6-8.32a11 11 0 0 0-1.8-4.93 55.31 55.31 0 0 1 9.31 4.91zm-40.85-7.74A53.9 53.9 0 0 1 105.85 18c1.88 1.79 3.7 4.18 3.93 6.8.19 2.25-.86 4.46-3.13 6.56-10.87-8-21.23-11.9-31.39-11.94a40.18 40.18 0 0 0-6.37.49 54.72 54.72 0 0 1 10.04-3.09zm58.33 80.06c.07-.45.13-.93.19-1.4a7.32 7.32 0 0 1-2.83 1.52c-.34 2-.74 3.94-1.18 5.68a54 54 0 0 1-32.28 20.49A54.8 54.8 0 0 1 90 124.34a36.68 36.68 0 0 0 8.43-5.87c5.76-5.29 10-13.63 13.12-22.32a10.33 10.33 0 0 1-3.08 1.11c-2.94 7.65-6.74 14.79-11.73 19.37A31.74 31.74 0 0 1 83.95 124a54.12 54.12 0 0 1-23.66-8.55 54.89 54.89 0 0 1-9.49-7.86q4.33-4.61 8.59-9l-.14-.06a11.56 11.56 0 0 0-2.49-.82c-2.53 2.63-5.08 5.29-7.65 8A54.68 54.68 0 0 1 35.7 70l1.06-2.48a24.64 24.64 0 0 1 6.15-9.09v-2.57a7.18 7.18 0 0 1 .25-1 30.28 30.28 0 0 0-7 8.16 54.07 54.07 0 0 1 8.45-22.78A56.87 56.87 0 0 1 59.14 25c12.86-5.41 27.31-5 45.47 8-6.56 4.53-17.41 6.37-26.24 7.87-1.58.27-3.07.52-4.45.78a14.88 14.88 0 0 1 .63 2.42c1.32-.24 2.74-.48 4.24-.74 9.38-1.59 21-3.56 27.93-8.78a111.58 111.58 0 0 1 8.73 7.45c-5.32 4.52-11.64 10.09-18.65 16.53a9.43 9.43 0 0 1 1.35 2.2c7.25-6.65 13.74-12.38 19.14-17a66.4 66.4 0 0 1 7.68 9c-3.71 3.54-6.87 9.4-8.57 16.58l-.5 2.11c-.5 2.13-1.06 4.48-1.68 7l2.78-.81c.49-2 .93-3.87 1.34-5.6l.49-2.1c1.63-6.84 4.51-11.94 7.6-15a56.31 56.31 0 0 1 8.44 22.32 5.09 5.09 0 0 1 2.79 1.37 59.26 59.26 0 0 0-9.3-25.33 7.45 7.45 0 0 1 5.64-1.58c3.8.78 7.88 7.15 9.82 10.83a53.85 53.85 0 0 1-6.56 34.35z' class='cls-1'/%3E%3Cpath d='M68.65 85.59q-3.34 3.35-6.77 6.85c0 1.16 0 2.31.13 3.46q3.74-3.84 7.4-7.51a25.08 25.08 0 0 1-.76-2.8zm45.11 6.33l-1.65-2c-.81 1.25-1.75 2.23-3.34 2.23-1.95 0-3.09-1.78-3.29-3.57l8.36-2.25c-.25-4.08-2.6-7.68-7-7.68-4.72 0-7.86 3.68-7.86 9.1 0 4.24 2.43 8.11 7.55 8.11a8.34 8.34 0 0 0 7.23-3.94zm-8.69-7.44c0-1.26 0-3.57 1.38-3.57s1.58 2 1.58 3c0 1.29-.61 1.59-1.49 1.83l-1.47.4z' class='cls-1'/%3E%3Cpath d='M130.9 82.62c0-1.1.46-1.43 1.1-1.43a3 3 0 0 0 2.86 2.71 2.17 2.17 0 0 0 2.43-2.05c0-2.26-1.63-3.13-4.22-3.13-1.86 0-5.34 1.2-6.57 3.81a5.34 5.34 0 0 0 .06-.79c0-1.69-.79-3.07-2.59-3.07-2 0-2.83 2.64-3.45 4.52h-.06a11.55 11.55 0 0 0-1-4.57l-6.26 1.83v1.94c1.75 0 2.07 1.18 2.07 3.65V93l-1.59.22v2.22h8.82v-2.25l-1.6-.19v-3c0-1 .37-6 1.51-5.62a6 6 0 0 0 2.1.53 1.82 1.82 0 0 0 1.62-1.11 4.8 4.8 0 0 0-.07.79c0 6.3 7.41 5.18 7.41 8.08 0 .76-.84 1.24-2 1.24-.31 0-.63-.06-.73-.44C130.37 92 130 90 127.8 90a2.22 2.22 0 0 0-2.2 2.5c0 3.13 3.58 3.4 5.63 3.4 3.37 0 6.87-1.21 6.87-6.06.02-6.48-7.2-4.66-7.2-7.22zM88 56.26c-13.15 0-18.43 10-18.43 22.19C69.6 89 73.7 98.11 85 98.11c7.33 0 13.28-5.22 13.28-14 0-7.41-3.92-12.91-10.3-12.91a8.45 8.45 0 0 0-7.2 3.48h-.05l.27-4.06c.16-2.75.79-10.24 4.61-10.24 1.83 0 1.42 2.44 1.63 3.54.51 2.59 1.63 5.56 5.18 5.56a4.74 4.74 0 0 0 5-4.87c-.05-5.04-4.27-8.35-9.42-8.35zM84.08 94c-3.14 0-3-4-3-8.66s.44-8.66 3-8.66c3.15 0 3.32 4 3.32 8.66S86.75 94 84.08 94z' class='cls-1'/%3E%3Cpath d='M60.49 96.57c-.76-7.8 1-16.31 4.33-21.25 2.3-3.43 8.5-12.24 9.56-19.16.11-.72-.26-.61-1.15.34-7 7.41-19.71 7.23-27.9-.62-.52-.5-.75-.28-.79.17V71.7c8.77 1.29 19.24.44 26.65-10.39.31-.46.49-.14.29.27-2.07 4.21-7 8.1-11.19 11.42-4.06 3.19-15 14.63-14.82 24.68 0 .77 0 .56.71.05C49.5 95.28 56 95.2 60 97.11c.51.26.55.18.49-.54z' class='cls-2'/%3E%3Cpath d='M59.23 33.75h-1.69l1.37 1-.5 1.57 1.34-.96 1.32.96-.5-1.57 1.38-1h-1.7l-.5-1.6-.52 1.6zm11.03 5.82l-.51-1.59-.52 1.59h-1.7l1.4 1.01-.52 1.57 1.34-.97 1.34.97-.51-1.57 1.38-1.01h-1.7zm-4.29-4.49l-.51-1.6-.51 1.6h-1.7l1.38 1-.5 1.58 1.33-.98 1.33.98-.5-1.58 1.38-1h-1.7zm4.89 10.01h-1.69l1.39.99-.51 1.58 1.34-.98 1.32.98-.49-1.58 1.37-.99h-1.7l-.51-1.6-.52 1.6zm.31 5.81l-.51-1.59-.5 1.59h-1.7l1.38 1.01-.5 1.58 1.33-.97 1.33.97-.5-1.58 1.37-1.01h-1.7zm-1.51 4.65h-1.71l-.5-1.59-.51 1.59h-1.7l1.39 1.01-.51 1.57 1.34-.97 1.32.97-.5-1.57 1.38-1.01zm-5.06 2.6h-1.69l-.51-1.59-.52 1.59h-1.69l1.38 1.01-.51 1.58 1.34-.97 1.33.97-.51-1.58 1.38-1.01zm-17.24-19.1l1.37 1.02-.5 1.56 1.32-.97 1.35.97-.51-1.56 1.39-1.02h-1.71l-.51-1.58-.51 1.58h-1.69zm6.39-2.37l1.33.98-.5-1.58 1.38-1h-1.7l-.51-1.6-.51 1.6h-1.7l1.38 1-.51 1.58 1.34-.98zm-7.46 10.27l1.32-.97 1.34.97-.5-1.58 1.39-1h-1.7l-.53-1.59-.5 1.59h-1.7l1.39 1-.51 1.58zm3.18 5.82l-.51-1.58 1.38-1h-1.7l-.5-1.6-.52 1.6h-1.7l1.38 1.01-.5 1.57 1.33-.97 1.34.97zm4.09 2.17h-1.7l-.51-1.6-.51 1.6h-1.7l1.38 1.01-.51 1.56 1.34-.97 1.34.97-.51-1.57 1.38-1zm5.06 3.02h-1.7l-.52-1.6-.5 1.6h-1.7l1.38 1-.5 1.57 1.31-.96 1.35.96-.51-1.58 1.39-.99z' class='cls-1'/%3E%3C/svg%3E"
-  />
-                            <div>
-                                <p>Official Partner of the<br />
-                                Philadelphia 76ers</p>
-                            </div>
-                        </div>
+          
                       
-                        <div class="legacy-trustbuilding--body-item">
-                            <img class="homepage-legacy-img" alt="Inc. 5000 Logo" src="data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 140'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bisolation:isolate;%7D.cls-2%7Bfill:%23fd0;%7D.cls-3%7Bfill:%23007dc4;mix-blend-mode:multiply;%7D.cls-4%7Bfill:%23bbbdbf;%7D.cls-5%7Bfill:%2362a63b;%7D.cls-6%7Bfill:%23e33126;%7D.cls-7%7Bfill:%23f48132;%7D.cls-8%7Bfill:%23231f20;%7D%3C/style%3E%3C/defs%3E%3Ctitle%3Efghgfhgfhfgh%3C/title%3E%3Cg class='cls-1'%3E%3Cg id='Layer_1' data-name='Layer 1'%3E%3Cpath class='cls-2' d='M90.89,76.23c-3.19-5-8.48-8.74-16.94-8.85-7-.1-12.33,2.31-16.05,6.29L57.33,79H54.22a30.17,30.17,0,0,0-2.52,7.64A16,16,0,0,1,60,100.89a19.1,19.1,0,0,1-3.8,11.35A19.87,19.87,0,0,0,72.55,120c8.41,0,14.08-3.65,17.65-8.86-2.74-4.2-4.3-9.78-4.3-16.55C85.9,87.64,87.5,81.12,90.89,76.23ZM73.06,109.69c-3.3,0-5.5-2.42-6.45-6.31A37.75,37.75,0,0,1,66,95.24c0-5,.29-11.51,2.2-14.74a6.22,6.22,0,0,1,5.21-3.15c3.52,0,5.35,2.86,6.09,6a60.52,60.52,0,0,1,.88,10.93C80.32,101.48,79.22,109.69,73.06,109.69Z'/%3E%3Cpath class='cls-3' d='M108.85,67.56c-8.33-.11-14.24,3.29-18,8.67,3.26,5.1,4.32,11.52,4.32,16.74,0,6.26-1.46,13-5,18.2,3.81,5.86,9.92,9,17.26,9,16.79,0,22.66-14.52,22.66-27.06C130.12,82.81,125.94,67.78,108.85,67.56ZM108,109.87c-3.3,0-5.5-2.42-6.45-6.31a37.61,37.61,0,0,1-.66-8.14c0-5,.29-11.51,2.2-14.74a6.22,6.22,0,0,1,5.21-3.15c3.52,0,5.35,2.86,6.09,6a60.58,60.58,0,0,1,.88,10.93C115.23,101.66,114.13,109.87,108,109.87Z'/%3E%3Cpath class='cls-4' d='M144.07,67.55h-.4c-8.12,0-13.9,3.38-17.56,8.67-.08.11-.14.23-.21.34,3.18,5.08,4.22,11.42,4.22,16.59,0,6.12-1.4,12.72-4.79,17.86l.09.14c3.82,5.86,9.92,9.05,17.26,9.05,16.79,0,22.66-14.52,22.66-27.06C165.34,82.8,161.15,67.77,144.07,67.55Zm-.88,42.32c-3.3,0-5.49-2.42-6.45-6.31a37.56,37.56,0,0,1-.66-8.14c0-5,.29-11.52,2.2-14.74a6.22,6.22,0,0,1,5.21-3.15c3.52,0,5.35,2.86,6.08,6a60.66,60.66,0,0,1,.88,10.93C150.45,101.65,149.35,109.87,143.18,109.87Z'/%3E%3Cpath class='cls-5' d='M90.89,76.23c-3.39,4.89-5,11.41-5,18.39,0,6.77,1.56,12.35,4.3,16.55,3.55-5.19,5-11.94,5-18.2C95.21,87.75,94.14,81.33,90.89,76.23Z'/%3E%3Cpath class='cls-6' d='M51.7,86.68a22,22,0,0,0-10.95-2.73,24.43,24.43,0,0,0-8.21,1.39,15.39,15.39,0,0,0-1.54.81L31.74,79H54.22a22.28,22.28,0,0,1,3.67-5.37l.54-5.12H21L18.24,95.83l12.54,1.54c.88-1.32,2.05-3.23,6.16-3.23,5.21,0,7.7,3.3,7.7,7.85,0,4-2.13,7.85-7.48,7.85-3,0-5.43-1.39-6.31-4.26a12.24,12.24,0,0,1-.37-3.67l-15,1.54c.81,3.81,1.54,7.33,4.77,10.7C26,120,34.38,120,37.09,120c4.25,0,12.1-.37,17.6-6a16.34,16.34,0,0,0,1.48-1.71C52.89,107.91,51,101.9,51,94.44A40.87,40.87,0,0,1,51.7,86.68Z'/%3E%3Cpath class='cls-7' d='M57.33,79l.56-5.37A22.28,22.28,0,0,0,54.22,79Z'/%3E%3Cpath class='cls-7' d='M51.7,86.68A40.87,40.87,0,0,0,51,94.44c0,7.46,1.9,13.48,5.18,17.8A19.1,19.1,0,0,0,60,100.89,16,16,0,0,0,51.7,86.68Z'/%3E%3Cpolygon class='cls-8' points='28.83 59.25 28.83 49.97 34.39 49.97 34.39 26.66 28.83 26.66 28.83 16.67 58.47 16.67 58.47 26.66 52.91 26.66 52.91 49.97 58.47 49.97 58.47 59.25 28.83 59.25'/%3E%3Cpath class='cls-8' d='M85.22,59.25V50h4.3V40.25c0-2.93-2.09-4.24-4.78-4.24a5.79,5.79,0,0,0-6,5.91v8h4.42v9.28H60V50h4.18V36H60V26.67H78.29v6.41a5.8,5.8,0,0,0,.84-.89c3.35-3.83,7.17-5.2,12.19-5.2,7,0,12.78,2.87,12.78,10.69V50h3.76v9.29Z'/%3E%3Cpath class='cls-8' d='M144.73,40.42l-12.51,1.38c-.15-3.47-.87-7.14-5.1-7.14-5.38,0-5.8,4.48-5.8,8.78h0v.09c0,4.3.42,8.78,5.8,8.78,2.82,0,5.31-1.62,5.31-5h12.46l-.1,1.08c-2.06,10.13-11.2,11.72-17.79,11.72-10.34,0-20.49-5.08-20.49-16.61v0c0-11.53,10.16-16.61,20.49-16.61,0,0,16.2-1.05,17.73,13.53'/%3E%3Cpath class='cls-8' d='M154.42,54.13a5.28,5.28,0,1,1-5.28-5.28,5.28,5.28,0,0,1,5.28,5.28'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"
-  />
-                            <div>
-                                <p class="text-center">One of the Fastest Growing <br /> 
-                                Private Companies in America</p>
-                            </div>
-                        </div>
-                 
-                        <div class="legacy-trustbuilding--body-item">
-                            <img class="homepage-legacy-img" alt="The New York Times Logo" src="data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' viewBox='0 0 180 140'%3E%3Cpath d='M109.55 58.12a13.78 13.78 0 0 0 1.14-1l-.2-.23-1.7 1.4-3.6-3.2-4.9 3.8v-3.7h-.5v27.3l-2.7-.5V59.4a4 4 0 0 0-4.4-4.25 4.7 4.7 0 0 0-4.5 4.52l.2-.4c.5-1.06 1.1-1.47 1.8-1.37s1.3.7 1.5 1.9a5.73 5.73 0 0 1 0 .8V65c0 1.6 0 1.6-1.6 2a3.54 3.54 0 0 0-2.5 5 2.3 2.3 0 0 0 2.2 1.5c-.2-.2-.5-.4-.5-.5a2.45 2.45 0 0 1 0-1.3 1.65 1.65 0 0 1 1.8-.54 1.24 1.24 0 0 1 .3.9v8.6a1.9 1.9 0 0 1-1.1 2A4.15 4.15 0 0 0 88 87.5a4.58 4.58 0 0 0 4 3.8 16.42 16.42 0 0 0 5.44-.3c2.1-.4 4.12-.8 6.2-1 1.4-.2 2.1 1.1 1.4 2.4a8.85 8.85 0 0 1-.75.9 5.74 5.74 0 0 0 1.8-.6 4.25 4.25 0 0 0 2.3-4.6 4 4 0 0 0-3.74-3.2 46.63 46.63 0 0 0-6.1.5c-2.1.2-4.1.6-6.2.8a1.9 1.9 0 0 1-2.1-1.6 2 2 0 0 1 1.4-2.3 6.5 6.5 0 0 1 2.7-.4c2.1.23 4.2.7 6.3 1.1a23.24 23.24 0 0 0 3.6.5 3.55 3.55 0 0 0 3.9-3.2 12.15 12.15 0 0 0 .2-1.75V59.4a1.36 1.36 0 0 1 .6-1.3zm-8 .55c.64.56 1.34 1.14 2 1.76a1.15 1.15 0 0 1 .28.75v5.6a1.5 1.5 0 0 1-.57 1 1.9 1.9 0 0 1-2.13.1 1.2 1.2 0 0 1-.72-.9v-7a1.73 1.73 0 0 1 1.1-1.3zm2.25 9.44v2.8a2.68 2.68 0 0 0-3.36.1v-2.9a6.7 6.7 0 0 0 1.65.5 6.73 6.73 0 0 0 1.6-.4zm0 11.9a2.68 2.68 0 0 1-2.8 2.8c-.34 0-.55 0-.64-.3V72.2a1.7 1.7 0 0 1 2.32-1.32 1.4 1.4 0 0 1 1.13 1.5V80zm-39.07 40.7v-7a1.57 1.57 0 0 1 .4-.5c.68-.6 1.38-1.1 2.12-1.7l-2.15-1.7a1.47 1.47 0 0 1-.37-.4v-5c3.8-.8 5.46-3 4.65-5.9a4.53 4.53 0 0 0-5.28-2.7c.48.2.9.2 1.32.4a1.7 1.7 0 0 1 1.24 1.7 1.6 1.6 0 0 1-1.66 1 7.22 7.22 0 0 1-1.92-.2l-7.4-2.1a6 6 0 0 0-5.08.8 4.78 4.78 0 0 0-1.52 6.4 2.6 2.6 0 0 0 1.63 1.2 2.16 2.16 0 0 1 2-3.6 13.3 13.3 0 0 1 2 .3L64 104a.73.73 0 0 1 .5.2v4.9a1.35 1.35 0 0 1-.3.5c-.7.6-1.4 1.1-2.2 1.8.8.6 1.5 1.1 2.1 1.7a1.66 1.66 0 0 1 .4.6v7a1.13 1.13 0 0 1-.5.42 8 8 0 0 1-9.22-1.8 2.6 2.6 0 0 1-.26-.35c2-1 3.9-2 5.84-2.9a1 1 0 0 0 .68-1.1v-10.6l-8 3.56a9 9 0 0 1 4-4.6l-.1-.2c-.5.2-1 .37-1.5.58-7.3 3-9.9 12-5.1 18.2a10.57 10.57 0 0 0 11 4.2c4.5-.9 7.24-3.8 8.1-8.4a16.9 16.9 0 0 0 .16-1.9 14.43 14.43 0 0 1-4.54 4.9zm-12.93-9.2c.3-2.8.34-2.8 2.92-3.9l1-.4v10.5a.93.93 0 0 1-.4.7 12.46 12.46 0 0 1-1.36.7 10.56 10.56 0 0 1-2.16-7.4zm16-90.9a2.68 2.68 0 0 0-.93.2 12.82 12.82 0 0 0-4.6 2.9c-6.13 5.8-4.27 16.1 3.48 19.2a10.43 10.43 0 0 0 14.47-8 17.37 17.37 0 0 0 .12-1.8 14.28 14.28 0 0 1-4.42 5v-6.9a1 1 0 0 1 .4-.6l2.15-1.7-2.13-1.8c-.17-.1-.4-.3-.4-.5v-5c2.24-.2 4-1 4.6-3.3a3.74 3.74 0 0 0-.94-4.2 5.2 5.2 0 0 0-4.5-1.1 13.5 13.5 0 0 1 1.78.5 1.5 1.5 0 0 1 1 1.5 1.37 1.37 0 0 1-1.3 1.2 5.76 5.76 0 0 1-2-.1c-2.26-.6-4.48-1.3-6.74-2a10.78 10.78 0 0 0-3-.4 5.16 5.16 0 0 0-5.18 5.8 3.55 3.55 0 0 0 2.4 3l-.3-.5a2 2 0 0 1 1.5-3.2 4.78 4.78 0 0 1 1.6.2c2 .5 4 1 6 1.6 1.56.4 3.13.78 4.73 1.16v4.77a1.24 1.24 0 0 1-.5.7c-.7.6-1.4 1.1-2.1 1.7l2.1 1.8a1.32 1.32 0 0 1 .4.8v6.3a1 1 0 0 1-.5.7 7.83 7.83 0 0 1-9.7-2c2-1 3.9-2 5.8-2.9a1 1 0 0 0 .6-1v-9.9c0-.2 0-.4-.1-.7l-8 3.55a9.54 9.54 0 0 1 3.8-4.7zm-.87 3.7v10.1A1.86 1.86 0 0 1 65.3 36a.7.7 0 0 1-.4-.32 10.56 10.56 0 0 1-1.35-9.52.76.76 0 0 1 .3-.43c.96-.5 1.95-.93 3.08-1.44zm-22.5 32a12.3 12.3 0 0 0-.15-2c-1.56 2.6-3.22 2.9-6 .7l-4.7 5.4.23.2 1.2-1.3a37.1 37.1 0 0 0 3.6 1.4 1.25 1.25 0 0 1 .6.3v12.5l-.3-.4-7.7-14a19.66 19.66 0 0 0-1.7-2.8 4.1 4.1 0 0 0-5.2-1 4.72 4.72 0 0 0-2.1 5.3c.1-.2.2-.3.2-.4.3-.6.5-1.2 1.3-1.3a2 2 0 0 1 1.9 1 2.67 2.67 0 0 1 .6 2V65c0 .5-.1.7-.7.8a9.06 9.06 0 0 0-2.6.8 3.2 3.2 0 0 0-1.3 3.6 3.05 3.05 0 0 0 2.7 2.57c-.8-1.47-.4-2.4 1.2-2.5.6 0 .8.1.8.7V76c0 .7-.1.95-.9 1a5.25 5.25 0 0 0-5.2 4.3c-.6 3 2.3 5.92 5 5.17a9.76 9.76 0 0 1-1.4-.8 1.92 1.92 0 0 1 .2-3.2 2.56 2.56 0 0 1 1.8-.4 17.5 17.5 0 0 1 2.8 1.4l4.5-5-.22-.2-1.3 1.4a8.72 8.72 0 0 0-4.7-2.6V61.5l.4.83 11 20.37a2.54 2.54 0 0 0 .47.7 1 1 0 0 0 .7.2c.1 0 .2-.32.2-.5a4.88 4.88 0 0 0 0-.8V61.6c0-.6.1-.9.8-1a4.8 4.8 0 0 0 3.9-4.34zM57.2 67.8a3.7 3.7 0 0 1 1.42 3.08v8.35a1.2 1.2 0 0 1-.6 1.15c-.4.25-.74.57-1.16.9.18.08.24.12.27.1a5.2 5.2 0 0 0 .53-.3c1.13-.82 1.12-.82 2.2.1l2.82 2.32 4.25-3.35c1.28 1 2.54 2 3.76 3a.78.78 0 0 0 1 .05q3.6-2.26 7.2-4.47a1.06 1.06 0 0 0 .6-1.06V69.4a1.4 1.4 0 0 1 .5-1.2c.8-.66 1.5-1.36 2.3-2.05a2.6 2.6 0 0 0 .3-.4l-.2-.15-1.4 1.2-3.7-3-3.9 3.6a15.07 15.07 0 0 1 1.1 1.1 1.4 1.4 0 0 1 .3.8v10.85a.87.87 0 0 1-.4.68c-.2.08-.6-.07-.7-.22-.8-.5-1.5-1.2-2.3-1.8a1.38 1.38 0 0 1-.6-1.2v-7.3a3.16 3.16 0 0 1 1.1-2.9 1.22 1.22 0 0 0 .2-.3l-3.5-3.2-4 3.6c.3.2.5.4.7.6a2.16 2.16 0 0 1 .9 2.1c-.07 2.8 0 5.5 0 8.2a6.42 6.42 0 0 1 0 1.3 1.4 1.4 0 0 1-.56.8c-.1.1-.45-.1-.64-.2-.6-.4-1.2-1-1.8-1.4a1.18 1.18 0 0 1-.56-1.1c0-2.9-.05-5.8 0-8.7a3.9 3.9 0 0 0-2-3.8 10.8 10.8 0 0 1-1.6-1.3 2 2 0 0 1-.1-3.1l.4-.4a4.47 4.47 0 0 0-4.3 5.2 4.23 4.23 0 0 0 1.7 2.4zm47.4 54.43c-.36-.4-.66-.75-1-1.06a2.42 2.42 0 0 1-.8-2c.06-2.65 0-5.3 0-8a1.17 1.17 0 0 1 .54-1.1c.4-.3.78-.62 1.17-.93l-.1-.2-1.7 1.2-3.3-3.64-4.6 3.7-3.3-3.56-4.5 3.53-3.3-3.52-4.8 4.2.2.24 1.5-1.3c.6.6 1.1 1.3 1.7 1.8a1.78 1.78 0 0 1 .5 1.4v6.4a2.38 2.38 0 0 1-.9 2.3v.2l3.5 4 3.4-3.7a3.23 3.23 0 0 0-.4-.5 2.62 2.62 0 0 1-1-2.4c.1-2.7.1-5.4 0-8.2a1.43 1.43 0 0 1 1-1.6c.7.7 1.4 1.5 2 2.3a2.16 2.16 0 0 1 .5 1.2v5.9c0 1 .3 2.2-.9 2.9l3.3 3.6 3.5-3.6a7.25 7.25 0 0 1-.8-.9 2.1 2.1 0 0 1-.4-1c0-3 0-6-.1-9a1.5 1.5 0 0 1 1-1.6c.75.8 1.47 1.5 2.1 2.3a1.8 1.8 0 0 1 .4 1v6c0 1 .3 2.1-.85 2.8l3.6 4 4.8-4.5-.2-.2zM81.43 40.45c.52-.55.9-.4 1.4.1.8.82 1.67 1.56 2.58 2.4l5.2-4.08-.2-.23-1.2.85C88 38.4 88 38.4 88 36.8c0-2.6.1-5.17 0-7.7a2.58 2.58 0 0 1 1.55-2.5c.56.7 1.16 1.35 1.65 2.1a2.76 2.76 0 0 1 .5 1.4v8.5a35 35 0 0 1-.2 3.7 5.1 5.1 0 0 1-3.6 4.6c-.1 0-.15.1-.24.2a7 7 0 0 0 8.54-7q.07-5.8.1-11.6a1.23 1.23 0 0 1 .6-1.16 12.2 12.2 0 0 0 1-.8l-.17-.2-1.64 1.1-3.6-3.94-4.6 3.94V14.08l-5.8 4.42a1.9 1.9 0 0 1 1.1 2c0 5.16-.1 10.3 0 15.46 0 1.88-.3 3.34-2.1 4.18-.2.07-.3.27-.4.4l.1.14a2.1 2.1 0 0 0 .5-.23zm31.23 37.35a2 2 0 0 1-.93 2.1c-.14.08-.23.26-.34.4l.1.17 1.3-1c1.4 1.22 2.9 2.42 4.3 3.64a.64.64 0 0 0 .9.1c2.4-1.4 4.8-2.7 7.2-4a.94.94 0 0 0 .5-1v-9a2.3 2.3 0 0 1 .5-1.1 6.3 6.3 0 0 1 .8-.8l-.2-.2-1.4 1.2c-1.6-1.3-3.1-2.6-4.6-4a.78.78 0 0 0-1.1-.1l-6.6 3.6a1 1 0 0 0-.6 1.1V78zm4.6-11.24a1.2 1.2 0 0 1 .1-.26c.88.8 1.67 1.66 2.6 2.35a3.15 3.15 0 0 1 1.3 2.92c-.1 3 0 6.08 0 9.37-1.4-1.25-2.6-2.34-3.8-3.45a.84.84 0 0 1-.18-.6q-.04-5.2-.02-10.4zM134 114.7c-.83-.74-1.7-1.43-2.58-2.13 1.46-2.08 3.3-4 2.53-6.77-.7 2.4-2.12 2.6-4.8.67l-6.73 3.94h-.07a2.15 2.15 0 0 0-.3.8c0 1.3-.05 2.6 0 3.8a1.77 1.77 0 0 0 .47 1.1c.73.8 1.53 1.5 2.5 2.4a6 6 0 0 0-1 .7 20.94 20.94 0 0 0-2.2 2.7 3.67 3.67 0 0 0 1.85 5.4 5.78 5.78 0 0 0 .74.2 2.13 2.13 0 0 0-.5-.5c-.4-.4-.8-.8-.6-1.5a1.46 1.46 0 0 1 1.5-.9 2.93 2.93 0 0 1 1.3.5 10.56 10.56 0 0 1 1.3 1c2.3-1.3 4.5-2.7 6.7-4a1 1 0 0 0 .4-.7v-5.5a1.28 1.28 0 0 0-.4-.8zm-7.73-2.33a26.25 26.25 0 0 0 0-3.6c1.74 2.2 3.63 3.42 6.25 1.44-.46 1.2-2.62 3.6-4.52 5-.8-.7-1.9-1.2-1.68-2.8zm3.86 10.72a5.6 5.6 0 0 0-3.5-2.9 4.46 4.46 0 0 0-4.15 1.4c1.54-2.5 3.84-4.2 5.84-6.2.6.5 1.13 1 1.65 1.4a.7.7 0 0 1 .22.4c0 1.9 0 3.8-.1 5.7zm19-43.4a3.6 3.6 0 0 1-1.7-3.5c.1-7.1 0-14.3 0-21.4v-1l-6 4.2a2.06 2.06 0 0 1 1.48 1.8 7.68 7.68 0 0 1 .1 1.3c0 5.1 0 10.1.1 15.2.1 1.9-.3 3.3-2 4.3-.1.1-.2.3-.3.4l.2.1 1.4-1.1 3.4 3.1 4.9-4.3-.1-.2zm-92.97-2.6l-.16-.3c-.2.1-.4.2-.6.4l-3.3 2.6c-.3.3-.5.3-.9 0-.9-.9-1.9-1.8-2.8-2.7a1.24 1.24 0 0 1 .15-1.9l3.64-2.7 3.1-2.4-3.7-6.4c-2.7 1.4-5.2 2.9-7.8 4.3a1.08 1.08 0 0 0-.4.8c0 2.8-.1 5.6 0 8.5a2.1 2.1 0 0 1-1 2.1 2.1 2.1 0 0 0-.4.5l.1.1 1.4-1.1L48 83zM48 66.7h.12l3.47 5.9-3.6 2.58zm68 56.18c-1.1-1-2.16-2-3.2-3a1.28 1.28 0 0 1 .17-2l4.47-3.27 2.24-1.6-3.7-6.4-.83.5c-2.2 1.3-4.4 2.6-6.64 3.8a1.05 1.05 0 0 0-.6 1.1v9a1.33 1.33 0 0 1-.6 1.3 9.6 9.6 0 0 0-.8.8l.2.2 1.5-1.1 4.1 3.7a.58.58 0 0 0 .9 0l7.2-5.6a1.93 1.93 0 0 0 .3-.3l-.1-.1zm-3.52-13.52h.12l3.45 5.85-3.58 2.7zm-12.24-70.28l4.58 4.12 7.95-6.3-.2-.26-4.38 3.4-3.1-2.9a1.23 1.23 0 0 1 .1-2.1l6.6-4.93-3.7-6.4-1.2.7-6.3 3.6a1 1 0 0 0-.7 1.1v8.8a1.55 1.55 0 0 1-.8 1.6 5.16 5.16 0 0 0-.8.7l.1.2zm4.42-12.8l3.57 6.06-3.58 2.66z'/%3E%3Cpath d='M141.6 64.06c-1.2 1.3-2.45 1-3.72 0l-3 3.1-2.73-3.26-4.85 4.38.18.22 1.4-1.12a9.48 9.48 0 0 0 .72.9 3.18 3.18 0 0 1 .87 2.56c-.07 2.05-.1 4.1 0 6.16a3.26 3.26 0 0 1-1.5 3.36 3.15 3.15 0 0 0-.57.6l.18.18 1.42-1.22 3.8 3.44 5-4.2-.2-.22-1.6 1.24a14.66 14.66 0 0 0-1.18-1 1.7 1.7 0 0 1-.72-1.6v-9.9c1.93 1.56 3.05 1.78 4.4 1a4.6 4.6 0 0 0 2.1-4.62zm18.33 14.34l-1.53 1.3c-2.55-3.84-5-7.6-7.52-11.38-.1-.17 0-.48 0-.84 4.08 2.38 7.45.68 7.6-3.72-1.77 1.62-3.5 1.53-5.25-.08l-.17.27c-1.7 2.48-3.4 5-5.14 7.44-.3.4-.12.7.1 1l4.46 7.1 2.36 3.7c1.8-1.6 3.6-3.1 5.32-4.7zM78.7 122.7c-.44-.5-.8-1-1.23-1.4a2.07 2.07 0 0 1-.64-1.66q.05-4 0-8a1.45 1.45 0 0 1 .62-1.32 10.76 10.76 0 0 0 1-.9l-.17-.18-1.55 1.25-3.36-3.9c-1.56 1.4-3.1 2.6-4.56 4l.2.2 1.3-1a19.7 19.7 0 0 1 1.5 1.7 2.74 2.74 0 0 1 .6 1.4v8.2a1.53 1.53 0 0 1-.6 1.4 4.93 4.93 0 0 0-.7.7l.2.1 1.5-1.2 3.2 3.6 4.6-4.1-.2-.3zm-5.8-17.08l3.52-3.2-2.86-3.15-3.5 3.2z'/%3E%3C/svg%3E" />
-                            <div>
-                                <p>Featured in the New York <br />
-                                Times Business Section</p>
-                            </div>
-                        </div>
-                
-                    </div>
-               
-                </div>
-
-            </div>
-        </div>
-    </div></div></section></div></main>
+                      </div></div>
+                      
+                   </div></main>
     
     
     

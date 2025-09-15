@@ -13,6 +13,7 @@ import Banner from "./Banner";
 import Header from "./Header";
 import axios from "axios"
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 
 const bgImage = `url("data:image/svg+xml;utf8,
@@ -23,6 +24,7 @@ const Single = () => {
 
     const { id } = useParams();
   const navigate = useNavigate();
+const [currentImageIndex, setCurrentImageIndex] = useState(0); // <-- add this
 
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
@@ -35,9 +37,8 @@ const Single = () => {
   const [selectedGrandParent, setSelectedGrandParent] = useState("");
   const [selectedParent, setSelectedParent] = useState("");
   const [selectedChild, setSelectedChild] = useState("");
- 
-const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+   const { addToCart } = useCart();
+  
 useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -85,7 +86,7 @@ useEffect(() => {
 
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/db/products?category=${product.category._id}`
+        `${process.env.REACT_APP_API_URL}/api/db/products/category/${product.category._id}`
       );
 
       // filter out the current product
@@ -191,7 +192,8 @@ const availableColors = [
                             </div></div>
                             
                             
-       <div className="md:col-start-1 md:row-start-1 md:row-span-3">
+                            
+                         <div className="md:col-start-1 md:row-start-1 md:row-span-3">
   <div className="carousel relative w-full">
     <div className="flex flex-row gap-2 overflow-hidden">
       {/* Thumbnails */}
@@ -201,30 +203,60 @@ const availableColors = [
             key={idx}
             aria-label={`slide dot ${idx}`}
             type="button"
-            className={`carousel__dot border ${idx === currentImageIndex ? 'border-black' : 'border-slate-200'}`}
-            onClick={() => setCurrentImageIndex(idx)}  // <-- update the index
+            // className="carousel__dot"
+               onClick={() => setCurrentImageIndex(idx)}   // ✅ fix
+      className={`border rounded-md ${
+        idx === currentImageIndex
+          ? "border-black"
+          : "border-slate-200 hover:border-black/30"
+      }`}
           >
             <img
               src={img}
               alt={product?.name || `Image ${idx + 1}`}
-              className="h-12 w-12 object-contain hover:border-black/30"
+              className="h-12 w-12 object-contain border border-slate-200 hover:border-black/30"
             />
           </button>
         ))}
       </div>
 
-      {/* Main slider */}
-      <div className="relative flex flex-1 justify-center">
-        {product?.images?.length > 0 ? (
-          <img
-            src={product.images[currentImageIndex]} // <-- use currentImageIndex
-            alt={product?.name}
-            className="w-full max-h-[500px] object-contain"
-          />
-        ) : (
-          <p className="text-gray-500">No image available</p>
-        )}
-      </div>
+{/* Main slider */}
+<div className="relative flex flex-1 justify-center items-center">
+  {product?.images?.length > 0 ? (
+    <>
+      <button
+        onClick={() =>
+          setCurrentImageIndex(
+            (prev) => (prev - 1 + product.images.length) % product.images.length
+          )
+        }
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow"
+      >
+        ◀
+      </button>
+
+      <img
+        src={product.images[currentImageIndex]}
+        alt={product?.name}
+        className="w-full max-h-[500px] object-contain"
+      />
+
+      <button
+        onClick={() =>
+          setCurrentImageIndex(
+            (prev) => (prev + 1) % product.images.length
+          )
+        }
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow"
+      >
+        ▶
+      </button>
+    </>
+  ) : (
+    <p className="text-gray-500">No image available</p>
+  )}
+</div>
+
     </div>
   </div>
 </div>
@@ -311,23 +343,63 @@ const availableColors = [
 
                                                                      
                                                                      
-                                                                     <a href="../../../design/indexbb41.html?method=scr&amp;item=7278&amp;color=22019" class="items-center
+                                                                     {/*<a href="../../../design/indexbb41.html?method=scr&amp;item=7278&amp;color=22019" class="items-center
                                                                       justify-center whitespace-nowrap font-bold ring-offset-background transition-colors focus-visible:outline-none
                                                                        focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
                                                                         bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl px-12 py-4 text-xl hidden md:block md:h-fit md:w-fit">
-                                                                        Add to Cart</a></div><div class="flex flex-col gap-4"><div class="flex w-full gap-4"><div class="flex basis-1/2
+                                                                        Add to Cart</a>*/}
+                 {/* Mobile Buttons - fixed bottom */}
+                    <button
+      onClick={() => addToCart(product, selectedColor)}
+      disabled={!selectedColor} // require a color
+      className="items-center justify-center whitespace-nowrap font-bold 
+                 rounded-2xl px-12 py-4 text-xl bg-primary text-primary-foreground 
+                 hover:bg-primary/90 disabled:opacity-50"
+    >
+      Add to Cart
+    </button>
+<div className="fixed bottom-0 left-0 right-0 z-50 flex gap-3 p-3 bg-white md:hidden shadow-lg">
+  {/* Add to Cart */}
+  <a
+   onClick={() => addToCart(product, selectedColor)}
+         disabled={!selectedColor}
+    className="flex-1 flex items-center justify-center  text-primary-foreground 
+               hover:bg-primary/90 font-bold text-lg py-3 rounded-full"
+               style={{backgroundColor: "white", color: "black", border: "1px solid black"}}
+  >
+    Add to Cart
+  </a>
+
+  {/* Buy It Now */}
+  <a
+    href="/checkout"
+    className="flex-1 flex items-center justify-center bg-primary text-primary-foreground 
+               hover:bg-primary/90 font-bold text-lg py-3 rounded-full"
+  >
+    Buy It Now
+  </a>
+</div>
+                                                              
+                                                                        </div><div class="flex flex-col gap-4"><div class="flex w-full gap-4">
+                                                                          
+                                                                          <div class="flex basis-1/2
                                                                          flex-row gap-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
                                                                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck
                                                                           size-10 shrink-0 rounded-full bg-slate-100 p-2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2">
                                                                           </path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14">
                                                                           </path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg><div><p class="font-bold">
-                                                                          Free Delivery</p><p class="text-sm md:text-nowrap">As soon as <span class="text-nowrap">...</span></p></div>
+                                                                          Free Delivery</p><p class="text-sm md:text-nowrap">As soon as <span class="text-nowrap">...</span></p>
+                                                                          
+                                                                          </div>
                                                                           </div></div><div class="flex w-full gap-4"><div class="flex basis-1/2 flex-row gap-4">
                                                                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag size-10
                                                                             rounded-full bg-slate-100 p-2"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z">
                                                                             </path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg><div><p class="font-bold">Material</p>
-                                                                            <p class="text-sm">{product?.material}</p></div></div><div class="flex basis-1/2 flex-row gap-4"><svg xmlns="http://www.w3.org/2000/svg" 
+                                                                            <p class="text-sm">{product?.material}</p></div></div><div class="flex basis-1/2 flex-row gap-4">
+                                                                            
+                                                                            
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" 
                                                                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                                              class="lucide lucide-dollar-sign h-10 w-10 rounded-full bg-slate-100 p-2"><line x1="12" x2="12" y1="2" y2="22"></line>
                                                                              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><div><p class="font-bold">Price</p><p class="text-sm">
@@ -376,26 +448,8 @@ const availableColors = [
           All {product.brand?.name}
         </a>
       </li>
-      <li>
-        <a
-          href={`/brands/${product.brand?._id}/t-shirts`}
-          className="inline-flex items-center justify-center whitespace-nowrap 
-            text-sm font-bold border-2 border-primary text-primary 
-            hover:bg-primary hover:text-white h-8 rounded-xl px-3"
-        >
-          T-Shirts
-        </a>
-      </li>
-      <li>
-        <a
-          href={`/brands/${product.brand?._id}/polos`}
-          className="inline-flex items-center justify-center whitespace-nowrap 
-            text-sm font-bold border-2 border-primary text-primary 
-            hover:bg-primary hover:text-white h-8 rounded-xl px-3"
-        >
-          Polos
-        </a>
-      </li>
+
+   
     </ul>
   </div>
 )}
