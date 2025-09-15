@@ -556,8 +556,15 @@ const filteredProducts = products.filter((p) => {
     
             {/* Product details */}
             <div className="flex basis-3/5 flex-col justify-center gap-2 px-2 py-3 md:w-full md:flex-grow md:justify-between">
-              <h3 className="text-balance text-lg font-bold md:text-center">
-                {product.name}
+              <h3 className="text-balance text-lg font-bold md:text-center" >
+                     <Link
+        to={`/single-product/${product._id}`}
+        className="hover:text-green-600"
+      >
+       {product.name}
+
+      </Link>
+         
               </h3>
     
               {/* Colors */}
