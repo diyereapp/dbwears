@@ -147,7 +147,7 @@ return (
     <div className="flex flex-col items-center">
       <h2 className="mt-8 text-2xl font-semibold">Shop Categories</h2>
       <p className="mt-2 text-center text-lg font-light">
-        Christian shirts & mugs that speak your faith.
+         Shirts & Mugs that speak your faith.
       </p>
 <ul className="my-8 w-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
   {categories.map((cat) => (
