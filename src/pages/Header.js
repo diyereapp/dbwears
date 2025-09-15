@@ -306,9 +306,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
                     </li>
                   ))}
                   <li>
-                    <a className="block px-4 py-3 text-center font-semibold text-gray-900 hover:bg-gray-100" href="/collections">
-                      Shop
-                    </a>
+              
                   </li>
                 </ul>
 
