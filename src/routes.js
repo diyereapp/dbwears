@@ -15,6 +15,7 @@ import MyDesign from "./pages/MyDesign";
 import MyOrder from "./pages/MyOrder";
 import Collection from "./pages/Collection";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 const routes = [
   { path: "/oauth-callback", element: <GoogleAuthHandler /> },
@@ -58,6 +59,10 @@ const routes = [
      {
     path: "/cart",
     element: <Cart />,
+  },
+       {
+    path: "/checkout",
+    element: <Checkout />,
   },
   // { path: "/", element: <Navigate to="vision" /> },
   {
