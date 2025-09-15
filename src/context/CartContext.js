@@ -145,9 +145,14 @@ export const CartProvider = ({ children }) => {
       prev.filter((item) => !(item._id === id && item.color === color))
     );
   };
+// Clear the cart
+const clearCart = () => {
+  setCartItems([]);
+  localStorage.removeItem("cartItems"); // optional: also clear from localStorage
+};
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

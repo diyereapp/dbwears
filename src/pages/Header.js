@@ -12,6 +12,14 @@ import Footer from "./Footer";
 import axios from "axios"
 import Banner from "./Banner";
 import { useState } from "react";
+import {
+  ChevronDown,
+  User,
+  Package,
+  Settings,
+  LogOut,
+} from "lucide-react"; // ✅ added icons
+
 import { Link } from "react-router-dom";
 import { FiHelpCircle } from "react-icons/fi"; // Feather icon (react-icons)
 import { MessageCircle, Phone } from "lucide-react";
@@ -25,9 +33,9 @@ const Header = () => {
  const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false); // for mobile menu
 const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
-
+  const [accountOpen, setAccountOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   // const { cartItems } = useCart();
   // const [open, setOpen] = useState(false);
 
@@ -67,25 +75,80 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
                 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sr-only" id="search-trigger-label" for="site-search-input">Search for products
                 </label><input id="site-search-input" placeholder="Search for products" className="w-full rounded-xl border border-slate-400 py-2 pl-10 pr-9 
                 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" value=""/></div></div>
-                
-                
-                
-                <li><a className="flex items-center 
-                gap-1 font-medium lg:hidden" href="/my-account" data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide
-                  lucide-circle-user-round w-5"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4"></circle><circle cx="12" cy="12" 
-                  r="10"></circle></svg>My Account</a><button id="radix-:Rkmm:-trigger-radix-:Rjkmm:" data-state="closed" aria-expanded="false"
-                   aria-controls="radix-:Rkmm:-content-radix-:Rjkmm:" className="group h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm 
-                   font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none
-                    disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group hidden bg-transparent 
-                    lg:inline-flex" data-radix-collection-item=""><a className="flex items-center gap-1 font-medium" href="my-account"
-                     data-radix-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-user-round 
-                      w-5"><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4">
+    <li className="relative">
+      {/* Main trigger */}
+      <button
+        onClick={() => setAccountOpen((prev) => !prev)}
+        className="flex items-center gap-1 font-medium px-4 py-2 hover:text-green-600"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="lucide lucide-circle-user-round w-5"
+        >
+          <path d="M18 20a6 6 0 0 0-12 0"></path>
+          <circle cx="12" cy="10" r="4"></circle>
+          <circle cx="12" cy="12" r="10"></circle>
+        </svg>
+        My Account
+        <ChevronDown
+          className={`w-4 h-4 transition-transform ${
+            accountOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
 
-                </circle><circle cx="12" cy="12" r="10"></circle></svg>My Account</a> </button></li>
-                
-                
+      {/* Dropdown */}
+      {accountOpen && (
+        <ul className="absolute right-0 mt-2 w-52 bg-white shadow-lg rounded-lg border border-gray-200 z-50">
+          <li>
+            <Link
+              to="/profile"
+              className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            >
+              <User className="w-4 h-4 text-gray-600" />
+              Profile
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/account-order"
+              className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            >
+              <Package className="w-4 h-4 text-gray-600" />
+              My Orders
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/settings"
+              className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            >
+              <Settings className="w-4 h-4 text-gray-600" />
+              Settings
+            </Link>
+          </li>
+          <li>
+            <button
+              onClick={() => {
+                // add logout logic here
+                console.log("Logging out...");
+              }}
+              className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+            >
+              <LogOut className="w-4 h-4 text-gray-600" />
+              Logout
+            </button>
+          </li>
+        </ul>
+      )}
+    </li>
     <div className="relative">
   {/* Cart Button */}
   <button
@@ -185,7 +248,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
               </a>
             </div>
             <button
-              // onClick={() => setCartItems([])}
+       onClick={clearCart}
               className="text-red-500 text-sm mt-1 hover:underline"
             >
               Clear Cart
