@@ -376,7 +376,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
     {/* Example "Design Now" button */}
     <div className="mt-4 flex justify-center">
       <a
-        href="/collection"
+        href="/collections"
         className="px-6 py-2 border-2 border-blue-500 text-blue-500 font-bold rounded-xl hover:bg-blue-500 hover:text-white transition"
         onClick={() => setOpen(false)}
       >
