@@ -73,7 +73,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
                  stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search size-5 text-slate-400">
                 <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div><label className="text-sm font-medium leading-none 
                 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sr-only" id="search-trigger-label" for="site-search-input">Search for products
-                </label><input id="site-search-input" placeholder="Search for products" className="w-full rounded-xl border border-slate-400 py-2 pl-10 pr-9 
+                </label><input id="site-search-input" placeholder="Search for products" className="w-full rounded-full border border-slate-400 py-2 pl-10 pr-9 
                 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" value=""/></div></div>
     <li className="relative">
       {/* Main trigger */}
