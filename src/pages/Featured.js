@@ -36,7 +36,7 @@ const availableColors = [
   return (
     <section className="flex flex-col gap-4 items-center justify-center">
       <div className="flex flex-col gap-1 text-center">
-        <h2 className="text-2xl font-bold" style={{textTransform: "uppercase"}}>Featured</h2>
+        <h2 className="text-2xl font-bold" >Featured</h2>
       
       </div>
 

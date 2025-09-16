@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-const Trending = () => {
+const Popular = () => {
   const [products, setProducts] = useState([]);
 const availableColors = [
   { name: "Black", hex: "#000000" },
@@ -22,7 +22,7 @@ const availableColors = [
     const fetchBestSellers = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/db/products/trending`
+          `${process.env.REACT_APP_API_URL}/api/db/products/popular`
         );
         setProducts(data);
       } catch (err) {
@@ -36,8 +36,8 @@ const availableColors = [
   return (
     <section className="flex flex-col gap-4 items-center justify-center">
       <div className="flex flex-col gap-1 text-center">
-        <h2 className="text-2xl font-bold">Trending</h2>
-        <p style={{textTransform: "uppercase"}}>Top wishes of the week</p>
+        <h2 className="text-2xl font-bold">Popular</h2>
+        <p style={{textTransform: "uppercase"}}>Our top popular product</p>
       </div>
 
       <div className="flex w-full flex-col items-center justify-center">
@@ -167,4 +167,4 @@ const availableColors = [
   );
 };
 
-export default Trending;
+export default Popular;

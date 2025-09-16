@@ -16,6 +16,7 @@ import Trending from "./Trending";
 import Featured from "./Featured";
 import "./mycss.css"
 import { Link } from "react-router-dom";
+import Popular from "./Popular";
 
 const bgImage = `url("data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'>
@@ -229,6 +230,7 @@ return (
                                                                                   
                                                                                   <BestSellers />
                                                                                   <Trending />
+                                                                                  <Popular />
                                                                                   <Featured />
                                                                                   
                                                                                   </div></div><div class="bg-slate-100 text-slate-900"><div class="mx-auto max-w-[1440px] px-6">

@@ -410,14 +410,7 @@ const [cartOpen, setCartOpen] = useState(false); // for cart dropdown
       ))}
 
       {/* Static Brands / Shop link */}
-      <li className="relative">
-        <a
-          href="/collections"
-          className="inline-flex items-center px-3 py-2 font-medium hover:text-blue-400"
-        >
-          Shop
-        </a>
-      </li>
+   
     </ul>
   </div>
 
