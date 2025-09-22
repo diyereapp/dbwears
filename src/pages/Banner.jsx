@@ -376,91 +376,46 @@ const Banner = () => {
 		</div>
 					</div>
 		</section>
-<section className="elementor-section elementor-top-section elementor-section-boxed elementor-section-height-default elementor-section-height-default">
+<section className="elementor-section elementor-top-section elementor-section-boxed elementor-section-height-default elementor-section-height-default px-4 md:px-0">
   <div className="elementor-container elementor-column-gap-default grid grid-cols-1 md:grid-cols-3 gap-4">
-    {categories.map((cat, index) => (
-      <div key={cat._id} className="elementor-column">
-        <div className="elementor-widget-wrap elementor-element-populated">
-          <div className="elementor-widget-container">
-            <div
-              className="business-block"
-              style={{
-                minHeight: "200px",
-                borderRadius: "10px",
-                padding: "20px",
-                overflow: "hidden",
-                position: "relative",
-                backgroundColor: index === 2 ? "#bcb8b8ff" : "#f8f8f8",
-              }}
+    {categories.map((cat) => (
+      <div key={cat._id} className="w-full">
+        {/* Card */}
+        <div className="relative w-full rounded-lg overflow-hidden shadow-lg h-64 md:h-72 group" style={{ height: '220px' }}>
+          {/* Background image */}
+          <img
+            src={
+              cat.image ||
+              "https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/10/business-8.png"
+            }
+            alt={cat.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              style={{ filter: 'brightness(50%)' }} 
+          />
+
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
+          {/* Text content */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+          
+            <h6 className="text-white text-xl md:text-2xl font-bold mb-3">
+              <Link to={`/category/${cat._id}`}>{cat.name}</Link>
+            </h6>
+            <Link
+              to={`/category/${cat._id}`}
+              className="inline-flex items-center gap-2 bg-red-500 text-white px-6 py-2 rounded-full font-bold hover:bg-red-600 transition"
             >
-              {/* Pattern background */}
-              <div
-                className="pattern-layer"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundImage:
-                    'url("https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/10/vector-6.png")',
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  opacity: 0.2,
-                  zIndex: 0,
-                }}
-              ></div>
-
-              {/* Flex content: text + image */}
-              <div
-                className="inner-box d-flex justify-content-between align-items-center"
-                style={{ position: "relative", zIndex: 1 }}
-              >
-                {/* Text content */}
-                <div className="content">
-                  <div className="save">Save 30%</div>
-                  <h6>
-                    <Link to={`/category/${cat._id}`}>{cat.name}</Link>
-                  </h6>
-                  <Link
-                    to={`/category/${cat._id}`}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      background: "red",
-                      color: "white",
-                      padding: "10px 20px",
-                      borderRadius: "6px",
-                      fontWeight: "bold",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <FaShoppingCart /> Shop Now
-                  </Link>
-                </div>
-
-                {/* Image */}
-                <div className="image">
-                  <img
-                    src={
-                      cat.image ||
-                      "https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/10/business-8.png"
-                    }
-                    alt={cat.name}
-                    style={{ maxHeight: "120px" }}
-                  />
-                </div>
-              </div>
-              {/* End inner-box */}
-            </div>
+              <FaShoppingCart /> Shop Now
+            </Link>
           </div>
         </div>
       </div>
     ))}
   </div>
 </section>
+
+
 
 				<section class="elementor-section elementor-top-section elementor-element elementor-element-6a755748 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="6a755748" data-element_type="section">
 						<div class="elementor-container elementor-column-gap-no">
