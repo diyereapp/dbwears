@@ -401,7 +401,7 @@
 // export default Header;
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import { HiMenu, HiX } from "react-icons/hi";
 
@@ -444,9 +444,11 @@ const Header = ({ cartCount = 1 }) => {
             {/* Nav Outer */}
             <div className="nav-outer clearfix">
               {/* Mobile Toggler */}
-              <div className="mobile-nav-toggler" onClick={() => setMenuOpen(!menuOpen)}>
-                <span className="icon flaticon-menu"></span>
-              </div>
+      {/* Mobile Toggler */}
+<div className="mobile-nav-toggler" onClick={() => setMenuOpen(!menuOpen)}>
+  {menuOpen ? <FaTimes size={24} className="text-black" /> : <FaBars size={24} className="text-black" />}
+</div>
+
 
               {/* Desktop Menu */}
               <nav className="main-menu show navbar-expand-md">
@@ -539,10 +541,16 @@ const Header = ({ cartCount = 1 }) => {
                 </ul>
               </div>
             </nav>
+<div className="menu-pull ml-auto">
+<button
+  className="md:hidden p-2"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  {menuOpen ? <FaTimes size={24} className="text-black" /> : <FaBars size={24} className="text-black" />}
+</button>
 
-            <div className="mobile-nav-toggler" onClick={() => setMenuOpen(!menuOpen)}>
-              <span className="icon flaticon-menu"></span>
-            </div>
+</div>
+
           </div>
         </div>
       </div>
