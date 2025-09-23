@@ -74,20 +74,46 @@ const Featured = () => {
     fetchBestSellers();
   }, []);
 
+  // const settings = {
+  //   dots: true,
+  //   arrows: true,
+  //   infinite: true,
+  //   autoplay: true,
+  //   autoplaySpeed: 4000,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 1,
+  //   responsive: [
+  //     { breakpoint: 1024, settings: { slidesToShow: 3 } },
+  //     { breakpoint: 768, settings: { slidesToShow: 2 } },
+  //     { breakpoint: 480, settings: { slidesToShow: 1 } },
+  //   ],
+  // };
   const settings = {
-    dots: true,
-    arrows: true,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
-    ],
-  };
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4, // default desktop
+  slidesToScroll: 1,
+  arrows: true,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+  responsive: [
+    {
+      breakpoint: 1024, // tablet
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 768, // mobile
+      settings: {
+        slidesToShow: 1, // 👈 show 1 slide per view on mobile
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
 
   return (
     <section
