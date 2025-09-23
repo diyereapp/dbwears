@@ -91,12 +91,12 @@ const Featured = () => {
   const settings = {
   dots: true,
   infinite: true,
-  speed: 500,
+autoplaySpeed: 4000,
   slidesToShow: 4, // default desktop
   slidesToScroll: 1,
   arrows: true,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
+  // nextArrow: <NextArrow />,
+  // prevArrow: <PrevArrow />,
   responsive: [
     {
       breakpoint: 1024, // tablet
