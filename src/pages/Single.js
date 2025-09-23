@@ -14,6 +14,7 @@ import Header from "./Header";
 import axios from "axios"
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import ProductTabs from "./ProductTabs";
 
 
 const bgImage = `url("data:image/svg+xml;utf8,
@@ -38,7 +39,8 @@ const [currentImageIndex, setCurrentImageIndex] = useState(0); // <-- add this
   const [selectedParent, setSelectedParent] = useState("");
   const [selectedChild, setSelectedChild] = useState("");
    const { addToCart } = useCart();
-  
+    const [activeTab, setActiveTab] = useState("description");
+  const [selectedSize, setSelectedSize] = useState("");
 useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -122,509 +124,555 @@ const availableColors = [
 
 
 
+    <section class="page-title" >
+        <div class="auto-container">
 
-    
-    
-    <main>
-        
-        <div class="relative bg-white"><div class="text-slate-900 bg-inherit"><div class="mx-auto max-w-[1440px] px-6">
-  <nav className="pt-4" aria-label="Breadcrumb">
-  <ol className="flex items-center">
-    {/* Always show All Products */}
-    <li className="flex items-center">
-      <Link
-        className="whitespace-nowrap text-rush-blue-500 hover:text-rush-blue-600 hover:underline"
-        to="/catalog"
+			<div class="icons-box parallax-scene-1"  style={{
+    transform: "translate3d(0px, 0px, 0px) rotate(0.0001deg)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    pointerEvents: "none",
+  }}>
+				<div class="icon-one" data-depth="0.10"   style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "relative",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}></div>
+                				<div class="icon-two" data-depth="0.30"  style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "absolute",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}>
+					<img src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/vector-9.png" alt="" />
+				</div>
+                                				<div class="icon-three" data-depth="0.30"  style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "absolute",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}>
+                    <img src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/vector-34.png" alt="" />
+				</div>
+                				<div class="icon-four" data-depth="0.10"  style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "absolute",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}></div>
+			</div>    
+                            <h2>  {product?.name}</h2>
+              
+            <ul class="bread-crumb clearfix"><li class="breadcrumb-item"><a href="https://themexriver.com/wp/prinox-wp/">Home &nbsp;</a></li><li class="breadcrumb-item">  {product?.category?.name}</li></ul>        </div>
+    </section>
+
+<section class="shop-detail-section"  style={{backgroundColor: "white"}}>
+	<div class="auto-container">
+											<div class="woocommerce-notices-wrapper"></div><div id="product-1546" class="product type-product post-1546 status-publish first outofstock product_cat-begs-package product_cat-book-paper product_cat-gift-brochure has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<div class="upper-box">
+		<div class="row clearfix">
+	
+
+
+
+
+
+<div className="gallery-column col-lg-6 col-md-12 col-sm-12">
+  <div className="inner-column">
+    {product?.images && product.images.length > 0 ? (
+      <div
+        className="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images"
+        data-columns="4"
+        style={{
+          opacity: 1,
+          transition: "opacity 0.25s ease-in-out",
+        }}
       >
-        All Products
-      </Link>
-      <div className="shrink-0 w-[1px] mx-2 h-3 rotate-12 bg-slate-500" />
-    </li>
-
-    {/* Grandparent */}
-    {product?.category?.parent?.parent && (
-      <li className="flex items-center">
-        <Link
-          to={`/category/${product.category.parent.parent._id}`}
-          className="whitespace-nowrap text-rush-blue-500 hover:text-rush-blue-600 hover:underline"
+        {/* Flex viewport */}
+        <div
+          className="flex-viewport"
+          style={{
+            overflow: "hidden",
+            position: "relative",
+            height: "387.305px",
+            transition: "none",
+          }}
         >
-          {product.category.parent.parent.name}
-        </Link>
-        <div className="shrink-0 w-[1px] mx-2 h-3 rotate-12 bg-slate-500" />
-      </li>
-    )}
-
-    {/* Parent */}
-    {product?.category?.parent && (
-      <li className="flex items-center">
-        <Link
-          to={`/category/${product.category.parent._id}`}
-          className="whitespace-nowrap text-rush-blue-500 hover:text-rush-blue-600 hover:underline"
-        >
-          {product.category.parent.name}
-        </Link>
-        <div className="shrink-0 w-[1px] mx-2 h-3 rotate-12 bg-slate-500" />
-      </li>
-    )}
-
-    {/* Current category (child) */}
-    <li className="truncate whitespace-nowrap text-slate-500">
-      {product?.category?.name}
-    </li>
-  </ol>
-</nav>
-
-
-            
-            
-            </div></div>
-            <div class="text-slate-900 bg-white py-8"><div class="mx-auto max-w-[1440px] px-6"><div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <div class="flex flex-col items-center md:items-start md:gap-2"><div class="flex flex-col gap-1"><h1 className="text-xl font-bold md:text-3xl">
-  {product?.name}
-</h1>
-</div>
-                    <div class="flex items-center gap-2">
-                        <div class="relative inline-block overflow-hidden whitespace-nowrap font-sans text-lg leading-none tracking-wide text-transparent
-                         before:absolute before:left-0 before:top-0 before:whitespace-nowrap before:font-sans before:text-slate-300 
-                         before:content-[&#x27;★★★★★&#x27;] md:text-2xl" role="img" aria-label="5 out of 5 stars">
-                            <div class="absolute left-0 top-0 overflow-hidden whitespace-nowrap font-sans text-yellow-500" 
-                            style={{width:"100%"}} aria-hidden="true">★★★★★</div>★★★★★</div><button class="text text-sm/8 text-rush-blue-500">3 reviews</button>
-                            </div></div>
-                            
-                            
-                            
-                         <div className="md:col-start-1 md:row-start-1 md:row-span-3">
-  <div className="carousel relative w-full">
-    <div className="flex flex-row gap-2 overflow-hidden">
-      {/* Thumbnails */}
-      <div className="md:basis-1/8 hidden md:flex md:flex-col gap-2">
-        {product?.images?.map((img, idx) => (
-          <button
-            key={idx}
-            aria-label={`slide dot ${idx}`}
-            type="button"
-            // className="carousel__dot"
-               onClick={() => setCurrentImageIndex(idx)}   // ✅ fix
-      className={`border rounded-md ${
-        idx === currentImageIndex
-          ? "border-black"
-          : "border-slate-200 hover:border-black/30"
-      }`}
-          >
-            <img
-              src={img}
-              alt={product?.name || `Image ${idx + 1}`}
-              className="h-12 w-12 object-contain border border-slate-200 hover:border-black/30"
-            />
-          </button>
-        ))}
-      </div>
-
-{/* Main slider */}
-<div className="relative flex flex-1 justify-center items-center">
-  {product?.images?.length > 0 ? (
-    <>
-      <button
-        onClick={() =>
-          setCurrentImageIndex(
-            (prev) => (prev - 1 + product.images.length) % product.images.length
-          )
-        }
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow"
-      >
-        ◀
-      </button>
-
-      <img
-        src={product.images[currentImageIndex]}
-        alt={product?.name}
-        className="w-full max-h-[500px] object-contain"
-      />
-
-      <button
-        onClick={() =>
-          setCurrentImageIndex(
-            (prev) => (prev + 1) % product.images.length
-          )
-        }
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow"
-      >
-        ▶
-      </button>
-    </>
-  ) : (
-    <p className="text-gray-500">No image available</p>
-  )}
-</div>
-
-    </div>
-  </div>
-</div>
-
-                                            <div class="flex flex-col gap-8">
-                                              
-                                              
-                                       <div className="flex items-center gap-4">
-  <p className="font-bold">Selected Color:</p>
-  {selectedColor && (
-    <>
-      <button
-        type="button"
-        className="relative flex items-center justify-center overflow-hidden rounded-md border border-black/15 bg-contain outline outline-2 outline-offset-2 outline-transparent m-0 h-10 w-10"
-        disabled
-        title={selectedColor}
-      >
-        <div className="flex h-full w-full">
-          <span
-            className="h-full w-full"
+          <figure
+            className="woocommerce-product-gallery__wrapper relative"
             style={{
-              backgroundColor:
-                availableColors.find((c) => c.name === selectedColor)?.hex,
+              width: "1200%",
+              transitionDuration: "0s",
+              transform: "translate3d(0px, 0px, 0px)",
             }}
-          ></span>
+          >
+            {/* Navigation buttons */}
+            <button
+              onClick={() =>
+                setCurrentImageIndex(
+                  (prev) =>
+                    (prev - 1 + product.images.length) %
+                    product.images.length
+                )
+              }
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow z-10"
+            >
+              ◀
+            </button>
+
+            <div
+              className="woocommerce-product-gallery__image flex-active-slide"
+              style={{
+                width: "323.734px",
+                marginRight: "0px",
+                float: "left",
+                display: "block",
+              }}
+            >
+              <a href={product.images[currentImageIndex]}>
+                <img
+                  src={product.images[currentImageIndex]}
+                  alt={product?.name}
+                  className="w-full max-h-[500px] object-contain"
+                  draggable="false"
+                />
+              </a>
+            </div>
+
+            <button
+              onClick={() =>
+                setCurrentImageIndex(
+                  (prev) => (prev + 1) % product.images.length
+                )
+              }
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow z-10"
+            >
+              ▶
+            </button>
+          </figure>
         </div>
-      </button>
-      <p>{selectedColor}</p>
-    </>
-  )}
-<ul className="flex flex-wrap items-center gap-1 md:justify-center">
-  {product?.color?.slice(0, 6).map((colorName) => {
-    const colorObj = availableColors.find((c) => c.name === colorName);
-    if (!colorObj) return null;
 
-    return (
-      <li key={colorName}>
-        <button
-          type="button"
-          onClick={() => setSelectedColor(colorName)}
-          className={`relative m-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-md border border-black/15 bg-contain outline outline-2 outline-offset-2 ${
-            selectedColor === colorName
-              ? "outline-rush-blue-500"
-              : "outline-transparent hover:outline-rush-blue-500"
-          }`}
-          title={colorObj.name}
-        >
-          <div className="flex h-full w-full">
-            <span
-              className="h-full w-full"
-              style={{ backgroundColor: colorObj.hex }}
-            ></span>
-          </div>
-          {selectedColor === colorName && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute h-5 w-5 text-white/70"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-          )}
-        </button>
-      </li>
-    );
-  })}
-
-  {product?.color?.length > 6 && (
-    <li className="flex justify-end text-sm text-slate-500">
-      +{product?.color.length - 6} colors
-    </li>
-  )}
-</ul>
-
-
-</div>
-
-                                                                  
-                                                                  
-
-
-                                                                     
-                                                                     
-                                                                     {/*<a href="../../../design/indexbb41.html?method=scr&amp;item=7278&amp;color=22019" class="items-center
-                                                                      justify-center whitespace-nowrap font-bold ring-offset-background transition-colors focus-visible:outline-none
-                                                                       focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
-                                                                        bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl px-12 py-4 text-xl hidden md:block md:h-fit md:w-fit">
-                                                                        Add to Cart</a>*/}
-                 {/* Mobile Buttons - fixed bottom */}
-                    <button
-      onClick={() => addToCart(product, selectedColor)}
-      disabled={!selectedColor} // require a color
-      className="items-center justify-center whitespace-nowrap font-bold 
-                 rounded-2xl px-12 py-4 text-xl bg-primary text-primary-foreground 
-                 hover:bg-primary/90 disabled:opacity-50"
-                 style={{padding: "12px"}}
-    >
-      Add to Cart
-    </button>
-<div className="fixed bottom-0 left-0 right-0 z-50 flex gap-3 p-3 bg-white md:hidden shadow-lg">
-  {/* Add to Cart */}
-  <a
-   onClick={() => addToCart(product, selectedColor)}
-         disabled={!selectedColor}
-    className="flex-1 flex items-center justify-center  text-primary-foreground 
-               hover:bg-primary/90 font-bold text-lg py-3 rounded-full"
-               style={{backgroundColor: "white", color: "black", border: "1px solid black"}}
-  >
-    Add to Cart
-  </a>
-
-  {/* Buy It Now */}
-  <a
-    href="/checkout"
-    className="flex-1 flex items-center justify-center bg-primary text-primary-foreground 
-               hover:bg-primary/90 font-bold text-lg py-3 rounded-full"
-  >
-    Buy It Now
-  </a>
-</div>
-                                                              
-                                                                        </div><div class="flex flex-col gap-4"><div class="flex w-full gap-4">
-                                                                          
-                                                                          <div class="flex basis-1/2
-                                                                         flex-row gap-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
-                                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck
-                                                                          size-10 shrink-0 rounded-full bg-slate-100 p-2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2">
-                                                                          </path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14">
-                                                                          </path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg><div><p class="font-bold">
-                                                                          Free Delivery</p><p class="text-sm md:text-nowrap">As soon as <span class="text-nowrap">...</span></p>
-                                                                          
-                                                                          </div>
-                                                                          </div></div><div class="flex w-full gap-4"><div class="flex basis-1/2 flex-row gap-4">
-                                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                                           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag size-10
-                                                                            rounded-full bg-slate-100 p-2"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z">
-                                                                            </path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg><div><p class="font-bold">Material</p>
-                                                                            <p class="text-sm">{product?.material}</p></div></div><div class="flex basis-1/2 flex-row gap-4">
-                                                                            
-                                                                            
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                                             class="lucide lucide-dollar-sign h-10 w-10 rounded-full bg-slate-100 p-2"><line x1="12" x2="12" y1="2" y2="22"></line>
-                                                                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><div><p class="font-bold">Price</p><p class="text-sm">
-                                                                             {product?.discountPrice}</p></div></div></div></div></div></div></div><section aria-labelledby="product-info-heading"><h2 id="product-info-heading"
-                                                                              class="sr-only">Product Details and Specifications</h2><div class="text-slate-900 bg-slate-100 py-8 md:pb-8 md:pt-16">
-                                                                              <div class="mx-auto max-w-[1440px] px-6"><div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
-                                                                              <div class="flex flex-col gap-8 lg:gap-16"><div><h3 class="mb-4 text-xl font-bold">Product Description</h3>
-                                                                              <div class="text-sm text-gray-600"><p>{product?.description}</p></div></div><div><h3 class="mb-4 text-xl font-bold">Available Sizes</h3><ul class="list-inside list-disc text-sm
-                                                                                leading-7 group-data-[state=closed]:hidden"><li class="py-1"><div class="inline-flex items-center gap-2"><span class="font-bold">
-                                                                                {product?.size}</span><button class="inline-flex items-center justify-center whitespace-nowrap font-bold
-                                                                                 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
-                                                                                 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 normal-case text-primary underline-offset-4
-                                                                                  hover:underline rounded-2xl h-auto p-0 text-base" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R7kp36m:"
-                                                                                   data-state="closed">Sizing Details</button></div></li>
-                                                                                   
-                                                                                   
-                                                                                   </ul></div>
-                                                                                   
-                                                                                   <div>
-                                                                                    
-                                                                                    
-                         {product?.brand && (
-  <div className="mt-6">
-    <h2 id="product-info-heading" style={{fontWeight: "800", fontSize: "20px"}}>Brand</h2>
-
-    {product?.brand?.image && (
-      <img
-        src={product.brand.image}
-        alt={product.brand.name}
-        className="mb-4 w-[200px] h-[200px] object-contain rounded"
-      />
-    )}
-
-    {product?.brand?.description && (
-      <p className="text-sm text-gray-600">{product.brand.description}</p>
-    )}
-
-    <ul className="mt-4 flex gap-4 flex-wrap">
-      <li>
-        <a
-          href={`/brands/${product.brand?._id}`}
-          className="inline-flex items-center justify-center whitespace-nowrap 
-            text-sm font-bold border-2 border-primary text-primary 
-            hover:bg-primary hover:text-white h-8 rounded-xl px-3"
-        >
-          All {product.brand?.name}
-        </a>
-      </li>
-
-   
-    </ul>
-  </div>
-)}
-
-
-                                                                                                     
-                                                                                                     </div>
-                                                                                                     
-                                                                                                     
-                                                                                                     </div>
-                                                                                                     
-                                                                                                     
-                                                                                               {/* Product Details */}
-{product?.features?.length > 0 && (
-  <div>
-    <h3 className="mb-4 text-xl font-bold">Product Details</h3>
-    <div
-      className="prose mb-0 max-w-none text-sm
-      group-data-[state=closed]:hidden prose-a:text-primary 
-      prose-a:no-underline hover:prose-a:underline lg:mb-8"
-    >
-      <ul>
-        {product?.features
-          .flatMap((f) => f.split(",")) // split string if it's comma-separated
-          .map((item, idx) => (
-            <li key={idx}>{item.trim()}</li> // remove extra spaces
+        {/* Thumbnail navigation */}
+        <ol className="flex-control-nav flex-control-thumbs mt-2 flex gap-2">
+          {product.images.map((thumb, index) => (
+            <li key={index}>
+              <img
+                src={thumb}
+                alt={`Thumbnail ${index + 1}`}
+                width="100"
+                height="100"
+                draggable="false"
+                className={`cursor-pointer border ${
+                  index === currentImageIndex
+                    ? "border-blue-500"
+                    : "border-transparent"
+                }`}
+                onClick={() => setCurrentImageIndex(index)}
+              />
+            </li>
           ))}
-      </ul>
-    </div>
-  </div>
-)}
-
-                                                                                                      
-                                                                                                      
-                                          <div className="flex flex-col gap-8 lg:gap-8">
-      <div className="flex flex-col items-center gap-2">
-        <h2 className="text-lg font-bold">Flexible Payment Options</h2>
-        <p className="text-sm">
-          Split your purchase into easy monthly payments with our trusted partners
-        </p>
-       {/*} <div className="grid grid-cols-2 gap-x-4 gap-y-2 md:grid-cols-4 md:gap-x-4 md:gap-y-0">
-          <img
-            src="/logo-affirm.png"
-            alt="Affirm Logo"
-            className="h-16 w-auto object-contain md:h-20"
-          />
-          <img
-            src="/logo-sezzle.png"
-            alt="Sezzle Logo"
-            className="h-16 w-auto object-contain md:h-20"
-          />
-          <img
-            src="/logo-afterpay.png"
-            alt="Afterpay Logo"
-            className="h-16 w-auto object-contain md:h-20"
-          />
-          <img
-            src="/logo-klarna.png"
-            alt="Klarna Logo"
-            className="h-16 w-auto object-contain md:h-20"
-          />
-        </div>*/}
+        </ol>
       </div>
-    </div>
-                                                                                                                </div></div></div></section>
-                                                                                                                
-                                                                                                                
- <section className="text-slate-900 bg-slate-100 py-8">
-  <div className="mx-auto max-w-[1440px] px-6">
-    <h2 className="mb-4 flex justify-center text-3xl font-semibold md:mb-8">
-      Related Products
-    </h2>
-
-    <ul className="flex flex-col gap-4 md:grid md:grid-cols-4 md:gap-8">
-      {products.map((product) => (
-        <li key={product._id}>
-          <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-white hover:shadow-md">
-            <Link
-              to={`/single-product/${product._id}`}
-              className="flex md:flex-grow md:flex-col"
-            >
-              {/* Product image */}
-          <div className="relative flex basis-2/5 items-center md:w-full md:max-w-none">
-  {/* Loading spinner overlay (only if you want it) */}
-  <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center pointer-events-none">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="lucide lucide-loader-circle size-16 animate-spin text-primary"
-    />
+    ) : (
+      <p>Loading images...</p> // fallback if no images
+    )}
   </div>
-
-  {/* Product image from DB */}
-  {product?.images?.length > 0 ? (
-    <img
-      src={product.images[0]} // ✅ show first image
-      alt={product.name}
-      className="w-full h-96 object-contain rounded-lg" // ✅ fixed height & contain
-    />
-  ) : (
-    <div className="flex h-96 w-full items-center justify-center bg-slate-200 text-slate-500 rounded-lg">
-      No Image
-    </div>
-  )}
 </div>
 
+			<div class="content-column col-lg-6 col-md-12 col-sm-12">
+								<div class="inner-column">
+					<h3 class="product_title entry-title">  {product?.name}</h3>					<div class="rating">
+						
+	<div class="woocommerce-product-rating">
+		<div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style={{width:"100%"}}>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">2</span> customer ratings</span></div>								<a href="#reviews" class="woocommerce-review-link" rel="nofollow">(<span class="count">2</span> customer reviews)</a>
+						</div>
 
-              {/* Product details */}
-              <div className="flex basis-3/5 flex-col justify-center gap-2 px-2 py-3 md:w-full md:flex-grow md:justify-between">
-                <h3 className="text-balance text-lg font-bold md:text-center">
-                  {product.name}
-                </h3>
+					</div>
+					<div class="text">
+						<div class="woocommerce-product-details__short-description">
+	<p>{product?.description}</p>
+</div>
+					</div>
+					<div class="price">
+						<p class="price"><span class="woocommerce-Price-amount amount" aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol">$</span>{product?.discountPrice}</bdi></span> <span aria-hidden="true">–</span> <span class="woocommerce-Price-amount amount" aria-hidden="true"></span><span class="screen-reader-text">Price range: $19.00 through $49.00</span></p>
+					</div>		
+					<div class="categories">
+						<div class="product_meta">
 
-                {/* Colors */}
-                <ul className="flex flex-wrap items-center gap-1 md:justify-center">
-                  {product.color?.slice(0, 6).map((colorName, i) => {
-                    const colorObj = availableColors.find(
-                      (c) => c.name === colorName
-                    );
-                    if (!colorObj) return null;
-                    return (
-                      <li
-                        key={i}
-                        className="h-5 w-5 rounded-full border"
-                        style={{ backgroundColor: colorObj.hex }}
-                        title={colorName}
-                      ></li>
-                    );
-                  })}
-                </ul>
+	
+	
+		<span class="sku_wrapper">SKU: <span class="sku">N/A</span></span>
 
-                {/* Price + Sizes */}
-                <div className="flex flex-col items-center gap-1 text-sm">
-                  {product.price && (
-                    <p>
-                      <span className="font-semibold">${product.price}</span>{" "}
-                      each
-                    </p>
-                  )}
-                  {product.sizes && (
-                    <p className="text-slate-600">{product.sizes.join(", ")}</p>
-                  )}
-                </div>
-              </div>
-            </Link>
-          </article>
-        </li>
+	
+	<span class="posted_in">Categories: <a href="https://themexriver.com/wp/prinox-wp/product-category/begs-package/" rel="tag">{product?.category?.name}</a>, <a href="https://themexriver.com/wp/prinox-wp/product-category/book-paper/" rel="tag">{product?.category?.name}</a>, </span>
+	
+	
+</div>
+					</div>		
+					
+<form class="variations_form cart wvs-loaded" action="https://themexriver.com/wp/prinox-wp/product/accesories-lather-shoes/" method="post" 
+enctype="multipart/form-data" data-product_id="1546" data-product_variations="[{&quot;attributes&quot;:{&quot;attribute_pa_color&quot;:&quot;
+  blue&quot;,&quot;attribute_pa_size&quot;:&quot;&quot;},&quot;availability_html&quot;:&quot;&quot;,&quot;backorders_allowed&quot;:false,&quot;
+  dimensions&quot;:{&quot;length&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;height&quot;:&quot;&quot;},&quot;dimensions_html&quot;
+  :&quot;N\/A&quot;,&quot;display_price&quot;:22,&quot;display_regular_price&quot;:25,&quot;image&quot;:{&quot;title&quot;:&quot;box&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;alt&quot;:&quot;box&quot;,&quot;src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg&quot;,&quot;srcset&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w&quot;,&quot;sizes&quot;:&quot;(max-width: 600px) 100vw, 600px&quot;,&quot;full_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;full_src_w&quot;:1003,&quot;full_src_h&quot;:1200,&quot;gallery_thumbnail_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-100x100.jpg&quot;,&quot;gallery_thumbnail_src_w&quot;:100,&quot;gallery_thumbnail_src_h&quot;:100,&quot;thumb_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-300x300.jpg&quot;,&quot;thumb_src_w&quot;:300,&quot;thumb_src_h&quot;:300,&quot;src_w&quot;:600,&quot;src_h&quot;:718},&quot;image_id&quot;:1852,&quot;is_downloadable&quot;:false,&quot;is_in_stock&quot;:true,&quot;is_purchasable&quot;:true,&quot;is_sold_individually&quot;:&quot;no&quot;,&quot;is_virtual&quot;:false,&quot;max_qty&quot;:&quot;&quot;,&quot;min_qty&quot;:1,&quot;price_html&quot;:&quot;&lt;span class=\&quot;price\&quot;&gt;&lt;del aria-hidden=\&quot;true\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;25.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/del&gt; &lt;span class=\&quot;screen-reader-text\&quot;&gt;Original price was: &amp;#036;25.00.&lt;\/span&gt;&lt;ins aria-hidden=\&quot;true\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;22.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/ins&gt;&lt;span class=\&quot;screen-reader-text\&quot;&gt;Current price is: &amp;#036;22.00.&lt;\/span&gt;&lt;\/span&gt;&quot;,&quot;sku&quot;:&quot;&quot;,&quot;variation_description&quot;:&quot;&quot;,&quot;variation_id&quot;:1576,&quot;variation_is_active&quot;:true,&quot;variation_is_visible&quot;:true,&quot;weight&quot;:&quot;&quot;,&quot;weight_html&quot;:&quot;N\/A&quot;,&quot;woosq_image_id&quot;:1852,&quot;woosq_image_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;woosq_image&quot;:&quot;&lt;img width=\&quot;384\&quot; height=\&quot;460\&quot; src=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg\&quot; class=\&quot;attachment-woosq size-woosq\&quot; alt=\&quot;\&quot; decoding=\&quot;async\&quot; srcset=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w\&quot; sizes=\&quot;(max-width: 384px) 100vw, 384px\&quot; \/&gt;&quot;},{&quot;attributes&quot;:{&quot;attribute_pa_color&quot;:&quot;red&quot;,&quot;attribute_pa_size&quot;:&quot;&quot;},&quot;availability_html&quot;:&quot;&quot;,&quot;backorders_allowed&quot;:false,&quot;dimensions&quot;:{&quot;length&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;height&quot;:&quot;&quot;},&quot;dimensions_html&quot;:&quot;N\/A&quot;,&quot;display_price&quot;:49,&quot;display_regular_price&quot;:49,&quot;image&quot;:{&quot;title&quot;:&quot;box&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;alt&quot;:&quot;box&quot;,&quot;src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg&quot;,&quot;srcset&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w&quot;,&quot;sizes&quot;:&quot;(max-width: 600px) 100vw, 600px&quot;,&quot;full_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;full_src_w&quot;:1003,&quot;full_src_h&quot;:1200,&quot;gallery_thumbnail_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-100x100.jpg&quot;,&quot;gallery_thumbnail_src_w&quot;:100,&quot;gallery_thumbnail_src_h&quot;:100,&quot;thumb_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-300x300.jpg&quot;,&quot;thumb_src_w&quot;:300,&quot;thumb_src_h&quot;:300,&quot;src_w&quot;:600,&quot;src_h&quot;:718},&quot;image_id&quot;:1852,&quot;is_downloadable&quot;:false,&quot;is_in_stock&quot;:true,&quot;is_purchasable&quot;:true,&quot;is_sold_individually&quot;:&quot;no&quot;,&quot;is_virtual&quot;:false,&quot;max_qty&quot;:&quot;&quot;,&quot;min_qty&quot;:1,&quot;price_html&quot;:&quot;&lt;span class=\&quot;price\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;49.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/span&gt;&quot;,&quot;sku&quot;:&quot;&quot;,&quot;variation_description&quot;:&quot;&quot;,&quot;variation_id&quot;:1577,&quot;variation_is_active&quot;:true,&quot;variation_is_visible&quot;:true,&quot;weight&quot;:&quot;&quot;,&quot;weight_html&quot;:&quot;N\/A&quot;,&quot;woosq_image_id&quot;:1852,&quot;woosq_image_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;woosq_image&quot;:&quot;&lt;img width=\&quot;384\&quot; height=\&quot;460\&quot; src=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg\&quot; class=\&quot;attachment-woosq size-woosq\&quot; alt=\&quot;\&quot; decoding=\&quot;async\&quot; srcset=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w\&quot; sizes=\&quot;(max-width: 384px) 100vw, 384px\&quot; \/&gt;&quot;},{&quot;attributes&quot;:{&quot;attribute_pa_color&quot;:&quot;black&quot;,&quot;attribute_pa_size&quot;:&quot;&quot;},&quot;availability_html&quot;:&quot;&quot;,&quot;backorders_allowed&quot;:false,&quot;dimensions&quot;:{&quot;length&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;height&quot;:&quot;&quot;},&quot;dimensions_html&quot;:&quot;N\/A&quot;,&quot;display_price&quot;:19,&quot;display_regular_price&quot;:29,&quot;image&quot;:{&quot;title&quot;:&quot;box&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;alt&quot;:&quot;box&quot;,&quot;src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg&quot;,&quot;srcset&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w&quot;,&quot;sizes&quot;:&quot;(max-width: 600px) 100vw, 600px&quot;,&quot;full_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;full_src_w&quot;:1003,&quot;full_src_h&quot;:1200,&quot;gallery_thumbnail_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-100x100.jpg&quot;,&quot;gallery_thumbnail_src_w&quot;:100,&quot;gallery_thumbnail_src_h&quot;:100,&quot;thumb_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-300x300.jpg&quot;,&quot;thumb_src_w&quot;:300,&quot;thumb_src_h&quot;:300,&quot;src_w&quot;:600,&quot;src_h&quot;:718},&quot;image_id&quot;:1852,&quot;is_downloadable&quot;:false,&quot;is_in_stock&quot;:true,&quot;is_purchasable&quot;:true,&quot;is_sold_individually&quot;:&quot;no&quot;,&quot;is_virtual&quot;:false,&quot;max_qty&quot;:&quot;&quot;,&quot;min_qty&quot;:1,&quot;price_html&quot;:&quot;&lt;span class=\&quot;price\&quot;&gt;&lt;del aria-hidden=\&quot;true\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;29.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/del&gt; &lt;span class=\&quot;screen-reader-text\&quot;&gt;Original price was: &amp;#036;29.00.&lt;\/span&gt;&lt;ins aria-hidden=\&quot;true\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;19.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/ins&gt;&lt;span class=\&quot;screen-reader-text\&quot;&gt;Current price is: &amp;#036;19.00.&lt;\/span&gt;&lt;\/span&gt;&quot;,&quot;sku&quot;:&quot;&quot;,&quot;variation_description&quot;:&quot;&quot;,&quot;variation_id&quot;:1574,&quot;variation_is_active&quot;:true,&quot;variation_is_visible&quot;:true,&quot;weight&quot;:&quot;&quot;,&quot;weight_html&quot;:&quot;N\/A&quot;,&quot;woosq_image_id&quot;:1852,&quot;woosq_image_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;woosq_image&quot;:&quot;&lt;img width=\&quot;384\&quot; height=\&quot;460\&quot; src=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg\&quot; class=\&quot;attachment-woosq size-woosq\&quot; alt=\&quot;\&quot; decoding=\&quot;async\&quot; srcset=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w\&quot; sizes=\&quot;(max-width: 384px) 100vw, 384px\&quot; \/&gt;&quot;},{&quot;attributes&quot;:{&quot;attribute_pa_color&quot;:&quot;blue&quot;,&quot;attribute_pa_size&quot;:&quot;&quot;},&quot;availability_html&quot;:&quot;&quot;,&quot;backorders_allowed&quot;:false,&quot;dimensions&quot;:{&quot;length&quot;:&quot;&quot;,&quot;width&quot;:&quot;&quot;,&quot;height&quot;:&quot;&quot;},&quot;dimensions_html&quot;:&quot;N\/A&quot;,&quot;display_price&quot;:39,&quot;display_regular_price&quot;:49,&quot;image&quot;:{&quot;title&quot;:&quot;box&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;alt&quot;:&quot;box&quot;,&quot;src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg&quot;,&quot;srcset&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w&quot;,&quot;sizes&quot;:&quot;(max-width: 600px) 100vw, 600px&quot;,&quot;full_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;full_src_w&quot;:1003,&quot;full_src_h&quot;:1200,&quot;gallery_thumbnail_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-100x100.jpg&quot;,&quot;gallery_thumbnail_src_w&quot;:100,&quot;gallery_thumbnail_src_h&quot;:100,&quot;thumb_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-300x300.jpg&quot;,&quot;thumb_src_w&quot;:300,&quot;thumb_src_h&quot;:300,&quot;src_w&quot;:600,&quot;src_h&quot;:718},&quot;image_id&quot;:1852,&quot;is_downloadable&quot;:false,&quot;is_in_stock&quot;:true,&quot;is_purchasable&quot;:true,&quot;is_sold_individually&quot;:&quot;no&quot;,&quot;is_virtual&quot;:false,&quot;max_qty&quot;:&quot;&quot;,&quot;min_qty&quot;:1,&quot;price_html&quot;:&quot;&lt;span class=\&quot;price\&quot;&gt;&lt;del aria-hidden=\&quot;true\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;49.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/del&gt; &lt;span class=\&quot;screen-reader-text\&quot;&gt;Original price was: &amp;#036;49.00.&lt;\/span&gt;&lt;ins aria-hidden=\&quot;true\&quot;&gt;&lt;span class=\&quot;woocommerce-Price-amount amount\&quot;&gt;&lt;bdi&gt;&lt;span class=\&quot;woocommerce-Price-currencySymbol\&quot;&gt;&amp;#36;&lt;\/span&gt;39.00&lt;\/bdi&gt;&lt;\/span&gt;&lt;\/ins&gt;&lt;span class=\&quot;screen-reader-text\&quot;&gt;Current price is: &amp;#036;39.00.&lt;\/span&gt;&lt;\/span&gt;&quot;,&quot;sku&quot;:&quot;&quot;,&quot;variation_description&quot;:&quot;&quot;,&quot;variation_id&quot;:1575,&quot;variation_is_active&quot;:true,&quot;variation_is_visible&quot;:true,&quot;weight&quot;:&quot;&quot;,&quot;weight_html&quot;:&quot;N\/A&quot;,&quot;woosq_image_id&quot;:1852,&quot;woosq_image_src&quot;:&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg&quot;,&quot;woosq_image&quot;:&quot;&lt;img width=\&quot;384\&quot; height=\&quot;460\&quot; src=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg\&quot; class=\&quot;attachment-woosq size-woosq\&quot; alt=\&quot;\&quot; decoding=\&quot;async\&quot; srcset=\&quot;https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1.jpg 1003w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-600x718.jpg 600w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-251x300.jpg 251w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-856x1024.jpg 856w, https:\/\/themexriver.com\/wp\/prinox-wp\/wp-content\/uploads\/2022\/08\/box-1-768x919.jpg 768w\&quot; sizes=\&quot;(max-width: 384px) 100vw, 384px\&quot; \/&gt;&quot;}]" current-image="">
+	<div data-product_id="1546" data-threshold_min="30" data-threshold_max="100" data-total="4">
+			<table class="variations" cellspacing="0" role="presentation">
+			<tbody>
+							<tr>
+  <th className="label">
+    <label htmlFor="pa_color">Color</label>
+    <span
+      className="woo-selected-variation-item-name"
+      data-default=""
+    >
+      {selectedColor}
+    </span>
+  </th>
+
+  <td className="value woo-variation-items-wrapper">
+    {/* Hidden select (to match WooCommerce markup) */}
+    <select
+      style={{ display: "none" }}
+      id="pa_color"
+      className="woo-variation-raw-select"
+      name="attribute_pa_color"
+      data-attribute_name="attribute_pa_color"
+      data-show_option_none="yes"
+      value={selectedColor || ""}
+      onChange={(e) => setSelectedColor(e.target.value)}
+    >
+      <option value="">Choose an option</option>
+      {product?.color?.map((colorName) => (
+        <option key={colorName} value={colorName} className="attached enabled">
+          {colorName}
+        </option>
       ))}
-    </ul>
-  </div>
-</section>
-                                                                                                               
-                                                                                                                
-                                                                                                                
-                                                                                                                
-                                                                                                                
+    </select>
 
-                                                                                                                                                                   
-                                                                                                                                                                
-                                                                                                                                                                         
-                                                                                                                                                                         
-                                                                                                                                                                       
-                                                                                                                                                                      
-                                                                                                                                                                      </div>
-                
-                
-                </main>
+    {/* Custom color list like Woo UI */}
+    <ul
+      role="radiogroup"
+      aria-label="color"
+      className="variable-items-wrapper button-variable-items-wrapper wvs-style-squared"
+      data-attribute_name="attribute_pa_color"
+      data-attribute_values={JSON.stringify(product?.color || [])}
+    >
+      {product?.color?.map((colorName) => {
+        const colorObj = availableColors.find((c) => c.name === colorName);
+        return (
+          <li
+            key={colorName}
+            aria-checked={selectedColor === colorName}
+            tabIndex={0}
+            data-attribute_name="attribute_pa_color"
+            data-wvstooltip={colorName}
+            className={`variable-item button-variable-item button-variable-item-${colorName.toLowerCase()} ${
+              selectedColor === colorName ? "selected" : ""
+            }`}
+            title={colorName}
+            data-title={colorName}
+            data-value={colorName}
+            role="radio"
+            onClick={() => setSelectedColor(colorName)}
+          >
+            <div className="variable-item-contents">
+              <span
+                className="variable-item-span variable-item-span-button"
+                style={{
+                  backgroundColor: colorObj?.hex || "#ddd", // fallback color
+                  display: "inline-block",
+                  padding: "4px 10px",
+                  borderRadius: "4px",
+                  color: "#fff",
+                }}
+              >
+                {colorName}
+              </span>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <th className="label">
+    <label htmlFor="pa_size">Size</label>
+    <span
+      className="woo-selected-variation-item-name"
+      data-default=""
+    >
+      {selectedSize}
+    </span>
+  </th>
+
+  <td className="value woo-variation-items-wrapper">
+    {/* Hidden select (Woo style) */}
+    <select
+      style={{ display: "none" }}
+      id="pa_size"
+      className="woo-variation-raw-select"
+      name="attribute_pa_size"
+      data-attribute_name="attribute_pa_size"
+      data-show_option_none="yes"
+      value={selectedSize || ""}
+      onChange={(e) => setSelectedSize(e.target.value)}
+    >
+      <option value="">Choose an option</option>
+
+      {Array.isArray(product?.size) &&
+        product.size.length > 0 &&
+        product.size[0]
+          .split(",")
+          .map((size) => size.trim())
+          .map((size) => (
+            <option key={size} value={size} className="attached enabled">
+              {size.toUpperCase()}
+            </option>
+          ))}
+    </select>
+
+    {/* Custom size list */}
+    <ul
+      role="radiogroup"
+      aria-label="size"
+      className="variable-items-wrapper button-variable-items-wrapper wvs-style-squared"
+      data-attribute_name="attribute_pa_size"
+      data-attribute_values={JSON.stringify(
+        Array.isArray(product?.size) && product.size.length > 0
+          ? product.size[0].split(",").map((s) => s.trim())
+          : []
+      )}
+    >
+      {Array.isArray(product?.size) &&
+        product.size.length > 0 &&
+        product.size[0]
+          .split(",")
+          .map((size) => size.trim())
+          .map((size) => (
+            <li
+              key={size}
+              aria-checked={selectedSize === size}
+              tabIndex={0}
+              data-attribute_name="attribute_pa_size"
+              data-wvstooltip={size.toUpperCase()}
+              className={`variable-item button-variable-item button-variable-item-${size.toLowerCase()} ${
+                selectedSize === size ? "selected" : ""
+              }`}
+              title={size.toUpperCase()}
+              data-title={size.toUpperCase()}
+              data-value={size}
+              role="radio"
+              onClick={() => setSelectedSize(size)}
+            >
+              <div className="variable-item-contents">
+                <span className="variable-item-span variable-item-span-button">
+                  {size.toUpperCase()}
+                </span>
+              </div>
+            </li>
+          ))}
+    </ul>
+
+    {/* Reset link */}
+    <a
+      className="reset_variations"
+      href="#"
+      aria-label="Clear options"
+      style={{ visibility: selectedSize ? "visible" : "hidden" }}
+      onClick={(e) => {
+        e.preventDefault();
+        setSelectedSize("");
+      }}
+    >
+      Clear
+    </a>
+  </td>
+</tr>
+
+
+							</tbody>
+		</table>
+		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
+		
+		<div class="single_variation_wrap">
+			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions" style={{display: "none"}}></div><div class="woocommerce-variation-add-to-cart variations_button d-flex align-items-center  woocommerce-variation-add-to-cart-disabled">
+	
+	
+	<div class="buttons-box">
+		<button type="submit" name="add-to-cart" value="1546" class="theme-btn btn-style-four clearfix">
+			<span class="btn-wrap">
+				<span class="text-one">Add to cart</span>
+				<span class="text-two">Add to cart</span>
+			</span>			
+		</button>
+	</div>
+		<div class="quantity">
+				<label class="screen-reader-text" for="quantity_68cc4096f118e">Accesories Lather Shoes quantity</label>
+		<input type="number" id="quantity_68cc4096f118e" class="input-text qty text" step="1" min="1" max=""
+     name="quantity" value="1" title="Qty" size="4" placeholder="" inputmode="numeric" autocomplete="off" />
+			</div>
+		
+	<input type="hidden" name="add-to-cart" value="1546" />
+	<input type="hidden" name="product_id" value="1546" />
+	<input type="hidden" name="variation_id" class="variation_id" value="0" />
+</div>
+		</div>
+	
+	</div></form>
+
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+
+<ProductTabs />
+
+	<section class="related products">
+
+					<h2>Related products</h2>
+				<div class="row clearfix">
+        
+     {products.map((product) => (
+			
+		<li>
+
+      			<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1556 status-publish first instock product_cat-gift-brochure product_cat-official-printing has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+	<div class="inner-box">
+				<div class="image">
+			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-300x300.jpg" 
+      class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="lounge chair fredericia" decoding="async" 
+      srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-300x300.jpg 300w,
+       https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-100x100.jpg 100w,
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-150x150.jpg 150w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-50x50.jpg 50w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-600x600.jpg 600w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-96x96.jpg 96w" sizes="(max-width: 300px) 100vw, 300px" /><a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1556" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1556" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1556" data-product_sku="" aria-label="Add to cart: “lounge chair fredericia”" rel="nofollow" data-success_message="“lounge chair fredericia” has been added to your cart" role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1556" class="screen-reader-text">
+			</span>
+		</div>
+				<div class="lower-content">
+			<div class="rating">
+                            </div> 
+			<h6><a href="https://themexriver.com/wp/prinox-wp/product/lounge-chair-fredericia/">                 {product.name}</a></h6>
+			
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>48.00</bdi></span></del> <span class="screen-reader-text">Original price was: $48.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>40.00</bdi></span></ins><span class="screen-reader-text">Current price is: $40.00.</span></span>
+			 
+		</div>
+			</div>	
+</div>
+
+			
+					<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1557 status-publish instock product_cat-begs-package product_cat-womens-collection has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
+	<div class="inner-box">
+				<div class="image">
+			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-300x300.jpg"
+       class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Coffees Mugs" decoding="async"
+        srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-300x300.jpg 300w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-100x100.jpg 100w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-150x150.jpg 150w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-50x50.jpg 50w,
+         https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-600x600.jpg 600w,
+          https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-96x96.jpg 96w" sizes="(max-width: 300px) 100vw, 300px" /><a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1557" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1557" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1557" data-product_sku="" aria-label="Add to cart: “Coffees Mugs”" rel="nofollow" data-success_message="“Coffees Mugs” has been added to your cart" role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1557" class="screen-reader-text">
+			</span>
+		</div>
+
+				<div class="lower-content">
+			<div class="rating">
+                <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style={{width:"100%"}}>Rated <strong class="rating">5.00</strong> out of 5</span></div>            </div> 
+			<h6><a href="https://themexriver.com/wp/prinox-wp/product/coffees-mugs/">Coffees Mugs</a></h6>
+			
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>48.00</bdi></span></del> <span class="screen-reader-text">Original price was: $48.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>40.00</bdi></span></ins><span class="screen-reader-text">Current price is: $40.00.</span></span>
+			 
+		</div>
+			</div>	
+</div>
+
+			
+					<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1549 status-publish instock product_cat-book-paper product_cat-official-printing has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
+	<div class="inner-box">
+				<div class="image">
+			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-300x300.jpg"
+       class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Print Book Cover" decoding="async" 
+       srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-300x300.jpg 300w, 
+       https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-100x100.jpg 100w,
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-150x150.jpg 150w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-50x50.jpg 50w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-600x600.jpg 600w, 
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-96x96.jpg 96w"
+        sizes="(max-width: 300px) 100vw, 300px" /><a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1549" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1549"
+         data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1549" data-product_sku="" 
+         aria-label="Add to cart: “Print Book Cover”" rel="nofollow" data-success_message="“Print Book Cover” has been added to your cart"
+          role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1549" class="screen-reader-text">
+			</span>
+		</div>
+				<div class="lower-content">
+			<div class="rating">
+                <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style={{width:"100%"}}>Rated <strong class="rating">5.00</strong> out of 5</span></div>            </div> 
+			<h6><a href="https://themexriver.com/wp/prinox-wp/product/print-book-cover/">Print Book Cover</a></h6>
+			
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>32.00</bdi></span></del> <span class="screen-reader-text">Original price was: $32.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>16.00</bdi></span></ins><span class="screen-reader-text">Current price is: $16.00.</span></span>
+			 
+		</div>
+			</div>	
+</div>
+
+			
+					<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1558 status-publish last instock product_cat-book-paper product_cat-womens-collection has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
+	<div class="inner-box">
+				<div class="image">
+			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Box Packag" decoding="async"
+       srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-300x300.jpg 300w, 
+       https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-100x100.jpg 100w,
+        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-150x150.jpg 150w,
+         https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-50x50.jpg 50w,
+          https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-600x600.jpg 600w,
+           https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-96x96.jpg 96w"
+           sizes="(max-width: 300px) 100vw, 300px" />
+           <a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1558" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1558" data-quantity="1"
+            class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1558" data-product_sku="" 
+            aria-label="Add to cart: “Box Packag”" rel="nofollow" data-success_message="“Box Packag” has been added to your cart"
+             role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1558" class="screen-reader-text">
+			</span>
+		</div>
+				<div class="lower-content">
+			<div class="rating">
+                <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5"><span style={{width:"80%"}}>Rated <strong class="rating">4.00</strong> out of 5</span></div>            </div> 
+			<h6><a href="https://themexriver.com/wp/prinox-wp/product/box-packag/">Box Package</a></h6>
+			
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>48.00</bdi></span></del> <span class="screen-reader-text">Original price was: $48.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>40.00</bdi></span></ins><span class="screen-reader-text">Current price is: $40.00.</span></span>
+			 
+		</div>
+			</div>	
+</div>
+    </li>
+      ))}
+			
+		</div>
+
+	</section>
+		
+</div>
+
+							  
+		
+	</div>
+</section>
+
     <Footer />
     </>
   );

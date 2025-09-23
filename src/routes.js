@@ -8,6 +8,7 @@ import AuthGuard from "./auth/AuthGuard";
 import Home from "./pages/Home";
 import GoogleAuthHandler from "./GoogleAuthHandler";
 import Selling from "./pages/Selling";
+import Single from "./pages/Single";
 
 
 const routes = [
@@ -24,6 +25,10 @@ const routes = [
   {
     path: "/selling",
     element: <Selling />,
+  },
+  {
+ path: "/single-product/:id",
+    element: <Single />,
   },
 
 
