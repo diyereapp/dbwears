@@ -543,129 +543,70 @@ enctype="multipart/form-data" data-product_id="1546" data-product_variations="[{
 
 <ProductTabs />
 
-	<section class="related products">
+ <section className="related products" style={{ padding: "40px 0" }}>
+      <h2 style={{ marginBottom: "20px" }}>Related products</h2>
+      <div className="row clearfix" style={{ display: "flex", flexWrap: "wrap" }}>
+        {products.map((related) => (
+          <li
+            key={related._id}
+            className="shop-item col-lg-3 col-md-4 col-sm-6 product"
+            style={{ listStyle: "none", marginBottom: "20px" }}
+          >
+            <div className="inner-box" style={{ border: "1px solid #eee", borderRadius: "8px", padding: "15px" }}>
+              {/* Image */}
+              <div className="image" style={{ textAlign: "center", marginBottom: "15px" }}>
+                <img
+                  width="300"
+                  height="300"
+                  src={
+                    related.images && related.images.length > 0
+                      ? related.images[0]
+                      : "/placeholder.png"
+                  }
+                  alt={related.name}
+                  style={{ maxWidth: "100%", borderRadius: "4px" }}
+                />
+                <button
+                  className="button add_to_cart_button"
+                  style={{
+                    display: "block",
+                    margin: "10px auto 0",
+                    padding: "8px 12px",
+                    background: "#333",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Add to cart
+                </button>
+              </div>
 
-					<h2>Related products</h2>
-				<div class="row clearfix">
-        
-     {products.map((product) => (
-			
-		<li>
+              {/* Content */}
+              <div className="lower-content" style={{ textAlign: "center" }}>
+                <h6 style={{ marginBottom: "10px" }}>
+                  <Link to={`/single-product/${related._id}`} style={{ color: "#333", textDecoration: "none" }}>
+                    {related.name}
+                  </Link>
+                </h6>
 
-      			<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1556 status-publish first instock product_cat-gift-brochure product_cat-official-printing has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
-	<div class="inner-box">
-				<div class="image">
-			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-300x300.jpg" 
-      class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="lounge chair fredericia" decoding="async" 
-      srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-300x300.jpg 300w,
-       https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-100x100.jpg 100w,
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-150x150.jpg 150w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-50x50.jpg 50w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-600x600.jpg 600w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/mog-1-96x96.jpg 96w" sizes="(max-width: 300px) 100vw, 300px" /><a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1556" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1556" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1556" data-product_sku="" aria-label="Add to cart: “lounge chair fredericia”" rel="nofollow" data-success_message="“lounge chair fredericia” has been added to your cart" role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1556" class="screen-reader-text">
-			</span>
-		</div>
-				<div class="lower-content">
-			<div class="rating">
-                            </div> 
-			<h6><a href="https://themexriver.com/wp/prinox-wp/product/lounge-chair-fredericia/">                 {product.name}</a></h6>
-			
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>48.00</bdi></span></del> <span class="screen-reader-text">Original price was: $48.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>40.00</bdi></span></ins><span class="screen-reader-text">Current price is: $40.00.</span></span>
-			 
-		</div>
-			</div>	
-</div>
-
-			
-					<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1557 status-publish instock product_cat-begs-package product_cat-womens-collection has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
-	<div class="inner-box">
-				<div class="image">
-			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-300x300.jpg"
-       class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Coffees Mugs" decoding="async"
-        srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-300x300.jpg 300w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-100x100.jpg 100w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-150x150.jpg 150w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-50x50.jpg 50w,
-         https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-600x600.jpg 600w,
-          https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/branding-1-96x96.jpg 96w" sizes="(max-width: 300px) 100vw, 300px" /><a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1557" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1557" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1557" data-product_sku="" aria-label="Add to cart: “Coffees Mugs”" rel="nofollow" data-success_message="“Coffees Mugs” has been added to your cart" role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1557" class="screen-reader-text">
-			</span>
-		</div>
-
-				<div class="lower-content">
-			<div class="rating">
-                <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style={{width:"100%"}}>Rated <strong class="rating">5.00</strong> out of 5</span></div>            </div> 
-			<h6><a href="https://themexriver.com/wp/prinox-wp/product/coffees-mugs/">Coffees Mugs</a></h6>
-			
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>48.00</bdi></span></del> <span class="screen-reader-text">Original price was: $48.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>40.00</bdi></span></ins><span class="screen-reader-text">Current price is: $40.00.</span></span>
-			 
-		</div>
-			</div>	
-</div>
-
-			
-					<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1549 status-publish instock product_cat-book-paper product_cat-official-printing has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
-	<div class="inner-box">
-				<div class="image">
-			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-300x300.jpg"
-       class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Print Book Cover" decoding="async" 
-       srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-300x300.jpg 300w, 
-       https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-100x100.jpg 100w,
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-150x150.jpg 150w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-50x50.jpg 50w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-600x600.jpg 600w, 
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/bookcover-1-96x96.jpg 96w"
-        sizes="(max-width: 300px) 100vw, 300px" /><a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1549" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1549"
-         data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1549" data-product_sku="" 
-         aria-label="Add to cart: “Print Book Cover”" rel="nofollow" data-success_message="“Print Book Cover” has been added to your cart"
-          role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1549" class="screen-reader-text">
-			</span>
-		</div>
-				<div class="lower-content">
-			<div class="rating">
-                <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style={{width:"100%"}}>Rated <strong class="rating">5.00</strong> out of 5</span></div>            </div> 
-			<h6><a href="https://themexriver.com/wp/prinox-wp/product/print-book-cover/">Print Book Cover</a></h6>
-			
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>32.00</bdi></span></del> <span class="screen-reader-text">Original price was: $32.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>16.00</bdi></span></ins><span class="screen-reader-text">Current price is: $16.00.</span></span>
-			 
-		</div>
-			</div>	
-</div>
-
-			
-					<div class="shop-item col-lg-3 col-md-4 col-sm-6 product type-product post-1558 status-publish last instock product_cat-book-paper product_cat-womens-collection has-post-thumbnail sale featured shipping-taxable purchasable product-type-simple">
-	<div class="inner-box">
-				<div class="image">
-			<img width="300" height="300" src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Box Packag" decoding="async"
-       srcset="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-300x300.jpg 300w, 
-       https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-100x100.jpg 100w,
-        https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-150x150.jpg 150w,
-         https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-50x50.jpg 50w,
-          https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-600x600.jpg 600w,
-           https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/coffee-1-96x96.jpg 96w"
-           sizes="(max-width: 300px) 100vw, 300px" />
-           <a href="/wp/prinox-wp/product/accesories-lather-shoes/?add-to-cart=1558" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1558" data-quantity="1"
-            class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1558" data-product_sku="" 
-            aria-label="Add to cart: “Box Packag”" rel="nofollow" data-success_message="“Box Packag” has been added to your cart"
-             role="button">Add to cart</a>	<span id="woocommerce_loop_add_to_cart_link_describedby_1558" class="screen-reader-text">
-			</span>
-		</div>
-				<div class="lower-content">
-			<div class="rating">
-                <div class="star-rating" role="img" aria-label="Rated 4.00 out of 5"><span style={{width:"80%"}}>Rated <strong class="rating">4.00</strong> out of 5</span></div>            </div> 
-			<h6><a href="https://themexriver.com/wp/prinox-wp/product/box-packag/">Box Package</a></h6>
-			
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>48.00</bdi></span></del> <span class="screen-reader-text">Original price was: $48.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>40.00</bdi></span></ins><span class="screen-reader-text">Current price is: $40.00.</span></span>
-			 
-		</div>
-			</div>	
-</div>
-    </li>
-      ))}
-			
-		</div>
-
-	</section>
-		
+                <span className="price" style={{ fontSize: "1rem", fontWeight: "bold" }}>
+                  {related.discountPrice ? (
+                    <>
+                      <del style={{ marginRight: "8px", color: "#999" }}>${related.price}</del>
+                      <ins style={{ color: "red", textDecoration: "none" }}>${related.discountPrice}</ins>
+                    </>
+                  ) : (
+                    <ins style={{ color: "red", textDecoration: "none" }}>${related.price}</ins>
+                  )}
+                </span>
+              </div>
+            </div>
+          </li>
+        ))}
+      </div>
+    </section>
 </div>
 
 							  
