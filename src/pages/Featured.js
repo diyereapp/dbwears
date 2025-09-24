@@ -306,7 +306,7 @@ const Featured = () => {
                 }}
               >
                 {/* Image */}
-                <div className="image" style={{ marginBottom: "15px" }}>
+                <div className="image" style={{ marginBottom: "15px" ,     height: "220px",}}>
              <img
   src={product.images && product.images.length > 0 ? product.images[0] : "/placeholder.png"}
   alt={product.name}

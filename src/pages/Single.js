@@ -564,34 +564,34 @@ enctype="multipart/form-data" data-product_id="1546" data-product_variations="[{
           >
             <div className="inner-box" style={{ border: "1px solid #eee", borderRadius: "8px", padding: "15px" }}>
               {/* Image */}
-              <div className="image" style={{ textAlign: "center", marginBottom: "15px" }}>
-                <img
-                  width="300"
-                  height="300"
-                  src={
-                    related.images && related.images.length > 0
-                      ? related.images[0]
-                      : "/placeholder.png"
-                  }
-                  alt={related.name}
-                  style={{ maxWidth: "100%", borderRadius: "4px" }}
-                />
-                <button
-                  className="button add_to_cart_button"
-                  style={{
-                    display: "block",
-                    margin: "10px auto 0",
-                    padding: "8px 12px",
-                    background: "#333",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Add to cart
-                </button>
-              </div>
+         <div
+  className="image"
+  style={{
+    textAlign: "center",
+    marginBottom: "15px",
+    height: "250px", // fixed height
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden", // hide overflow so it crops
+  }}
+>
+  <img
+    src={
+      related.images && related.images.length > 0
+        ? related.images[0]
+        : "/placeholder.png"
+    }
+    alt={related.name}
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover", // makes all images uniform
+      borderRadius: "4px",
+    }}
+  />
+</div>
+
 
               {/* Content */}
               <div className="lower-content" style={{ textAlign: "center" }}>

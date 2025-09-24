@@ -236,7 +236,15 @@ const availableColors = [
             <p >
   {product?.description}
             </p>
-       
+          <h3 className="tb-ron-title pro-ti2">Features</h3>
+    
+     <ul>
+        {product?.features
+          .flatMap((f) => f.split(",")) // split string if it's comma-separated
+          .map((item, idx) => (
+            <li key={idx}>{item.trim()}</li> // remove extra spaces
+          ))}
+      </ul>
           </div>
 
           {/* Additional information */}
@@ -250,37 +258,38 @@ const availableColors = [
     display: activeTab === "additional_information" ? "block" : "none",
   }}
 >
-  <h3 className="tb-ron-title">Additional information</h3>
+  <h3 className="tb-ron-title pro-ti2">Additional information</h3>
 
   <table
     className="woocommerce-product-attributes shop_attributes"
     aria-label="Product Details"
   >
     <tbody>
-      {/* Colors */}
-      {product?.color?.length > 0 && (
-        <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_color">
-          <th
+           <th
             className="woocommerce-product-attributes-item__label"
             scope="row"
           >
             Color
           </th>
+      {/* Colors */}
+      {product?.color?.length > 0 && (
+        <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_color">
+       
           <td className="woocommerce-product-attributes-item__value">
             <p>{product.color.join(", ")}</p>
           </td>
         </tr>
       )}
-
-      {/* Sizes */}
-      {product?.size?.length > 0 && (
-        <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_size">
-          <th
+     <th
             className="woocommerce-product-attributes-item__label"
             scope="row"
           >
             Size
           </th>
+      {/* Sizes */}
+      {product?.size?.length > 0 && (
+        <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_size">
+     
           <td className="woocommerce-product-attributes-item__value">
             <p>{product.size.join(", ")}</p>
           </td>
