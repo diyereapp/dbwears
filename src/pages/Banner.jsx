@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaShippingFast, FaLock, FaHeadset, FaWallet, FaShoppingCart } from "react-icons/fa";
-
+import "./style.css"
 import a5 from "./a5.jpg";
 import a3 from "./a3.jpg";
 import Featured from "./Featured";
@@ -16,14 +16,18 @@ import DealsoftheDay from "./DealsoftheDay";
 // Custom Arrow Components
 const NextArrow = ({ onClick }) => (
   <div
-    onClick={onClick}
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick?.();
+    }}
     style={{
       position: "absolute",
       right: "20px",
       top: "50%",
       transform: "translateY(-50%)",
-      zIndex: 5,
-      background: "rgba(255,255,255,0.8)",
+      zIndex: 9999, // bump higher
+      background: "rgba(255,255,255,0.9)",
       borderRadius: "50%",
       width: "45px",
       height: "45px",
@@ -33,7 +37,8 @@ const NextArrow = ({ onClick }) => (
       cursor: "pointer",
       fontSize: "22px",
       color: "black",
-      boxShadow: "0 4px 6px rgba(0,0,0,0.2)",
+      boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+      pointerEvents: "auto", // force arrow to catch click
     }}
   >
     ➡
@@ -42,14 +47,18 @@ const NextArrow = ({ onClick }) => (
 
 const PrevArrow = ({ onClick }) => (
   <div
-    onClick={onClick}
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick?.();
+    }}
     style={{
       position: "absolute",
       left: "20px",
       top: "50%",
       transform: "translateY(-50%)",
-      zIndex: 5,
-      background: "rgba(255,255,255,0.8)",
+      zIndex: 9999, // bump higher
+      background: "rgba(255,255,255,0.9)",
       borderRadius: "50%",
       width: "45px",
       height: "45px",
@@ -59,10 +68,34 @@ const PrevArrow = ({ onClick }) => (
       cursor: "pointer",
       fontSize: "22px",
       color: "black",
-      boxShadow: "0 4px 6px rgba(0,0,0,0.2)",
+      boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+      pointerEvents: "auto",
     }}
   >
     ⬅
+  </div>
+);
+
+const TestArrow = ({ onClick }) => (
+  <div
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("Next arrow clicked!");
+      onClick?.();
+    }}
+    style={{
+      background: "blue",
+      color: "white",
+      padding: "10px",
+      cursor: "pointer",
+      position: "absolute",
+      top: "50%",
+      right: "10px",
+      zIndex: 9999,
+    }}
+  >
+    TEST ➡
   </div>
 );
 const Banner = () => {
@@ -82,7 +115,18 @@ const Banner = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-  
+//   const settings = {
+//   dots: true,
+//   infinite: true,
+//   autoplay: true,
+//   autoplaySpeed: 4000,
+//   speed: 800,
+//   slidesToShow: 1,
+//   slidesToScroll: 1,
+//   nextArrow: <TestArrow />,
+//   prevArrow: <TestArrow />,
+// };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {

@@ -28,3 +28,14 @@
 .bread-crumb .breadcrumb-item + .breadcrumb-item::before {
   content: none !important;
 }
+
+.main-slider-five a {
+  pointer-events: auto !important;
+}
+
+.slick-arrow {
+  z-index: 9999 !important;
+}
+.elementor a[href*="contact-us"] {
+  pointer-events: none !important;
+}
