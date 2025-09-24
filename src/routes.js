@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import GoogleAuthHandler from "./GoogleAuthHandler";
 import Selling from "./pages/Selling";
 import Single from "./pages/Single";
+import ShopCategory from "./pages/ShopCategory";
 
 
 const routes = [
@@ -29,6 +30,10 @@ const routes = [
   {
  path: "/single-product/:id",
     element: <Single />,
+  },
+  {
+ path: "/category/:id",
+    element: <ShopCategory />,
   },
 
 

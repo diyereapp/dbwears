@@ -161,181 +161,195 @@ useEffect(() => {
     </div>
 
 
+    <section class="page-title">
+        <div class="auto-container">
 
-
-    
-    
-    
-    <main>
-      
-      
-      <div class="bg-slate-100"><div class="text-slate-900 bg-inherit"><div class="mx-auto max-w-[1440px] px-6"><nav class="pt-4" aria-label="Breadcrumb"><ol class="flex items-center"><li class="flex items-center"><a class="whitespace-nowrap text-rush-green-500
-     hover:text-rush-green-600 hover:underline" href="../catalog/index.html">All Products</a>
+			<div class="icons-box parallax-scene-1"   style={{
+    transform: "translate3d(0px, 0px, 0px) rotate(0.0001deg)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    pointerEvents: "none",
+  }}>
+				<div class="icon-one" data-depth="0.10"  style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "relative",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }} ></div>
+                				<div class="icon-two" data-depth="0.30"
+                        
      
-     <div data-orientation="vertical" role="none" class="shrink-0 w-[1px] mx-2 h-3 rotate-12 bg-slate-500"></div>
-     
-     </li><li class="truncate whitespace-nowrap text-slate-500">     {name}</li></ol></nav></div></div></div><div class="bg-slate-100 text-slate-900 py-4"><div class="mx-auto max-w-[1440px] px-6">
-      
-      <div class="grid grid-cols-4 gap-8">
-        
-        <aside class="hidden h-fit flex-col divide-y rounded-2xl bg-white px-8 md:inline-flex">
-      
-<section className="py-8">
-  <h2 className="pb-2 text-lg font-semibold">Shop By Style</h2>
-  <ul className="flex flex-col">
-    {parents.map((parent) => (
-      <li key={parent._id}>
-        <a
-          href={`/category/${parent._id}`}
-          className="block select-none rounded-md px-3 py-1 outline-none transition-colors
-            hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-        >
-          {parent.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
-
-
- <section className="py-8">
-  <h2 className="pb-2 text-lg font-semibold">Shop By Brand</h2>
-  <ul className="flex flex-col">
-    {brands.map((parent) => (
-      <li key={parent._id}>
-        <a
-          href={`/category/${parent._id}`}
-          className="block select-none rounded-md px-3 py-1 outline-none transition-colors
-            hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-        >
-          {parent.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
-
-      
-
-       <section className="py-8">
-  <h2 className="pb-2 text-lg font-semibold">Shop By category</h2>
-  <ul className="flex flex-col">
-    {parents.map((parent) => (
-      <li key={parent._id}>
-        <a
-          href={`/category/${parent._id}`}
-          className="block select-none rounded-md px-3 py-1 outline-none transition-colors
-            hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-        >
-          {parent.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
-
-      
-
-      
-      
-
-      
-      </aside>
-      
-      
-      <main class="col-span-full flex flex-col gap-8 md:col-span-3">
-
-       
-       
-       <section class="flex flex-col gap-4"><div class="flex flex-col gap-1">
-        
-        
-        <h2 class="text-3xl font-bold">Shop By Style</h2><p>Find the perfect {name} to customize</p></div>
-        
-        
-     <section className="py-8">
-
-
-  <ul className="mt-4 grid grid-cols-2 gap-4 overflow-hidden rounded-2xl">
-    {parents.map((parent, index) => (
-      <li
-        key={parent._id}
-        style={{
-          background: parent.bgColor || ["#e4f4f1", "#b8dcfc", "#9dadbc", "#ffeccc"][index % 4], // fallback colors
-        }}
-      >
-        <a
-          href={`/category/${parent._id}`}
-          className="relative flex justify-center transition-opacity duration-200 hover:opacity-75"
-        >
-          <img
-            alt={parent.name}
-            loading="lazy"
-            decoding="async"
-            className="object-contain p-2 lg:max-w-72"
-            src={parent.image || "https://via.placeholder.com/600x600?text=No+Image"}
-          />
-          <h3 className="absolute bottom-0 left-0 mb-4 rounded-r-lg bg-white px-2 py-1 text-lg font-bold md:px-4 md:py-2 md:text-xl">
-            {parent.name}
-          </h3>
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
-</section>
-
-
-
-<section className="flex flex-col gap-4">
-      {/* Heading */}
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold">Popular Brands</h2>
-          <a
-            href="/brands"
-            className="text-sm font-bold transition-opacity duration-200 hover:opacity-75"
-          >
-            View All Brands
-          </a>
-        </div>
-        <p>Shop top brands that you know and love</p>
-      </div>
-
-      {/* Brand Grid */}
-      <ul className="grid grid-cols-2 gap-4 md:grid-cols-5">
-        {brands.map((brand) => (
-          <li
-            key={brand._id}
-            className="flex items-center justify-center rounded-2xl border bg-white transition duration-200 hover:shadow-md"
-          >
-            <a
-              href={`/brands/${brand._id}/jackets`}
-              className="w-full p-6 flex items-center justify-center"
-            >
-              <img
-                src={brand.image}
-                alt={brand.name}
-                className="w-full h-auto object-contain"
-                loading="lazy"
-              />
-            </a>
-          </li>
-        ))}
-      </ul>
+                        
+                         style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "absolute",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}
+                        >
+					<img src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/vector-9.png" alt="" />
+				</div>
+                                				<div class="icon-three" data-depth="0.30"
+                                        
+ style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "absolute",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}
+                                        
+                                        
+                                        
+                                        >
+                    <img src="https://themexriver.com/wp/prinox-wp/wp-content/uploads/2022/08/vector-34.png" alt="" />
+				</div>
+                				<div class="icon-four" data-depth="0.10"
+                        
+                       style={{
+    transform: "translate3d(0px, 0px, 0px)",
+    transformStyle: "preserve-3d",
+    backfaceVisibility: "hidden",
+    position: "absolute",
+    display: "block",
+    left: "0px",
+    top: "0px",
+  }}
+                                        
+         
+                        
+                        ></div>
+			</div>            
+			<h2 className="pro-ti">
+                Shop {name} Product            </h2>
+            <ul class="bread-crumb clearfix"><li class="breadcrumb-item"><a href="https://themexriver.com/wp/prinox-wp/">Home &nbsp;</a>   <span style={{ margin: "0 5px", fontSize: "0.8rem"  }}>›</span></li><li class="breadcrumb-item">{name}</li></ul>        </div>
     </section>
+
+
+<section class="shop-page-section sidebar-page-container" style={{backgroundColor: "white"}}>
+    <div class="auto-container">
+        <div class="row clearfix">
+			
+
+			<div class="content-side content-side col-lg-12 col-md-12 col-sm-12 right-sidebar">
+				                        
               
-              
-              
-              
-              
-                    </main>
-                    
-                    
-                    
-                    
-                    </div></div></div></main>
+                <div class="filter-box">
+				<div class="d-flex justify-content-between align-items-center flex-wrap">
+
+							<div class="left-box d-flex align-items-center">
+								<div class="results">
+									<p class="woocommerce-result-count" role="alert" aria-relevant="all" aria-hidden="false">
+	Showing all 12 results</p>
+								</div>
+							</div>
+				
+							<div class="right-box">
+								<form class="woocommerce-ordering" method="get">
+		<select name="orderby" class="orderby" aria-label="Shop order">
+					<option value="menu_order" selected="selected">Default sorting</option>
+					<option value="popularity">Sort by popularity</option>
+					<option value="rating">Sort by average rating</option>
+					<option value="date">Sort by latest</option>
+					<option value="price">Sort by price: low to high</option>
+					<option value="price-desc">Sort by price: high to low</option>
+			</select>
+	<input type="hidden" name="paged" value="1" />
+	</form>
+							</div>
+						</div>
+                    <div class="woocommerce-form">
+                                                </div>
+                        </div>   
+                                                
+                                
+                            
+               <div className="row clearfix">
+  {products.map((product) => (
+    <div
+      key={product._id}
+      className="shop-item col-lg-3 col-md-4 col-sm-6 product"
+    >
+      <div className="inner-box">
+        {/* Product Image */}
+        <div className="image" >
+   <img
+  loading="lazy"
+  width="300"
+  style={{ height: "230px",}}
+  height="300"
+  src={
+    product.images && product.images.length > 0
+      ? product.images[0] // first image from array
+      : "https://via.placeholder.com/300"
+  }
+  alt={product.name}
+/>
+
+          <button
+            className="button product_type_simple add_to_cart_button"
+            style={{backgroundColor: "red",  fontWeight: "900", borderRadius: "10px", color: "white"}}
+            onClick={() => console.log("Add to cart:", product._id)} // replace with real add-to-cart
+          >
+            Add to cart
+          </button>
+        </div>
+
+        {/* Product Info */}
+        <div className="lower-content">
+          {/* Rating (example using ⭐) */}
+          <div className="rating">
+            {Array.from({ length: 5 }, (_, i) => (
+              <span key={i}>{i < product.rating ? "⭐" : "☆"}</span>
+            ))}
+          </div>
+
+          <h6>
+            <a href={`/single-product/${product._id}`}>{product.name}</a>
+          </h6>
+
+          {/* Price */}
+          <span className="price">
+            {product.oldPrice && (
+              <del>
+                <span className="woocommerce-Price-amount amount">
+                  ${product.oldPrice}
+                </span>
+              </del>
+            )}
+            <ins>
+              <span className="woocommerce-Price-amount amount">
+                ${product.price}
+              </span>
+            </ins>
+          </span>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+                            
+                                
+                            </div>
     
+		</div>
+	</div>
+</section>
+
+
+
+    
+    
+ 
 
 
     <Footer />

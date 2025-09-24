@@ -112,6 +112,23 @@ const Banner = () => {
   useEffect(() => {
     fetchBrands();
   }, []);
+    const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/db/products/featured`
+        );
+        setProducts(data || []);
+      } catch (err) {
+        console.error("Error fetching featured products:", err);
+      }
+    };
+
+    fetchFeatured();
+  }, []);
+
 
   return (
     <>
@@ -127,78 +144,86 @@ const Banner = () => {
 						<div class="elementor-element elementor-element-6da39e4 elementor-widget elementor-widget-ack-slider-five-id" data-id="6da39e4" data-element_type="widget" data-widget_type="ack-slider-five-id.default">
 				<div class="elementor-widget-container">
 <section className="main-slider-five" style={{ backgroundColor: "white" }}>
-      <Slider {...settings}>
-        {/* -------- First Slide -------- */}
-        <div>
+  <Slider {...settings}>
+    {products.map((product) => (
+      <div key={product._id}>
+        <div
+          style={{
+            position: "relative",
+            backgroundImage: `url(${
+              product.images && product.images.length > 0
+                ? product.images[0] // use first product image
+                : "https://via.placeholder.com/1200x500" // fallback
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            minHeight: "500px",
+            color: "white",
+          }}
+        >
+          {/* Dark overlay */}
           <div
             style={{
-              position: "relative",
-              backgroundImage: `url(${a5})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0,0,0,0.5)",
+            }}
+          ></div>
+
+          {/* Centered text */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
               minHeight: "500px",
-              color: "white",
+              position: "relative",
+              zIndex: 2,
+              padding: "20px",
             }}
           >
-            {/* Dark overlay */}
             <div
               style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(0,0,0,0.5)",
-              }}
-            ></div>
-
-            {/* Centered text */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                minHeight: "500px",
-                position: "relative",
-                zIndex: 2,
-                padding: "20px",
+                fontSize: "2.5rem",
+                fontWeight: "bold",
+                marginBottom: "20px",
               }}
             >
-          
-			      <div
-                style={{
-                  fontSize: "2.5rem",
-                  fontWeight: "bold",
-                  marginBottom: "20px",
-                }}
-              >
-               Shirt &amp; Wear Printing
-              </div>
-              <div
-                style={{
-                  fontSize: "1.3rem",
-                  fontWeight: "bold",
-                  marginBottom: "20px",
-                }}
-              >
-                Starting From <span>$60.99</span>
-              </div>
-              <Link
-                to="/shop"
-                style={{
-                  background: "red",
-                  color: "white",
-                  padding: "12px 25px",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                  marginBottom: "15px",
-                }}
-              >
-                Shop Now
-              </Link>
+              {product.name}
+            </div>
+            <div
+              style={{
+                fontSize: "1.3rem",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
+              Starting From{" "}
+              <span>
+                ${product.discountPrice || product.price}
+              </span>
+            </div>
+            <Link
+              to={`/single-product/${product._id}`}
+              style={{
+                background: "red",
+                color: "white",
+                padding: "12px 25px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                fontWeight: "bold",
+                marginBottom: "15px",
+              }}
+            >
+              Shop Now
+            </Link>
+
+            {product.discountPrice && (
               <div
                 style={{
                   background: "red",
@@ -209,99 +234,19 @@ const Banner = () => {
                   fontWeight: "bold",
                 }}
               >
-                29<i>%</i> OFF
+                {Math.round(
+                  ((product.price - product.discountPrice) / product.price) * 100
+                )}
+                <i>%</i> OFF
               </div>
-            </div>
+            )}
           </div>
         </div>
+      </div>
+    ))}
+  </Slider>
+</section>
 
-        {/* -------- Second Slide -------- */}
-        <div>
-          <div
-            style={{
-              position: "relative",
-              backgroundImage: `url(${a3})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              minHeight: "500px",
-              color: "white",
-            }}
-          >
-            {/* Dark overlay */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(0,0,0,0.5)",
-              }}
-            ></div>
-
-            {/* Centered text */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                minHeight: "500px",
-                position: "relative",
-                zIndex: 2,
-                padding: "20px",
-              }}
-            >
-             <div
-                style={{
-                  fontSize: "2.5rem",
-                  fontWeight: "bold",
-                  marginBottom: "20px",
-                }}
-              >
-               Shirt &amp; Wear Printing
-              </div>
-              <div
-                style={{
-                  fontSize: "1.3rem",
-                  fontWeight: "bold",
-                  marginBottom: "20px",
-                }}
-              >
-                Starting From <span>$60.99</span>
-              </div>
-              <Link
-                to="/shop"
-                style={{
-                  background: "red",
-                  color: "white",
-                  padding: "12px 25px",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                  marginBottom: "15px",
-                }}
-              >
-                Shop Now
-              </Link>
-              <div
-                style={{
-                  background: "red",
-                  color: "white",
-                  padding: "6px 12px",
-                  borderRadius: "6px",
-                  display: "inline-block",
-                  fontWeight: "bold",
-                }}
-              >
-                29<i>%</i> OFF
-              </div>
-            </div>
-          </div>
-        </div>
-      </Slider>
-    </section>
     				</div>
 				</div>
 					</div>
