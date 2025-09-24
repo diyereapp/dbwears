@@ -15,7 +15,8 @@ import axios from "axios"
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import ProductTabs from "./ProductTabs";
-
+import { FaChevronRight } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const bgImage = `url("data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'>
@@ -174,9 +175,18 @@ const availableColors = [
     top: "0px",
   }}></div>
 			</div>    
-                            <h2>  {product?.name}</h2>
+                            <h2 className="pro-ti">  {product?.name}</h2>
               
-            <ul class="bread-crumb clearfix"><li class="breadcrumb-item"><a href="https://themexriver.com/wp/prinox-wp/">Home &nbsp;</a></li><li class="breadcrumb-item">  {product?.category?.name}</li></ul>        </div>
+<ul className="bread-crumb clearfix">
+  <li className="breadcrumb-item">
+    <a href="/">Home&nbsp;</a>
+    <span style={{ margin: "0 5px", fontSize: "0.8rem"  }}>›</span>
+
+  </li>
+  <li className="breadcrumb-item">{product?.category?.name}</li>
+</ul>
+
+       </div>
     </section>
 
 <section class="shop-detail-section"  style={{backgroundColor: "white"}}>
@@ -294,10 +304,10 @@ const availableColors = [
 
 			<div class="content-column col-lg-6 col-md-12 col-sm-12">
 								<div class="inner-column">
-					<h3 class="product_title entry-title">  {product?.name}</h3>					<div class="rating">
+					<h3 class="product_title entry-title pro-ti">  {product?.name}</h3>					<div class="rating">
 						
 	<div class="woocommerce-product-rating">
-		<div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style={{width:"100%"}}>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">2</span> customer ratings</span></div>								<a href="#reviews" class="woocommerce-review-link" rel="nofollow">(<span class="count">2</span> customer reviews)</a>
+							<a href="#reviews" class="woocommerce-review-link" rel="nofollow">(<span class="count">2</span> customer reviews)</a>
 						</div>
 
 					</div>
@@ -307,17 +317,17 @@ const availableColors = [
 </div>
 					</div>
 					<div class="price">
-						<p class="price"><span class="woocommerce-Price-amount amount" aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol">$</span>{product?.discountPrice}</bdi></span> <span aria-hidden="true">–</span> <span class="woocommerce-Price-amount amount" aria-hidden="true"></span><span class="screen-reader-text">Price range: $19.00 through $49.00</span></p>
+						<p class="price" style={{fontWeight: "900", color: "black"}}><span class="woocommerce-Price-amount amount"  style={{fontWeight: "900", color: "black"}} aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol" style={{fontWeight: "900", color: "black"}}>$</span>{product?.discountPrice}</bdi></span> <span aria-hidden="true"></span> <span class="woocommerce-Price-amount amount" aria-hidden="true"></span></p>
 					</div>		
 					<div class="categories">
 						<div class="product_meta">
 
 	
 	
-		<span class="sku_wrapper">SKU: <span class="sku">N/A</span></span>
+
 
 	
-	<span class="posted_in">Categories: <a href="https://themexriver.com/wp/prinox-wp/product-category/begs-package/" rel="tag">{product?.category?.name}</a>, <a href="https://themexriver.com/wp/prinox-wp/product-category/book-paper/" rel="tag">{product?.category?.name}</a>, </span>
+	<span class="posted_in">Category: <a href="https://themexriver.com/wp/prinox-wp/product-category/begs-package/" rel="tag">{product?.category?.name}</a> </span>
 	
 	
 </div>

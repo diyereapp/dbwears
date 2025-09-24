@@ -1,4 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import Header from "./Header";
+import axios from "axios"
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import "./style.css"
+import { FaChevronRight } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const ProductTabs = () => {
   const tabsOrder = [
@@ -6,6 +13,7 @@ const ProductTabs = () => {
     "additional_information",
     "reviews"
   ];
+   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("description");
   const tabRefs = useRef([]);
 
@@ -48,7 +56,97 @@ const ProductTabs = () => {
       focusTabAt(last);
     }
   };
+const navigate = useNavigate();
+const [currentImageIndex, setCurrentImageIndex] = useState(0); // <-- add this
 
+  const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState("");
+ const [product, setProduct] = useState(null);
+  const [grandParents, setGrandParents] = useState([]);
+  const [parents, setParents] = useState([]);
+  const [children, setChildren] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [selectedGrandParent, setSelectedGrandParent] = useState("");
+  const [selectedParent, setSelectedParent] = useState("");
+  const [selectedChild, setSelectedChild] = useState("");
+   const { addToCart } = useCart();
+
+  const [selectedSize, setSelectedSize] = useState("");
+useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const { data: product } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/db/product/${id}`
+        );
+
+        setProduct(product);
+
+        // Category info
+        const category = product.category;
+        if (category) {
+          setSelectedChild(category._id);
+          if (category.parent) {
+            setSelectedParent(category.parent._id);
+            if (category.parent.parent) {
+              setSelectedGrandParent(category.parent.parent._id);
+            }
+          }
+        }
+
+        // Debugging
+        console.log("Fetched product:", product);
+        console.log("Child:", category?.name);
+        console.log("Parent:", category?.parent?.name);
+        console.log("Grandparent:", category?.parent?.parent?.name);
+      } catch (err) {
+        console.error("Failed to fetch product:", err);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+const [selectedColor, setSelectedColor] = useState(null);
+
+useEffect(() => {
+  if (product?.color?.length > 0) {
+    // pick the first color from DB as default
+    setSelectedColor(product.color[0]);
+  }
+}, [product]);
+useEffect(() => {
+  const fetchRelatedProducts = async () => {
+    if (!product?.category?._id) return;
+
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/db/products/category/${product.category._id}`
+      );
+
+      // filter out the current product
+      const filtered = data.filter((p) => p._id !== product._id);
+
+      setProducts(filtered);
+    } catch (err) {
+      console.error("Failed to fetch related products:", err);
+    }
+  };
+
+  fetchRelatedProducts();
+}, [product]);
+
+const availableColors = [
+  { name: "Black", hex: "#000000" },
+  { name: "White", hex: "#FFFFFF" },
+  { name: "Red", hex: "#FF0000" },
+  { name: "Blue", hex: "#0000FF" },
+  { name: "Green", hex: "#008000" },
+  { name: "Yellow", hex: "#FFFF00" },
+  { name: "Purple", hex: "#800080" },
+  { name: "Gray", hex: "#808080" },
+  { name: "Navy", hex: "#001F54" },
+  { name: "Orange", hex: "#FFA500" },
+];
   return (
     <div className="woocommerce-tabs wc-tabs-wrapper product-info-tabs">
       <div className="prod-tabs tabs-box">
@@ -133,74 +231,65 @@ const ProductTabs = () => {
             aria-labelledby="tab-title-description"
             style={{ display: activeTab === "description" ? "block" : "none" }}
           >
-            <h3 className="tb-ron-title">Description</h3>
+            <h3 className="tb-ron-title pro-ti2">Description</h3>
 
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Curabitur vulputate vestibulum Phasellus rhoncus, dolor eget
-              viverra pretium, dolor tellus aliquet nunc vitae ultricies erat
-              elit eu lacus. Vestibulum non justo consectetur, cursus ante,
-              tincidunt sapien. Nulla quis diam sit amet turpis interdum
-              accumsan quis nec enim. Vivamus faucibus ex sed nibh egestas
-              elementum. Mauris et bibendum dui. Aenean consequat pulvinar
-              luctus
+            <p >
+  {product?.description}
             </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Curabitur vulputate vestibulum Phasellus rhoncus, dolor eget
-              viverra pretium, dolor tellus aliquet nunc, vitae ultricies erat
-              elit eu lacus. Vestibulum non justo consectetur, cursus ante,
-              tincidunt sapien. Nulla quis diam sit amet turpis interdum
-              accumsan quis nec enim. Vivamus faucibus ex sed nibh egestas
-              elementum. Mauris et bibendum dui. Aenean consequat pulvinar
-              luctus. Suspendisse consectetur tristique tortor
-            </p>
+       
           </div>
 
           {/* Additional information */}
-          <div
-            className="tab woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab"
-            id="tab-additional_information"
-            role="tabpanel"
-            aria-labelledby="tab-title-additional_information"
-            style={{
-              display:
-                activeTab === "additional_information" ? "block" : "none",
-            }}
+      {/* Additional information */}
+<div
+  className="tab woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab"
+  id="tab-additional_information"
+  role="tabpanel"
+  aria-labelledby="tab-title-additional_information"
+  style={{
+    display: activeTab === "additional_information" ? "block" : "none",
+  }}
+>
+  <h3 className="tb-ron-title">Additional information</h3>
+
+  <table
+    className="woocommerce-product-attributes shop_attributes"
+    aria-label="Product Details"
+  >
+    <tbody>
+      {/* Colors */}
+      {product?.color?.length > 0 && (
+        <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_color">
+          <th
+            className="woocommerce-product-attributes-item__label"
+            scope="row"
           >
-            <h3 className="tb-ron-title">Additional information</h3>
+            Color
+          </th>
+          <td className="woocommerce-product-attributes-item__value">
+            <p>{product.color.join(", ")}</p>
+          </td>
+        </tr>
+      )}
 
-            <table
-              className="woocommerce-product-attributes shop_attributes"
-              aria-label="Product Details"
-            >
-              <tbody>
-                <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_color">
-                  <th
-                    className="woocommerce-product-attributes-item__label"
-                    scope="row"
-                  >
-                    color
-                  </th>
-                  <td className="woocommerce-product-attributes-item__value">
-                    <p>Black, Blue, Green, Red</p>
-                  </td>
-                </tr>
+      {/* Sizes */}
+      {product?.size?.length > 0 && (
+        <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_size">
+          <th
+            className="woocommerce-product-attributes-item__label"
+            scope="row"
+          >
+            Size
+          </th>
+          <td className="woocommerce-product-attributes-item__value">
+            <p>{product.size.join(", ")}</p>
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
 
-                <tr className="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_size">
-                  <th
-                    className="woocommerce-product-attributes-item__label"
-                    scope="row"
-                  >
-                    size
-                  </th>
-                  <td className="woocommerce-product-attributes-item__value">
-                    <p>L, M, XL</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
           {/* Reviews */}
           <div
